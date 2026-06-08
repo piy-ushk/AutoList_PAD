@@ -24,8 +24,9 @@ class SheetAPI:
         self.access_token = access_token
 
     def read_range(self, tab_name, range_spec):
+        import urllib.parse
         range_name = f"'{tab_name}'!{range_spec}"
-        url = f"{self.base_url}/{self.spreadsheet_id}/values/{range_name}"
+        url = f"{self.base_url}/{self.spreadsheet_id}/values/{urllib.parse.quote(range_name)}"
         headers = {"Authorization": f"Bearer {self.access_token}"}
         req = urllib.request.Request(url, headers=headers)
         with urllib.request.urlopen(req) as response:
@@ -33,8 +34,9 @@ class SheetAPI:
             return data.get("values", [])
 
     def write_range(self, tab_name, range_spec, data):
+        import urllib.parse
         range_name = f"'{tab_name}'!{range_spec}"
-        url = f"{self.base_url}/{self.spreadsheet_id}/values/{range_name}?valueInputOption=USER_ENTERED"
+        url = f"{self.base_url}/{self.spreadsheet_id}/values/{urllib.parse.quote(range_name)}?valueInputOption=USER_ENTERED"
         headers = {"Authorization": f"Bearer {self.access_token}", "Content-Type": "application/json"}
         body = json.dumps({"range": range_name, "majorDimension": "ROWS", "values": data})
         req = urllib.request.Request(url, data=body.encode("utf-8"), headers=headers, method="PUT")
@@ -42,8 +44,9 @@ class SheetAPI:
             return json.loads(response.read().decode("utf-8"))
 
     def append_range(self, tab_name, range_spec, data):
+        import urllib.parse
         range_name = f"'{tab_name}'!{range_spec}"
-        url = f"{self.base_url}/{self.spreadsheet_id}/values/{range_name}:append?valueInputOption=USER_ENTERED&insertDataOption=INSERT_ROWS"
+        url = f"{self.base_url}/{self.spreadsheet_id}/values/{urllib.parse.quote(range_name)}:append?valueInputOption=USER_ENTERED&insertDataOption=INSERT_ROWS"
         headers = {"Authorization": f"Bearer {self.access_token}", "Content-Type": "application/json"}
         body = json.dumps({"range": range_name, "majorDimension": "ROWS", "values": data})
         req = urllib.request.Request(url, data=body.encode("utf-8"), headers=headers, method="POST")
@@ -54,12 +57,33 @@ class SheetAPI:
 class GoogleSheetsClient:
     def __init__(self):
         self.config = load_sheet_config()
-        self.spreadsheet_id = self.config["spreadsheet_id"]
         self.tabs = self.config["tabs"]
         try:
             api_config = load_api_config()
-            self.access_token = api_config.get("google", {}).get("access_token", "")
-        except (FileNotFoundError, json.JSONDecodeError):
+            self.spreadsheet_id = api_config.get("google", {}).get("spreadsheet_id", "")
+            if not self.spreadsheet_id or self.spreadsheet_id.strip() == "YOUR_SPREADSHEET_ID":
+                self.spreadsheet_id = self.config.get("spreadsheet_id", "")
+        except Exception:
+            api_config = {}
+            self.spreadsheet_id = self.config.get("spreadsheet_id", "")
+
+        try:
+            token = api_config.get("google", {}).get("access_token", "")
+            if not token or not token.strip() or "token" in token.lower():
+                key_file = api_config.get("google", {}).get("service_account_key_file", "")
+                if key_file:
+                    proj_root = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+                    full_path = key_file if os.path.isabs(key_file) else os.path.join(proj_root, key_file)
+                    if os.path.exists(full_path):
+                        from google.oauth2 import service_account
+                        from google.auth.transport.requests import Request
+                        scopes = ["https://www.googleapis.com/auth/spreadsheets"]
+                        creds = service_account.Credentials.from_service_account_file(full_path, scopes=scopes)
+                        creds.refresh(Request())
+                        token = creds.token
+            self.access_token = token
+        except Exception as e:
+            print(f"Error loading service account access token: {e}")
             self.access_token = ""
         self.api = SheetAPI(self.spreadsheet_id, self.access_token)
 

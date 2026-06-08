@@ -58,16 +58,50 @@ def log(message):
     print(f"[SETUP] {message}", flush=True)
 
 
+def get_column_letter(col_idx):
+    result = ""
+    while col_idx > 0:
+        col_idx, remainder = divmod(col_idx - 1, 26)
+        result = chr(65 + remainder) + result
+    return result
+
+
 def get_access_token():
     config_path = os.path.join(os.path.dirname(__file__), "config", "api_keys.json")
     try:
         with open(config_path, "r", encoding="utf-8") as f:
-            return json.load(f).get("google", {}).get("access_token", "")
-    except FileNotFoundError:
-        return ""
+            config = json.load(f)
+            token = config.get("google", {}).get("access_token", "")
+            if token and token.strip() and "token" not in token.lower():
+                return token
+            
+            key_file = config.get("google", {}).get("service_account_key_file", "")
+            if key_file:
+                # Resolve key file path relative to workspace root if it is not absolute
+                proj_root = os.path.dirname(__file__)
+                full_path = key_file if os.path.isabs(key_file) else os.path.join(proj_root, key_file)
+                if os.path.exists(full_path):
+                    from google.oauth2 import service_account
+                    from google.auth.transport.requests import Request
+                    scopes = ["https://www.googleapis.com/auth/spreadsheets"]
+                    creds = service_account.Credentials.from_service_account_file(full_path, scopes=scopes)
+                    creds.refresh(Request())
+                    return creds.token
+    except Exception as e:
+        log(f"Error fetching access token from service account key: {e}")
+    return ""
 
 
 def get_sheet_id():
+    api_config_path = os.path.join(os.path.dirname(__file__), "config", "api_keys.json")
+    try:
+        with open(api_config_path, "r", encoding="utf-8") as f:
+            sid = json.load(f).get("google", {}).get("spreadsheet_id", "")
+            if sid and sid.strip() and sid != "YOUR_SPREADSHEET_ID":
+                return sid
+    except Exception:
+        pass
+
     config_path = os.path.join(os.path.dirname(__file__), "config", "sheet_config.json")
     with open(config_path, "r", encoding="utf-8") as f:
         return json.load(f).get("spreadsheet_id", "")
@@ -98,7 +132,50 @@ def create_spreadsheet():
     return ""
 
 
+def ensure_tabs_exist(spreadsheet_id, token):
+    url = f"https://sheets.googleapis.com/v4/spreadsheets/{spreadsheet_id}"
+    headers = {"Authorization": f"Bearer {token}"}
+    req = urllib.request.Request(url, headers=headers)
+    try:
+        with urllib.request.urlopen(req) as resp:
+            meta = json.loads(resp.read().decode("utf-8"))
+            existing_sheets = [s["properties"]["title"] for s in meta.get("sheets", [])]
+    except Exception as e:
+        log(f"Error fetching spreadsheet metadata: {e}")
+        return
+
+    requests = []
+    for tab_name in TABS:
+        if tab_name not in existing_sheets:
+            requests.append({
+                "addSheet": {
+                    "properties": {
+                        "title": tab_name
+                    }
+                }
+            })
+
+    if requests:
+        log(f"Adding missing tabs to existing spreadsheet...")
+        url = f"https://sheets.googleapis.com/v4/spreadsheets/{spreadsheet_id}:batchUpdate"
+        headers = {"Authorization": f"Bearer {token}", "Content-Type": "application/json"}
+        body = json.dumps({"requests": requests}).encode("utf-8")
+        req = urllib.request.Request(url, data=body, headers=headers, method="POST")
+        try:
+            with urllib.request.urlopen(req) as resp:
+                pass
+            log("Missing tabs created successfully.")
+        except Exception as e:
+            log(f"Error adding missing tabs: {e}")
+
+
 def setup_spreadsheet():
+    import sys
+    try:
+        sys.stdout.reconfigure(encoding="utf-8")
+    except AttributeError:
+        pass
+
     log("AutoList - Google Spreadsheet Initializer")
     spreadsheet_id = get_sheet_id()
     if not spreadsheet_id or spreadsheet_id == "YOUR_GOOGLE_SHEET_ID_HERE":
@@ -109,8 +186,10 @@ def setup_spreadsheet():
             return
         log(f"Update config/sheet_config.json with id: {spreadsheet_id}")
 
-    base = f"https://sheets.googleapis.com/v4/spreadsheets/{spreadsheet_id}/values"
     token = get_access_token()
+    ensure_tabs_exist(spreadsheet_id, token)
+
+    base = f"https://sheets.googleapis.com/v4/spreadsheets/{spreadsheet_id}/values"
     headers = {"Authorization": f"Bearer {token}", "Content-Type": "application/json"}
 
     for tab_name, cols in TABS.items():
@@ -118,9 +197,11 @@ def setup_spreadsheet():
             data = [cols] + VERO_SAMPLE
         else:
             data = [cols]
-        range_spec = f"A1:{chr(64 + len(cols))}{len(data)}"
-        url = f"{base}/'{tab_name}'!{range_spec}?valueInputOption=USER_ENTERED"
-        body = json.dumps({"range": f"'{tab_name}'!{range_spec}", "majorDimension": "ROWS", "values": data}).encode("utf-8")
+        import urllib.parse
+        range_spec = f"A1:{get_column_letter(len(cols))}{len(data)}"
+        range_name = f"'{tab_name}'!{range_spec}"
+        url = f"{base}/{urllib.parse.quote(range_name)}?valueInputOption=USER_ENTERED"
+        body = json.dumps({"range": range_name, "majorDimension": "ROWS", "values": data}).encode("utf-8")
         req = urllib.request.Request(url, data=body, headers=headers, method="PUT")
         try:
             with urllib.request.urlopen(req) as resp:
