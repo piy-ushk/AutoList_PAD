@@ -14,6 +14,6 @@
   },
   "monodas": {
     "credential_manager_target": "AutoList-Monodas",
-    "base_url": "https://monodas.jp"
+    "base_url": "https://monodaz.jp"
   }
 }
