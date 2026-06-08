@@ -33,9 +33,12 @@ def init_sheets():
         sys.exit(1)
 
 
-def init_vero_dictionary():
+def init_vero_dictionary(sheet_client):
     log("Step 2/5: Loading VeRO keyword dictionary...")
-    keywords = load_keyword_dictionary()
+    keywords = sheet_client.get_vero_keywords()
+    if not keywords:
+        log("  WARNING: Could not load from Sheets, falling back to local config.")
+        keywords = load_keyword_dictionary()
     log(f"  Loaded {len(keywords)} keywords.")
     return keywords
 
@@ -87,12 +90,13 @@ def process_validation(sheet_client, error_handler):
 
     log(f"  Found {len(rows)} rows.")
     duplicates = sheet_client.get_duplicate_db_entries()
-    vero_kw = load_keyword_dictionary()
+    vero_kw = sheet_client.get_vero_keywords() or load_keyword_dictionary()
     validated, blocked = 0, 0
 
     for row in rows:
         sku = row.get("管理ID_SKU", f"row_{row['_sheet_row']}")
         sheet_row = row["_sheet_row"]
+        staff_name = row.get("担当者", "")
         log(f"  Validating SKU: {sku}")
 
         vr = run_all_validations(row)
@@ -100,6 +104,7 @@ def process_validation(sheet_client, error_handler):
             sheet_client.update_validation_status(sheet_row, "format_error")
             error_handler.log_error(sku=sku, error_code=ErrorCode.E014, error_message="; ".join(vr["errors"]), pad_step="Validate_Row")
             blocked += 1
+            if staff_name: sheet_client.update_staff_metrics(staff_name, is_success=False)
             continue
 
         title = row.get("ChatGPT_Title", "")
@@ -110,6 +115,7 @@ def process_validation(sheet_client, error_handler):
             sheet_client.update_validation_status(sheet_row, "vero_flagged", flagged)
             error_handler.log_vero_error(sku, flagged)
             blocked += 1
+            if staff_name: sheet_client.update_staff_metrics(staff_name, is_success=False)
             log(f"    BLOCKED: VeRO: {', '.join(flagged)}")
             continue
 
@@ -118,11 +124,14 @@ def process_validation(sheet_client, error_handler):
             sheet_client.update_validation_status(sheet_row, "duplicate_suspected")
             error_handler.log_duplicate_error(sku, dup["reason"])
             blocked += 1
+            if staff_name: sheet_client.update_staff_metrics(staff_name, is_success=False)
             log(f"    BLOCKED: Duplicate: {dup['reason']}")
             continue
 
         sheet_client.update_validation_status(sheet_row, "validated")
+        sheet_client.append_duplicate_entry(row)
         validated += 1
+        if staff_name: sheet_client.update_staff_metrics(staff_name, is_success=True)
         log(f"    OK.")
     log(f"  Complete: {validated} passed, {blocked} blocked.")
 
@@ -169,7 +178,7 @@ def main():
     try:
         sheet = init_sheets()
         err = ErrorHandler(sheet_logger=sheet)
-        init_vero_dictionary()
+        init_vero_dictionary(sheet)
         process_ai_generation(sheet, err)
         process_validation(sheet, err)
         process_monodas_drafts(sheet)

@@ -223,20 +223,46 @@ class GoogleSheetsClient:
 
     def append_duplicate_entry(self, listing):
         tab = self.tabs["duplicate_db"]
+        from modules.duplicate_checker import generate_fingerprint
+        fp = generate_fingerprint(listing)
         row_data = [
-            listing.get("管理ID_SKU", listing.get("SKU", "")),
-            listing.get("Title_Hash", ""),
-            listing.get("JAN_Code", ""),
-            listing.get("Model_Number", ""),
-            listing.get("Brand", ""),
-            listing.get("仕入URL", listing.get("Source_URL", "")),
-            listing.get("Image_Hash", ""),
-            "active",
+            fp["SKU"],
+            fp["Title_Hash"],
+            fp["JAN_Code"],
+            fp["Model_Number"],
+            fp["Brand"],
+            fp["Source_URL"],
+            fp["Image_Hash"],
+            fp["Status"],
             datetime.now(timezone.utc).isoformat(),
-            listing.get("eBay_Item_ID", ""),
+            fp["eBay_Item_ID"],
         ]
         self.api.append_range(tab, "A:J", [row_data])
         return True
+
+    def update_staff_metrics(self, staff_name, is_success):
+        if not staff_name:
+            return False
+        tab = self.tabs.get("staff", "スタッフ管理")
+        try:
+            values = self.api.read_range(tab, "A:I")
+            if not values or len(values) < 2:
+                return False
+            for i, row in enumerate(values[1:], start=2):
+                if len(row) > 1 and row[1].strip() == staff_name.strip():
+                    try:
+                        today = int(row[6]) if len(row) > 6 and row[6].strip() else 0
+                        total = int(row[7]) if len(row) > 7 and row[7].strip() else 0
+                    except Exception:
+                        today, total = 0, 0
+                    if is_success:
+                        today += 1
+                        total += 1
+                    self.api.write_range(tab, f"G{i}:H{i}", [[str(today), str(total)]])
+                    return True
+        except Exception:
+            pass
+        return False
 
     def log_error(self, sku, error_type, error_field, error_message, pad_step, screenshot_path=""):
         tab = self.tabs["error_log"]

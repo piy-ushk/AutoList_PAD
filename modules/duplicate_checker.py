@@ -72,14 +72,16 @@ def check_duplicate(new_listing, existing_listings):
 
 def generate_fingerprint(listing):
     title = listing.get("ChatGPT_Title", listing.get("eBay_Title", ""))
+    image_urls = listing.get("画像URLs", "")
+    image_hash = compute_hash(image_urls) if image_urls else listing.get("Image_Hash", "")
     return {
         "SKU": listing.get("管理ID_SKU", listing.get("SKU", "")),
         "Title_Hash": title,
         "JAN_Code": listing.get("JAN_Code", ""),
         "Model_Number": listing.get("Model_Number", ""),
         "Brand": normalize_text(listing.get("Brand", "")),
-        "Source_URL": listing.get("仕入URL", ""),
-        "Image_Hash": listing.get("Image_Hash", ""),
+        "Source_URL": listing.get("仕入URL", listing.get("Source_URL", "")),
+        "Image_Hash": image_hash,
         "Status": "active",
         "eBay_Item_ID": listing.get("eBay_Item_ID", ""),
     }

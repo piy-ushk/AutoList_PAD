@@ -66,11 +66,16 @@ class ErrorHandler:
         screen_path = os.path.join(self.screenshot_dir, self._make_screenshot_filename(sku))
         try:
             import subprocess
-            subprocess.run([
-                "powershell", "-Command",
-                "Add-Type -AssemblyName System.Windows.Forms; "
-                f"[System.Windows.Forms.SendKeys]::SendWait('{{PRTSC}}')"
-            ], capture_output=True, timeout=10)
+            ps_script = f"""
+Add-Type -AssemblyName System.Windows.Forms
+Add-Type -AssemblyName System.Drawing
+$Screen = [System.Windows.Forms.SystemInformation]::VirtualScreen
+$Bitmap = New-Object System.Drawing.Bitmap $Screen.Width, $Screen.Height
+$Graphics = [System.Drawing.Graphics]::FromImage($Bitmap)
+$Graphics.CopyFromScreen($Screen.Left, $Screen.Top, 0, 0, $Bitmap.Size)
+$Bitmap.Save('{screen_path}')
+"""
+            subprocess.run(["powershell", "-Command", ps_script], capture_output=True, timeout=15)
         except Exception:
             return ""
         return screen_path
