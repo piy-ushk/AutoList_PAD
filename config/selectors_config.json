@@ -1,0 +1,51 @@
+{
+  "monodas": {
+    "login_email": "#email",
+    "login_password": "#password",
+    "login_submit": "#btn-login",
+    "new_listing_btn": "#new-listing",
+    "title_field": "#item-title",
+    "category_dropdown": "#category-select",
+    "price_field": "#item-price",
+    "condition_dropdown": "#item-condition",
+    "source_url_field": "#source-url",
+    "description_frame": "#description-iframe",
+    "save_draft_btn": "#btn-save-draft",
+    "publish_btn": "#btn-publish",
+    "item_id_element": "#confirmed-item-id",
+    "image_upload_btn": "#btn-upload-image",
+    "shipping_policy_dropdown": "#shipping-policy-select",
+    "handling_time_dropdown": "#handling-time-select"
+  },
+  "monodas_login_fallback": {
+    "email_field": "input[type='email'], input[name='email']",
+    "password_field": "input[type='password'], input[name='password']",
+    "submit_button": "button[type='submit'], .btn-login, input[value='ログイン']"
+  },
+  "monodas_listing_fallback": {
+    "new_listing_button": "a[href*='listing/new'], .new-listing-btn",
+    "title_input": "input[name='title'], #item-title, input[placeholder*='タイトル']",
+    "category_select": "select[name='category'], #category",
+    "price_input": "input[name='price'], #price-field",
+    "condition_select": "select[name='condition'], #condition",
+    "source_url_input": "input[name='source_url'], #source-url",
+    "description_editor": "iframe.description-frame, #description-wysiwyg",
+    "save_draft_button": "button.save-draft, a[href*='draft'], button[data-action='save-draft']",
+    "item_id_display": ".ebay-item-id, #confirmed-item-id, [data-field='item_id']",
+    "image_upload": "input[type='file'], .image-upload-btn",
+    "shipping_policy_select": "select[name='shipping_policy'], #shipping-policy",
+    "handling_time_select": "select[name='handling_time'], #handling-time"
+  },
+  "ebay": {
+    "draft_item_id": ".item-id-display",
+    "listing_status_badge": ".listing-status",
+    "seller_hub_drafts": ".draft-listings",
+    "seller_hub_publish": ".publish-draft-btn"
+  },
+  "browser": {
+    "type": "edge",
+    "fallback_type": "chrome",
+    "wait_timeout_ms": 30000,
+    "post_navigation_delay_ms": 2000
+  }
+}

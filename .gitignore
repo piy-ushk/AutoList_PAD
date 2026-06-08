@@ -1,0 +1,24 @@
+# Credentials and secrets - NEVER COMMIT
+config/api_keys.json
+credentials/
+*.key.json
+service-account*.json
+
+# Logs
+logs/error_screenshots/
+logs/run_logs/
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+.env
+
+# PAD generated files
+*.pad.tmp
+*.pad.bak
+
+# OS files
+.DS_Store
+Thumbs.db
+desktop.ini
