@@ -74,7 +74,7 @@ def generate_fingerprint(listing):
     title = listing.get("ChatGPT_Title", listing.get("eBay_Title", ""))
     return {
         "SKU": listing.get("管理ID_SKU", listing.get("SKU", "")),
-        "Title_Hash": compute_hash(title),
+        "Title_Hash": title,
         "JAN_Code": listing.get("JAN_Code", ""),
         "Model_Number": listing.get("Model_Number", ""),
         "Brand": normalize_text(listing.get("Brand", "")),

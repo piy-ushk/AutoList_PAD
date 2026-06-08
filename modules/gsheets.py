@@ -72,7 +72,7 @@ class GoogleSheetsClient:
         rows = []
         for row_idx, row in enumerate(values[1:], start=1):
             row_data = {}
-            for col_idx, header in enumerate(headers[:52]):
+            for col_idx, header in enumerate(headers):
                 row_data[header] = row[col_idx] if col_idx < len(row) else ""
             row_data["_sheet_row"] = row_idx + 1
             rows.append(row_data)
