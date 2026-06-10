@@ -6,7 +6,7 @@ from modules.gsheets import GoogleSheetsClient, load_sheet_config
 from modules.chatgpt import ChatGPTCaller, validate_ai_output
 from modules.vero_checker import run_vero_check, load_keyword_dictionary
 from modules.duplicate_checker import check_duplicate, generate_fingerprint
-from modules.shipping import select_shipping_policy
+from modules.shipping import select_shipping_policy, find_best_policy
 from modules.error_handler import ErrorHandler, ErrorCode
 from modules.validator import run_all_validations
 
@@ -143,13 +143,15 @@ def process_monodas_drafts(sheet_client):
         log("  No rows ready.")
         return
     log(f"  Found {len(rows)} rows.")
+    available_policies = sheet_client.get_shipping_policies()
     tasks = []
     for row in rows:
-        policy = select_shipping_policy(
+        policy = find_best_policy(
             price_usd=float(row.get("出品価格_USD", 0)),
             handling_days=row.get("Handling_Time", "10日"),
             sa_exclusion=row.get("南米除外", "NO"),
             stock_type="DROP",
+            available_policies=available_policies,
         )
         tasks.append({
             "sheet_row": row["_sheet_row"],

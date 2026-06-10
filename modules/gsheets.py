@@ -23,15 +23,30 @@ class SheetAPI:
         self.spreadsheet_id = spreadsheet_id
         self.access_token = access_token
 
+    def _execute_request(self, req):
+        import time
+        max_retries = 5
+        delay = 2
+        for attempt in range(max_retries):
+            try:
+                with urllib.request.urlopen(req) as response:
+                    return response.read()
+            except urllib.error.HTTPError as e:
+                if e.code == 429 and attempt < max_retries - 1:
+                    time.sleep(delay)
+                    delay *= 2
+                    continue
+                raise e
+
     def read_range(self, tab_name, range_spec):
         import urllib.parse
         range_name = f"'{tab_name}'!{range_spec}"
         url = f"{self.base_url}/{self.spreadsheet_id}/values/{urllib.parse.quote(range_name)}"
         headers = {"Authorization": f"Bearer {self.access_token}"}
         req = urllib.request.Request(url, headers=headers)
-        with urllib.request.urlopen(req) as response:
-            data = json.loads(response.read().decode("utf-8"))
-            return data.get("values", [])
+        res_data = self._execute_request(req)
+        data = json.loads(res_data.decode("utf-8"))
+        return data.get("values", [])
 
     def write_range(self, tab_name, range_spec, data):
         import urllib.parse
@@ -40,8 +55,8 @@ class SheetAPI:
         headers = {"Authorization": f"Bearer {self.access_token}", "Content-Type": "application/json"}
         body = json.dumps({"range": range_name, "majorDimension": "ROWS", "values": data})
         req = urllib.request.Request(url, data=body.encode("utf-8"), headers=headers, method="PUT")
-        with urllib.request.urlopen(req) as response:
-            return json.loads(response.read().decode("utf-8"))
+        res_data = self._execute_request(req)
+        return json.loads(res_data.decode("utf-8"))
 
     def append_range(self, tab_name, range_spec, data):
         import urllib.parse
@@ -50,8 +65,8 @@ class SheetAPI:
         headers = {"Authorization": f"Bearer {self.access_token}", "Content-Type": "application/json"}
         body = json.dumps({"range": range_name, "majorDimension": "ROWS", "values": data})
         req = urllib.request.Request(url, data=body.encode("utf-8"), headers=headers, method="POST")
-        with urllib.request.urlopen(req) as response:
-            return json.loads(response.read().decode("utf-8"))
+        res_data = self._execute_request(req)
+        return json.loads(res_data.decode("utf-8"))
 
 
 class GoogleSheetsClient:
