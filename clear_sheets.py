@@ -22,9 +22,9 @@ def clear_test_data():
     for tab_key, tab_name in client.tabs.items():
         if tab_key == "vero_dict":
             # setup_sheets.py creates 1 header + 14 sample rows = 15 rows. Clear from row 16.
-            ranges.append(f"'{tab_name}'!A16:Z1000")
+            ranges.append(f"'{tab_name}'!A16:BB1000")
         else:
-            ranges.append(f"'{tab_name}'!A2:Z1000")
+            ranges.append(f"'{tab_name}'!A2:BB1000")
             
     body = json.dumps({"ranges": ranges}).encode("utf-8")
     req = urllib.request.Request(base_url, data=body, headers=headers, method="POST")

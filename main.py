@@ -173,10 +173,54 @@ def process_monodas_drafts(sheet_client):
     log("  PAD reads this file to fill Monodas forms (draft only).")
 
 
+def process_monodas_results(sheet_client):
+    log("Step 0/5: Checking for Monodas listing results to sync...")
+    path = os.path.join(os.path.dirname(__file__), "logs", "monodas_results.json")
+    if not os.path.exists(path):
+        log("  No results file found to sync.")
+        return
+
+    try:
+        with open(path, "r", encoding="utf-8") as f:
+            results = json.load(f)
+    except Exception as e:
+        log(f"  ERROR: Could not read results file: {e}")
+        return
+
+    # Handle both a single object and a list of objects
+    if not isinstance(results, list):
+        results = [results]
+
+    log(f"  Found {len(results)} results to sync.")
+    success_count = 0
+    for res in results:
+        sheet_row = res.get("sheet_row")
+        item_id = res.get("ebay_item_id")
+        if not sheet_row or not item_id:
+            continue
+
+        # Construct standard eBay URL
+        listing_url = f"https://www.ebay.com/itm/{item_id}"
+
+        try:
+            sheet_client.mark_draft_saved(sheet_row, item_id, listing_url)
+            success_count += 1
+            log(f"    Row {sheet_row} synced: eBay ID {item_id}")
+        except Exception as e:
+            log(f"    ERROR syncing row {sheet_row}: {e}")
+
+    try:
+        os.remove(path)
+        log(f"  Sync complete. Processed {success_count} entries. Results file deleted.")
+    except Exception as e:
+        log(f"  WARNING: Could not delete results file: {e}")
+
+
 def main():
     print_banner()
     try:
         sheet = init_sheets()
+        process_monodas_results(sheet)
         err = ErrorHandler(sheet_logger=sheet)
         init_vero_dictionary(sheet)
         process_ai_generation(sheet, err)
