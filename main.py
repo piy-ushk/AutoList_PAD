@@ -132,6 +132,8 @@ def process_validation(sheet_client, error_handler):
             continue
 
         dup = check_duplicate(row, duplicates)
+        if ONLY_PROCESS_TEST_CARDS:
+            dup["is_duplicate"] = False
         if dup["is_duplicate"]:
             sheet_client.update_validation_status(sheet_row, "duplicate_suspected")
             error_handler.log_duplicate_error(sku, dup["reason"])
@@ -197,8 +199,12 @@ def process_monodas_results(sheet_client):
         return
 
     try:
-        with open(path, "r", encoding="utf-8") as f:
-            results = json.load(f)
+        try:
+            with open(path, "r", encoding="utf-16") as f:
+                results = json.load(f)
+        except UnicodeError:
+            with open(path, "r", encoding="utf-8") as f:
+                results = json.load(f)
     except Exception as e:
         log(f"  ERROR: Could not read results file: {e}")
         return

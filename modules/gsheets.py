@@ -153,6 +153,7 @@ class GoogleSheetsClient:
 
     def write_ai_content(self, sheet_row, ai_data):
         fields = [
+            ("eBay_Title", ai_data.get("title", "")),
             ("ChatGPT_Title", ai_data.get("title", "")),
             ("ChatGPT_ItemSpecifics", json.dumps(ai_data.get("itemSpecifics", {}), ensure_ascii=False)),
             ("ChatGPT_Description", ai_data.get("description", "")),
