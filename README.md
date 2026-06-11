@@ -1,78 +1,78 @@
-# AutoList — eBay出品自動化システム セットアップ手順
+# AutoList — eBay Listing Automation System Setup Instructions
 
-## 必要なもの
+## Requirements
 
-- Windows パソコン
-- Python 3.9 以上（なければ https://www.python.org/downloads/ からインストール）
-- OpenAI APIキー（ChatGPTを使うため。https://platform.openai.com/api-keys で作成）
-- Googleアカウント（GmailでOK）
+- Windows PC
+- Python 3.9 or higher (if not installed, download from https://www.python.org/downloads/)
+- OpenAI API key (to use ChatGPT. Create one at https://platform.openai.com/api-keys)
+- Google account (Gmail is fine)
 
 ---
 
-## ステップ1: api_keys.json を作る
+## Step 1: Create api_keys.json
 
-`config/api_keys.json.template` をコピーして `config/api_keys.json` にリネームしてください。
+Copy `config/api_keys.json.template` and rename it to `config/api_keys.json`.
 
-**コマンドでやる場合:**
+**Via Command Prompt / PowerShell:**
 ```bash
 cd AutoList_PAD
 copy config\api_keys.json.template config\api_keys.json
 ```
 
-**エクスプローラでやる場合:**
-`config` フォルダを開き、`api_keys.json.template` を右クリック → コピー → 右クリック → 名前を付けて貼り付け → `api_keys.json` にリネーム
+**Via File Explorer:**
+Open the `config` folder, right-click `api_keys.json.template` -> Copy -> Right-click -> Paste -> Rename to `api_keys.json`.
 
-次に、`config/api_keys.json` をメモ帳で開き、以下を設定します:
+Next, open `config/api_keys.json` with Notepad or an editor, and configure the following:
 
 ```json
 {
   "openai": {
-    "api_key": "sk-ここに実際のOpenAI APIキーを入れる",
+    "api_key": "sk-insert-your-actual-OpenAI-API-key-here",
     "model": "gpt-4o"
   },
   "google": {
-    "access_token": "（当面は空欄でOK。ステップ4で使う）"
+    "access_token": "(Leave blank for now. Used in Step 4)"
   }
 }
 ```
 
 ---
 
-## ステップ2: Googleスプレッドシートの準備
+## Step 2: Set up Google Sheets
 
-### 2-a. Google Cloud でサービスアカウントを作る（初回のみ）
+### 2-a. Create a Service Account in Google Cloud (One-time setup)
 
-1. https://console.cloud.google.com にアクセス
-2. 左上のプロジェクト選択 → 「新しいプロジェクト」→ 名前を入れて作成
-3. APIとサービス → ライブラリ → 「Google Sheets API」を検索して有効化
-4. 認証情報 → 「認証情報を作成」→ 「サービスアカウント」
-   - 名前: `autolist`（任意）
-   - ロール: 「編集者」
-   - 「完了」をクリック
-5. 作成したサービスアカウントをクリック → 「キー」タブ → 「鍵を追加」→ 「JSON」
-   - 自動的にJSONファイルがダウンロードされるので、`AutoList_PAD/credentials/` フォルダを作って保存
-6. ダウンロードしたJSONファイルをメモ帳で開き、以下のように `config/api_keys.json` を編集:
+1. Go to https://console.cloud.google.com
+2. Click the project selector in the top-left -> "New Project" -> Enter a project name and click create.
+3. Go to "APIs & Services" -> "Library" -> Search for "Google Sheets API" and enable it.
+4. Go to "Credentials" -> click "+ Create Credentials" -> Select "Service Account".
+   - Name: `autolist` (or any name you prefer)
+   - Role: "Editor"
+   - Click "Done".
+5. Click on the newly created service account -> Go to the "Keys" tab -> Click "Add Key" -> "Create new key" -> Select "JSON".
+   - A JSON file will download automatically. Create a folder named `AutoList_PAD/credentials/` and save it there.
+6. Open the downloaded JSON file, and edit `config/api_keys.json` to configure the key file path:
 
 ```json
 {
   "openai": {
-    "api_key": "sk-あなたのOpenAIキー",
+    "api_key": "sk-your-openai-key",
     "model": "gpt-4o"
   },
   "google": {
-    "service_account_key_file": "credentials/ダウンロードしたファイル名.json",
-    "access_token": "（空欄のままでOK）"
+    "service_account_key_file": "credentials/your-downloaded-filename.json",
+    "access_token": "(Leave blank)"
   }
 }
 ```
 
-### 2-b. Googleスプレッドシートを自動作成
+### 2-b. Automatically Create the Google Sheet
 
 ```bash
 python setup_sheets.py
 ```
 
-成功すると、次のようなメッセージが表示されます:
+If successful, you will see a message like this:
 ```
 [SETUP] Created spreadsheet: https://docs.google.com/spreadsheets/d/1abc123def456...
 [SETUP]   出品管理表: 55 cells written
@@ -80,51 +80,51 @@ python setup_sheets.py
 ...
 ```
 
-自動的に `config/sheet_config.json` にスプレッドシートIDが書き込まれます。
+The spreadsheet ID will be automatically written to `config/sheet_config.json`.
 
-**エラーになる場合:**
-- `[SETUP] ERROR: No Google access token configured.` → 一度ブラウザでGoogle Sheets APIを有効にしたか確認
-- その場合は、上記のサービスアカウントJSONファイルを使う方式を試すか、スプレッドシートを手動で作成:
-  1. Google Sheetsで新しいスプレッドシートを作成
-  2. URLの `https://docs.google.com/spreadsheets/d/XXXXXXXXX/edit` の `XXXXXXXXX` の部分をコピー
-  3. `config/sheet_config.json` の `"spreadsheet_id"` に貼り付け
-  4. 手動でタブ名と列名を追加（prompt.mdのSection 5参照）
+**If you encounter an error:**
+- `[SETUP] ERROR: No Google access token configured.` -> Verify if you enabled the Google Sheets API in your Google Cloud Project.
+- Alternatively, you can use the Service Account JSON method above, or create the spreadsheet manually:
+  1. Create a new Google Sheet.
+  2. Copy the spreadsheet ID (the long string of characters `XXXXXXXXX` in the URL: `https://docs.google.com/spreadsheets/d/XXXXXXXXX/edit`).
+  3. Paste it into the `"spreadsheet_id"` field in `config/sheet_config.json`.
+  4. Manually add the sheet tabs and column headers (refer to Section 5 of prompt.md).
 
-### 2-c. スプレッドシートの権限設定
+### 2-c. Configure Spreadsheet Permissions
 
-作成したスプレッドシートを開き、右上の「共有」→ サービスアカウントのメールアドレス（`autolist@XXXX.iam.gserviceaccount.com` のような形式）を追加 → 「編集者」権限を付与
+Open the created spreadsheet, click "Share" in the top-right -> Add the service account email address (looks like `autolist@XXXX.iam.gserviceaccount.com`) -> Set permission to "Editor".
 
 ---
 
-## ステップ3: 出品データを入力
+## Step 3: Enter Listing Data
 
-Googleスプレッドシートの「出品管理表」タブを開き、1行目に見出しが自動入力されています。
-2行目以降に商品データを入力します。
+Open the "出品管理表" (Listing Management) tab in the Google Sheet. The headers in the first row are automatically filled.
+Enter your product data starting from the second row.
 
-**最低限必要な列:**
+**Minimum Required Columns:**
 
-| 列 | 項目名 | 入力例 | 説明 |
+| Column | Column Name | Input Example | Description |
 |---|---|---|---|
-| A | 管理ID_SKU | `2026-06-01-1500` | 重複しない管理番号（日付-価格がおすすめ） |
-| E | 商品名_JP | `ポケモンカード リザードンVMAX` | 日本語の商品名 |
-| J | 仕入URL | `https://jp.mercari.com/item/...` | メルカリなどの仕入元URL（必須） |
-| N | Category | `Pokemon Cards` | eBayカテゴリ名 |
-| O | Condition | `Used` または `New` | 商品状態 |
-| P | 出品価格_USD | `25.00` | 米ドルでの販売価格 |
-| AE | 担当者 | `山田太郎` | この商品を担当するスタッフ名 |
-| AI | Listing_Status | `pending_ai` | **必ず `pending_ai` と入力してください** |
+| A | 管理ID_SKU | `2026-06-01-1500` | Unique management ID (recommended: date-price) |
+| E | 商品名_JP | `ポケモンカード リザードンVMAX` | Product name in Japanese |
+| J | 仕入URL | `https://jp.mercari.com/item/...` | Sourcing URL such as Mercari (Required) |
+| N | Category | `Pokemon Cards` | eBay category name |
+| O | Condition | `Used` or `New` | Product condition |
+| P | 出品価格_USD | `25.00` | Selling price in USD |
+| AE | 担当者 | `山田太郎` | The name of the staff member in charge of this item |
+| AI | Listing_Status | `pending_ai` | **Must be entered exactly as `pending_ai`** |
 
-他の列（Brand, JAN_Code, 画像URLs など）は任意ですが、入力すると検出精度が上がります。
+Other columns (Brand, JAN_Code, Image URLs, etc.) are optional, but filling them will increase detection accuracy.
 
 ---
 
-## ステップ4: 実行する
+## Step 4: Run the Script
 
 ```bash
 python main.py
 ```
 
-**実行結果の見方:**
+**How to Read the Execution Results:**
 
 ```
 [2026-06-01 10:00:00] ============================================================
@@ -142,38 +142,38 @@ python main.py
 [2026-06-01 10:00:00] Cycle complete.
 ```
 
-処理が完了すると:
-- ChatGPTで生成されたタイトル・説明文がスプレッドシートのY～AD列に書き込まれる
-- `AI_Status` 列が `ai_complete` に変わる
-- 検証後、`Validation_Status` が `validated` になる
-- Monodasに送信するデータが `logs/monodas_task_batch.json` に保存される（PADで読み込んで下書き保存）
+When processing completes:
+- The title and description generated by ChatGPT will be written to columns Y to AD of the spreadsheet.
+- The `AI_Status` column will change to `ai_complete`.
+- After verification, `Validation_Status` will change to `validated`.
+- Data to be sent to Monodas will be saved to `logs/monodas_task_batch.json` (to be loaded by PAD to save drafts).
 
 ---
 
-## エラーが出た場合
+## Troubleshooting
 
-**`OPENAI_API_KEY not configured` が出る:**
-→ `config/api_keys.json` の `api_key` に正しいキーが入っているか確認
+**`OPENAI_API_KEY not configured` error occurs:**
+-> Check if the correct API key is set in `api_key` under `config/api_keys.json`.
 
-**`spreadsheet_id` が設定されていない:**
-→ `config/sheet_config.json` を開き、`spreadsheet_id` に実際のIDが入っているか確認
+**`spreadsheet_id` is not set:**
+-> Open `config/sheet_config.json` and make sure the actual spreadsheet ID is entered in `spreadsheet_id`.
 
-**行が処理されない:**
-→ スプレッドシートの `AI` 列（Listing_Status）が `pending_ai` になっているか確認
-→ `AE` 列（担当者）に名前が入っているか確認
+**Rows are not being processed:**
+-> Check if the `Listing_Status` in column `AI` of the spreadsheet is set to `pending_ai`.
+-> Check if a name is entered in the `担当者` (Assignee/Staff) column (column `AE`).
 
 ---
 
-## 全体の処理の流れ
+## Overall Workflow
 
 ```
-① スタッフがスプレッドシートに商品データを入力（Listing_Status = pending_ai）
-② python main.py を実行
-③ → ChatGPT API がタイトル・説明文を自動生成
-④ → VeRO禁止キーワードをチェック（該当する場合はそこで停止）
-⑤ → 重複出品をチェック（該当する場合はそこで停止）
-⑥ → すべて通過したら logs/monodas_task_batch.json に出力
-⑦ Power Automate Desktop がこのJSONを読み込み、Monodasで下書き保存
-⑧ 管理者がeBay Seller Hubで内容を確認、承認
-⑨ 公開後、Monodasが自動で在庫監視・価格監視・自動終了
+① Staff enters product data into the spreadsheet (Listing_Status = pending_ai)
+② Run `python main.py`
+③ → ChatGPT API automatically generates titles and descriptions
+④ → Checks for VeRO prohibited keywords (stops if any are found)
+⑤ → Checks for duplicate listings (stops if a duplicate is found)
+⑥ → Outputs to logs/monodas_task_batch.json if all checks pass
+⑦ Power Automate Desktop reads this JSON and saves drafts in Monodas
+⑧ Administrator checks and approves the drafts in eBay Seller Hub
+⑨ After publishing, Monodas automatically monitors stock, prices, and handles auto-termination
 ```
