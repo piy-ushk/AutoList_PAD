@@ -68,6 +68,14 @@ class SheetAPI:
         res_data = self._execute_request(req)
         return json.loads(res_data.decode("utf-8"))
 
+    def batch_write_ranges(self, data_list):
+        url = f"{self.base_url}/{self.spreadsheet_id}/values:batchUpdate"
+        headers = {"Authorization": f"Bearer {self.access_token}", "Content-Type": "application/json"}
+        body = json.dumps({"valueInputOption": "USER_ENTERED", "data": data_list})
+        req = urllib.request.Request(url, data=body.encode("utf-8"), headers=headers, method="POST")
+        res_data = self._execute_request(req)
+        return json.loads(res_data.decode("utf-8"))
+
 
 class GoogleSheetsClient:
     def __init__(self):
@@ -151,8 +159,26 @@ class GoogleSheetsClient:
         except Exception:
             return False
 
+    def batch_update_cells(self, sheet_row, updates):
+        col_map = self.config["column_mapping"]
+        header_map = {v: k for k, v in col_map.items()}
+        tab = self.tabs["listings"]
+        data_list = []
+        for field_name, value in updates:
+            sheet_col_letter = header_map.get(field_name)
+            if sheet_col_letter:
+                range_spec = f"'{tab}'!{sheet_col_letter}{sheet_row}:{sheet_col_letter}{sheet_row}"
+                data_list.append({"range": range_spec, "values": [[str(value)]]})
+        if not data_list:
+            return False
+        try:
+            self.api.batch_write_ranges(data_list)
+            return True
+        except Exception:
+            return False
+
     def write_ai_content(self, sheet_row, ai_data):
-        fields = [
+        updates = [
             ("eBay_Title", ai_data.get("title", "")),
             ("ChatGPT_Title", ai_data.get("title", "")),
             ("ChatGPT_ItemSpecifics", json.dumps(ai_data.get("itemSpecifics", {}), ensure_ascii=False)),
@@ -160,32 +186,34 @@ class GoogleSheetsClient:
             ("ChatGPT_Rarity", ai_data.get("rarity", "")),
             ("ChatGPT_Features", ai_data.get("features", "")),
             ("ChatGPT_Background", ai_data.get("background", "")),
+            ("AI_Status", "ai_complete")
         ]
-        for field_name, value in fields:
-            self.update_cell(sheet_row, field_name, value)
-        self.update_cell(sheet_row, "AI_Status", "ai_complete")
-        return True
+        return self.batch_update_cells(sheet_row, updates)
 
     def mark_draft_saved(self, sheet_row, item_id, listing_url):
-        self.update_cell(sheet_row, "eBay_Item_ID", item_id)
-        self.update_cell(sheet_row, "eBay_Listing_URL", listing_url)
-        self.update_cell(sheet_row, "Listing_Status", "draft_saved")
-        self.update_cell(sheet_row, "Error_Status", "")
-        return True
+        updates = [
+            ("eBay_Item_ID", item_id),
+            ("eBay_Listing_URL", listing_url),
+            ("Listing_Status", "draft_saved"),
+            ("Error_Status", "")
+        ]
+        return self.batch_update_cells(sheet_row, updates)
 
     def mark_error(self, sheet_row, error_message, error_field=None):
-        self.update_cell(sheet_row, "Listing_Status", "error")
-        self.update_cell(sheet_row, "Error_Status", error_message)
-        self.update_cell(sheet_row, "Error_Timestamp", datetime.now(timezone.utc).isoformat())
+        updates = [
+            ("Listing_Status", "error"),
+            ("Error_Status", error_message),
+            ("Error_Timestamp", datetime.now(timezone.utc).isoformat())
+        ]
         if error_field:
-            self.update_cell(sheet_row, "Error_Field", error_field)
-        return True
+            updates.append(("Error_Field", error_field))
+        return self.batch_update_cells(sheet_row, updates)
 
     def update_validation_status(self, sheet_row, status, flags=None):
-        self.update_cell(sheet_row, "Validation_Status", status)
+        updates = [("Validation_Status", status)]
         if flags:
-            self.update_cell(sheet_row, "VeRO_Flags", ", ".join(flags))
-        return True
+            updates.append(("VeRO_Flags", ", ".join(flags)))
+        return self.batch_update_cells(sheet_row, updates)
 
     def update_listing_status(self, sheet_row, status):
         self.update_cell(sheet_row, "Listing_Status", status)
@@ -256,12 +284,12 @@ class GoogleSheetsClient:
         self.api.append_range(tab, "A:J", [row_data])
         return True
 
-    def update_staff_metrics(self, staff_name, is_success):
+    def update_staff_metrics(self, staff_name, is_success, error_type=None):
         if not staff_name:
             return False
         tab = self.tabs.get("staff", "スタッフ管理")
         try:
-            values = self.api.read_range(tab, "A:I")
+            values = self.api.read_range(tab, "A:J")
             if not values or len(values) < 2:
                 return False
             for i, row in enumerate(values[1:], start=2):
@@ -269,12 +297,15 @@ class GoogleSheetsClient:
                     try:
                         today = int(row[6]) if len(row) > 6 and row[6].strip() else 0
                         total = int(row[7]) if len(row) > 7 and row[7].strip() else 0
+                        errors = int(row[8]) if len(row) > 8 and row[8].strip() else 0
                     except Exception:
-                        today, total = 0, 0
+                        today, total, errors = 0, 0, 0
                     if is_success:
                         today += 1
                         total += 1
-                    self.api.write_range(tab, f"G{i}:H{i}", [[str(today), str(total)]])
+                    else:
+                        errors += 1
+                    self.api.write_range(tab, f"G{i}:I{i}", [[str(today), str(total), str(errors)]])
                     return True
         except Exception:
             pass

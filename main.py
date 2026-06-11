@@ -16,6 +16,11 @@ from modules.validator import run_all_validations
 # Set to True to only process the 5 TEST cards (SKUs starting with "TEST-").
 # Set to False to process all cards normally.
 ONLY_PROCESS_TEST_CARDS = True
+
+# PHASE 2 SAFETY OVERRIDE:
+# Set to True to force ALL items to be saved as Drafts regardless of automation rules.
+# Set to False (in Phase 3) to allow automatic publishing of normal items.
+FORCE_DRAFT = True
 # ==============================================================================
 
 
@@ -116,7 +121,7 @@ def process_validation(sheet_client, error_handler):
             sheet_client.update_validation_status(sheet_row, "format_error")
             error_handler.log_error(sku=sku, error_code=ErrorCode.E014, error_message="; ".join(vr["errors"]), pad_step="Validate_Row")
             blocked += 1
-            if staff_name: sheet_client.update_staff_metrics(staff_name, is_success=False)
+            if staff_name: sheet_client.update_staff_metrics(staff_name, is_success=False, error_type="format_error")
             continue
 
         title = row.get("ChatGPT_Title", "")
@@ -127,7 +132,7 @@ def process_validation(sheet_client, error_handler):
             sheet_client.update_validation_status(sheet_row, "vero_flagged", flagged)
             error_handler.log_vero_error(sku, flagged)
             blocked += 1
-            if staff_name: sheet_client.update_staff_metrics(staff_name, is_success=False)
+            if staff_name: sheet_client.update_staff_metrics(staff_name, is_success=False, error_type="vero_flagged")
             log(f"    BLOCKED: VeRO: {', '.join(flagged)}")
             continue
 
@@ -138,7 +143,7 @@ def process_validation(sheet_client, error_handler):
             sheet_client.update_validation_status(sheet_row, "duplicate_suspected")
             error_handler.log_duplicate_error(sku, dup["reason"])
             blocked += 1
-            if staff_name: sheet_client.update_staff_metrics(staff_name, is_success=False)
+            if staff_name: sheet_client.update_staff_metrics(staff_name, is_success=False, error_type="duplicate")
             log(f"    BLOCKED: Duplicate: {dup['reason']}")
             continue
 
@@ -161,14 +166,28 @@ def process_monodas_drafts(sheet_client):
     log(f"  Found {len(rows)} rows.")
     available_policies = sheet_client.get_shipping_policies()
     tasks = []
+    config_rules = sheet_client.config.get("automation_rules", {})
+    high_val_threshold = config_rules.get("high_value_threshold_usd", 300)
+
     for row in rows:
+        price_val = float(row.get("出品価格_USD", 0))
         policy = find_best_policy(
-            price_usd=float(row.get("出品価格_USD", 0)),
+            price_usd=price_val,
             handling_days=row.get("Handling_Time", "10日"),
             sa_exclusion=row.get("南米除外", "NO"),
             stock_type="DROP",
             available_policies=available_policies,
         )
+
+        # Determine automation action based on client vision
+        automation_action = "publish"
+        if price_val >= high_val_threshold:
+            automation_action = "draft" # High-value items need human verification
+        # (Additional error/warning checks could force draft here)
+        
+        if FORCE_DRAFT:
+            automation_action = "draft" # Phase 2 safety override
+
         tasks.append({
             "sheet_row": row["_sheet_row"],
             "sku": row.get("管理ID_SKU", ""),
@@ -182,6 +201,7 @@ def process_monodas_drafts(sheet_client):
             "shipping_policy": policy,
             "handling_time": row.get("Handling_Time", "10日"),
             "item_specifics": row.get("ChatGPT_ItemSpecifics", "{}"),
+            "automation_action": automation_action,
         })
     path = os.path.join(os.path.dirname(__file__), "logs", "monodas_task_batch.json")
     os.makedirs(os.path.dirname(path), exist_ok=True)

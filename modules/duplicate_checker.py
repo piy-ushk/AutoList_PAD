@@ -58,8 +58,11 @@ def check_duplicate(new_listing, existing_listings):
         if new_url and existing_url and new_url == existing_url:
             matches.append({"type": "Source_URL", "priority": "HIGH", "existing_sku": existing_sku, "detail": f"Source URL match: {new_url}"})
 
-        if new_title and existing_title and title_similarity(new_title, existing_title) > 0.8:
-            matches.append({"type": "Title_Similarity", "priority": "MEDIUM", "existing_sku": existing_sku, "detail": f"Title similarity > 80%"})
+        if new_title and existing_title:
+            sim = title_similarity(new_title, existing_title)
+            if sim > 0.8:
+                priority = "HIGH" if sim == 1.0 else "MEDIUM"
+                matches.append({"type": "Title_Similarity", "priority": priority, "existing_sku": existing_sku, "detail": f"Title similarity {sim*100:.1f}%"})
 
         if new_brand and existing_brand and new_brand == existing_brand and new_title and existing_title and new_title in existing_title:
             matches.append({"type": "Brand_Title", "priority": "MEDIUM", "existing_sku": existing_sku, "detail": f"Brand + partial title match"})

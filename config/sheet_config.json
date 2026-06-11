@@ -68,5 +68,9 @@
   "sku_column": "A",
   "ai_status_column": "AF",
   "validation_status_column": "AG",
-  "approval_column": "AJ"
+  "approval_column": "AJ",
+  "automation_rules": {
+    "high_value_threshold_usd": 300,
+    "strict_mode": true
+  }
 }
