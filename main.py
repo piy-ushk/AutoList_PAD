@@ -10,6 +10,14 @@ from modules.shipping import select_shipping_policy, find_best_policy
 from modules.error_handler import ErrorHandler, ErrorCode
 from modules.validator import run_all_validations
 
+# ==============================================================================
+# SETTINGS
+# ==============================================================================
+# Set to True to only process the 5 TEST cards (SKUs starting with "TEST-").
+# Set to False to process all cards normally.
+ONLY_PROCESS_TEST_CARDS = True
+# ==============================================================================
+
 
 def log(message):
     print(f"[{datetime.now().strftime('%Y-%m-%d %H:%M:%S')}] {message}", flush=True)
@@ -46,6 +54,8 @@ def init_vero_dictionary(sheet_client):
 def process_ai_generation(sheet_client, error_handler):
     log("Step 3/5: Processing AI content generation...")
     rows = sheet_client.get_pending_ai_rows()
+    if ONLY_PROCESS_TEST_CARDS:
+        rows = [r for r in rows if str(r.get("管理ID_SKU", "")).startswith("TEST-")]
     if not rows:
         log("  No rows pending.")
         return
@@ -84,6 +94,8 @@ import time
 def process_validation(sheet_client, error_handler):
     log("Step 4/5: Running validation...")
     rows = sheet_client.get_ai_complete_rows()
+    if ONLY_PROCESS_TEST_CARDS:
+        rows = [r for r in rows if str(r.get("管理ID_SKU", "")).startswith("TEST-")]
     if not rows:
         log("  No rows to validate.")
         return
@@ -139,6 +151,8 @@ def process_validation(sheet_client, error_handler):
 def process_monodas_drafts(sheet_client):
     log("Step 5/5: Preparing Monodas draft tasks...")
     rows = sheet_client.get_validated_rows()
+    if ONLY_PROCESS_TEST_CARDS:
+        rows = [r for r in rows if str(r.get("管理ID_SKU", "")).startswith("TEST-")]
     if not rows:
         log("  No rows ready.")
         return
