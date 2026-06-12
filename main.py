@@ -116,6 +116,16 @@ def process_validation(sheet_client, error_handler):
         staff_name = row.get("担当者", "")
         log(f"  Validating SKU: {sku}")
 
+        # Ensure both titles are synchronized if one is missing (backfill)
+        ebay_title = row.get("eBay_Title", "").strip()
+        cgpt_title = row.get("ChatGPT_Title", "").strip()
+        if cgpt_title and not ebay_title:
+            sheet_client.update_cell(sheet_row, "eBay_Title", cgpt_title)
+            row["eBay_Title"] = cgpt_title
+        elif ebay_title and not cgpt_title:
+            sheet_client.update_cell(sheet_row, "ChatGPT_Title", ebay_title)
+            row["ChatGPT_Title"] = ebay_title
+
         vr = run_all_validations(row)
         if not vr["passed"]:
             sheet_client.update_validation_status(sheet_row, "format_error")
@@ -124,7 +134,7 @@ def process_validation(sheet_client, error_handler):
             if staff_name: sheet_client.update_staff_metrics(staff_name, is_success=False, error_type="format_error")
             continue
 
-        title = row.get("ChatGPT_Title", "")
+        title = row.get("eBay_Title", "").strip() or row.get("ChatGPT_Title", "").strip()
         desc = row.get("ChatGPT_Description", "")
         vero = run_vero_check(title, desc, vero_kw)
         if not vero["passed"]:
@@ -135,6 +145,21 @@ def process_validation(sheet_client, error_handler):
             if staff_name: sheet_client.update_staff_metrics(staff_name, is_success=False, error_type="vero_flagged")
             log(f"    BLOCKED: VeRO: {', '.join(flagged)}")
             continue
+
+        # If VeRO check passed, save any auto-replacements made to the sheet so both titles are updated together
+        updates = []
+        if vero.get("title_replacements_made"):
+            new_title = vero.get("auto_replaced_title", "")
+            updates.append(("eBay_Title", new_title))
+            updates.append(("ChatGPT_Title", new_title))
+            row["eBay_Title"] = new_title
+            row["ChatGPT_Title"] = new_title
+        if vero.get("desc_replacements_made"):
+            new_desc = vero.get("auto_replaced_description", "")
+            updates.append(("ChatGPT_Description", new_desc))
+            row["ChatGPT_Description"] = new_desc
+        if updates:
+            sheet_client.batch_update_cells(sheet_row, updates)
 
         dup = check_duplicate(row, duplicates)
         if ONLY_PROCESS_TEST_CARDS:
@@ -171,13 +196,15 @@ def process_monodas_drafts(sheet_client):
 
     for row in rows:
         price_val = float(row.get("出品価格_USD", 0))
-        policy = find_best_policy(
-            price_usd=price_val,
-            handling_days=row.get("Handling_Time", "10日"),
-            sa_exclusion=row.get("南米除外", "NO"),
-            stock_type="DROP",
-            available_policies=available_policies,
-        )
+        policy = row.get("Shipping_Policy", "").strip()
+        if not policy:
+            policy = find_best_policy(
+                price_usd=price_val,
+                handling_days=row.get("Handling_Time", "10日"),
+                sa_exclusion=row.get("南米除外", "NO"),
+                stock_type="DROP",
+                available_policies=available_policies,
+            )
 
         # Determine automation action based on client vision
         automation_action = "publish"
@@ -188,10 +215,20 @@ def process_monodas_drafts(sheet_client):
         if FORCE_DRAFT:
             automation_action = "draft" # Phase 2 safety override
 
+        # Ensure both titles are synchronized if one is missing (backfill)
+        ebay_title = row.get("eBay_Title", "").strip()
+        cgpt_title = row.get("ChatGPT_Title", "").strip()
+        if cgpt_title and not ebay_title:
+            sheet_client.update_cell(row["_sheet_row"], "eBay_Title", cgpt_title)
+            row["eBay_Title"] = cgpt_title
+        elif ebay_title and not cgpt_title:
+            sheet_client.update_cell(row["_sheet_row"], "ChatGPT_Title", ebay_title)
+            row["ChatGPT_Title"] = ebay_title
+
         tasks.append({
             "sheet_row": row["_sheet_row"],
             "sku": row.get("管理ID_SKU", ""),
-            "title": row.get("ChatGPT_Title", ""),
+            "title": row.get("eBay_Title", "").strip() or row.get("ChatGPT_Title", "").strip(),
             "category": row.get("Category", ""),
             "condition": row.get("Condition", ""),
             "price_usd": row.get("出品価格_USD", ""),

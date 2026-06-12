@@ -35,7 +35,7 @@ def title_similarity(title_a, title_b):
 
 def check_duplicate(new_listing, existing_listings):
     matches = []
-    new_title = normalize_text(new_listing.get("ChatGPT_Title", new_listing.get("eBay_Title", "")))
+    new_title = normalize_text(new_listing.get("eBay_Title", "").strip() or new_listing.get("ChatGPT_Title", "").strip())
     new_jan = normalize_text(new_listing.get("JAN_Code", ""))
     new_model = normalize_text(new_listing.get("Model_Number", ""))
     new_url = normalize_text(new_listing.get("仕入URL", ""))
@@ -74,7 +74,7 @@ def check_duplicate(new_listing, existing_listings):
 
 
 def generate_fingerprint(listing):
-    title = listing.get("ChatGPT_Title", listing.get("eBay_Title", ""))
+    title = listing.get("eBay_Title", "").strip() or listing.get("ChatGPT_Title", "").strip()
     image_urls = listing.get("画像URLs", "")
     image_hash = compute_hash(image_urls) if image_urls else listing.get("Image_Hash", "")
     return {

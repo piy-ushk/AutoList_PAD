@@ -2,15 +2,21 @@ import re
 
 
 def check_required_fields(listing_data):
-    required = ["管理ID_SKU", "Brand", "Category", "Condition", "ChatGPT_Title", "ChatGPT_Description", "仕入URL", "販売形式", "出品価格_USD"]
+    required = ["管理ID_SKU", "Brand", "Category", "Condition", "ChatGPT_Description", "仕入URL", "販売形式", "出品価格_USD"]
     missing = [c for c in required if not listing_data.get(c, "").strip()]
+    title = listing_data.get("eBay_Title", "").strip() or listing_data.get("ChatGPT_Title", "").strip()
+    if not title:
+        missing.append("eBay_Title/ChatGPT_Title")
     return len(missing) == 0, missing
 
 
 def check_ai_content(listing_data):
-    ai_fields = ["ChatGPT_Title", "ChatGPT_Description", "ChatGPT_ItemSpecifics", "ChatGPT_Rarity", "ChatGPT_Features", "ChatGPT_Background"]
+    ai_fields = ["ChatGPT_Description", "ChatGPT_ItemSpecifics", "ChatGPT_Rarity", "ChatGPT_Features", "ChatGPT_Background"]
     missing = [f for f in ai_fields if not listing_data.get(f, "").strip()]
-    has_any = len(missing) < 6
+    title = listing_data.get("eBay_Title", "").strip() or listing_data.get("ChatGPT_Title", "").strip()
+    if not title:
+        missing.append("ChatGPT_Title/eBay_Title")
+    has_any = len(missing) < 5 or bool(title)
     return has_any, missing
 
 
@@ -26,14 +32,14 @@ def check_price(listing_data):
 
 
 def check_title_length(listing_data):
-    title = listing_data.get("ChatGPT_Title", listing_data.get("eBay_Title", ""))
+    title = listing_data.get("eBay_Title", "").strip() or listing_data.get("ChatGPT_Title", "").strip()
     if len(title) > 80:
         return False, f"Title is {len(title)} characters (max 80)"
     return True, ""
 
 
 def check_title_not_empty(listing_data):
-    title = listing_data.get("ChatGPT_Title", listing_data.get("eBay_Title", ""))
+    title = listing_data.get("eBay_Title", "").strip() or listing_data.get("ChatGPT_Title", "").strip()
     if not title.strip():
         return False, "Title is empty"
     return True, ""

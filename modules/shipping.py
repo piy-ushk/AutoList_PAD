@@ -31,8 +31,28 @@ def parse_policy_name(policy_name):
 
 
 def find_best_policy(price_usd, handling_days, sa_exclusion, stock_type, available_policies):
-    # Force all policies to DDP(1～50USD)Economy as requested by the user
-    return "DDP(1～50USD)Economy"
+    target = select_shipping_policy(price_usd, handling_days, sa_exclusion, stock_type)
+    exact = [p for p in available_policies if p.get("Template_Name", "") == target]
+    if exact:
+        return exact[0].get("Template_Name", target)
+
+    target_p = parse_policy_name(target)
+    if not target_p:
+        return target
+
+    best, best_score = None, -1
+    for policy in available_policies:
+        name = policy.get("Template_Name", "")
+        p = parse_policy_name(name)
+        if not p:
+            continue
+        score = sum([40 if p["stock_type"] == target_p["stock_type"] else 0,
+                     30 if p["handling_days"] == target_p["handling_days"] else 0,
+                     20 if p["shipping_method"] == target_p["shipping_method"] else 0,
+                     10 if p["sa_exclusion"] == target_p["sa_exclusion"] else 0])
+        if score > best_score:
+            best_score, best = score, name
+    return best if best else target
 
 
 def generate_all_templates():

@@ -17,31 +17,36 @@ def insert_test_data():
             "管理ID_SKU": "TEST-001",
             "商品名_JP": "テストカード 1",
             "仕入URL": "https://jp.mercari.com/item/m12345678901",
-            "出品価格_USD": "10"
+            "出品価格_USD": "10",
+            "Shipping_Policy": "DDP(1～50USD)Economy"
         },
         {
             "管理ID_SKU": "TEST-002",
             "商品名_JP": "テストカード 2",
             "仕入URL": "https://jp.mercari.com/item/m12345678902",
-            "出品価格_USD": "20"
+            "出品価格_USD": "20",
+            "Shipping_Policy": "DDP(101～200USD)Expedited"
         },
         {
             "管理ID_SKU": "TEST-003",
             "商品名_JP": "テストカード 3",
             "仕入URL": "https://jp.mercari.com/item/m12345678903",
-            "出品価格_USD": "30"
+            "出品価格_USD": "30",
+            "Shipping_Policy": "DDP(101～200USD)Expedited無在庫10日handling"
         },
         {
             "管理ID_SKU": "TEST-004",
             "商品名_JP": "テストカード 4",
             "仕入URL": "https://jp.mercari.com/item/m12345678904",
-            "出品価格_USD": "40"
+            "出品価格_USD": "40",
+            "Shipping_Policy": "DDP(101～200USD)Expedited荷物大南米除外"
         },
         {
             "管理ID_SKU": "TEST-005",
             "商品名_JP": "テストカード 5",
             "仕入URL": "https://jp.mercari.com/item/m12345678905",
-            "出品価格_USD": "50"
+            "出品価格_USD": "50",
+            "Shipping_Policy": "DDP(101～200USD)Expedited無在庫20日handling"
         }
     ]
 
@@ -58,6 +63,7 @@ def insert_test_data():
             "Condition": "Used",
             "Brand": "Nintendo",
             "出品価格_USD": item["出品価格_USD"],
+            "Shipping_Policy": item["Shipping_Policy"],
             "仕入URL": item["仕入URL"],
             "画像URLs": "https://upload.wikimedia.org/wikipedia/en/a/a6/Pok%C3%A9mon_Pikachu_art.png",
             "担当者": "Test Staff",
