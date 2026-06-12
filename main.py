@@ -19,8 +19,8 @@ ONLY_PROCESS_TEST_CARDS = True
 
 # PHASE 2 SAFETY OVERRIDE:
 # Set to True to force ALL items to be saved as Drafts regardless of automation rules.
-# Set to False (in Phase 3) to allow automatic publishing of normal items.
-FORCE_DRAFT = True
+# Set to False to allow automatic publishing of normal items (as requested by client).
+FORCE_DRAFT = False
 # ==============================================================================
 
 
@@ -180,6 +180,21 @@ def process_validation(sheet_client, error_handler):
     log(f"  Complete: {validated} passed, {blocked} blocked.")
 
 
+def format_schedule_date(date_str):
+    if not date_str:
+        return ""
+    # Try different formats commonly entered in sheets
+    for fmt in ("%Y/%m/%d", "%Y-%m-%d", "%Y/%m/%d %H:%M:%S", "%Y-%m-%d %H:%M:%S", "%Y/%m/%d %H:%M", "%Y-%m-%d %H:%M"):
+        try:
+            dt = datetime.strptime(str(date_str).strip(), fmt)
+            return dt.strftime("%Y/%m/%d")
+        except ValueError:
+            continue
+    # Fallback to cleaning slashes if it's already close
+    cleaned = str(date_str).replace("-", "/").strip()
+    return cleaned
+
+
 def process_monodas_drafts(sheet_client):
     log("Step 5/5: Preparing Monodas draft tasks...")
     rows = sheet_client.get_validated_rows()
@@ -215,6 +230,17 @@ def process_monodas_drafts(sheet_client):
         if FORCE_DRAFT:
             automation_action = "draft" # Phase 2 safety override
 
+        # Custom scheduling date
+        custom_schedule = format_schedule_date(row.get("Schedule_Time", ""))
+        
+        # Calculate final scheduled_date
+        if custom_schedule:
+            scheduled_date = custom_schedule
+        elif automation_action == "draft":
+            scheduled_date = "2099/01/01"
+        else:
+            scheduled_date = datetime.now().strftime("%Y/%m/%d")
+
         # Ensure both titles are synchronized if one is missing (backfill)
         ebay_title = row.get("eBay_Title", "").strip()
         cgpt_title = row.get("ChatGPT_Title", "").strip()
@@ -239,6 +265,7 @@ def process_monodas_drafts(sheet_client):
             "handling_time": row.get("Handling_Time", "10日"),
             "item_specifics": row.get("ChatGPT_ItemSpecifics", "{}"),
             "automation_action": automation_action,
+            "scheduled_date": scheduled_date,
         })
     path = os.path.join(os.path.dirname(__file__), "logs", "monodas_task_batch.json")
     os.makedirs(os.path.dirname(path), exist_ok=True)

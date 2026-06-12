@@ -44,10 +44,21 @@ Once the Listing Editor page has loaded, use the **Populate text field on web pa
 - **Shipping Policy:** Select the shipping policy dropdown (`#shipping-policy-select`) and match the value from `%CurrentItem.shipping_policy%`.
 - **Handling Time:** Select the handling time dropdown (`#handling-time-select`) and match the value from `%CurrentItem.handling_time%`.
 
-#### D. Save as Draft
-- Click the **Save Draft** button (`#btn-save-draft` or `button.save-draft`).
-- Wait for the page to load and confirm the success message.
-- Capture the generated **eBay Item ID** (`#confirmed-item-id` or `.ebay-item-id`) from the page to write it back to the Google Sheet (optional, updates column `G: eBay_Item_ID`).
+#### D. Save as Draft or Publish (Conditional Routing)
+Now that Phase 2's staff/status logic is active, each item in the JSON will have an `%CurrentItem.automation_action%` variable set to either `"draft"` or `"publish"`.
+
+1. **Add an If condition:**
+   * **First operand:** `%CurrentItem.automation_action%`
+   * **Operator:** `Equal to (=)`
+   * **Second operand:** `draft`
+2. **Inside the If block (Draft Path):**
+   * Click the **Save Draft** button (`#btn-save-draft` or `button.save-draft`).
+   * Wait for the page to load and confirm the success message.
+3. **Inside the Else / Else If block (Publish Path):**
+   * Click the **Publish / 出品** button (`#btn-publish`, `#btn-list`, or `button.publish` depending on the Monodas interface).
+   * Wait for the page to load and confirm the success message.
+4. **Capture the generated eBay Item ID:**
+   * After saving/publishing, capture the generated **eBay Item ID** (`#confirmed-item-id` or `.ebay-item-id` or extract it from the post-publish URL) from the page to write it back to the Google Sheet (updates column `G: eBay_Item_ID`).
 
 ### Step 4: Output Listing Results (E2E Sheet Synchronization)
 To make the system fully automated, PAD writes the generated eBay Item IDs to a results file. When you run `main.py` next, it will read this file and automatically update the Google Sheet.

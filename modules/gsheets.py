@@ -112,7 +112,7 @@ class GoogleSheetsClient:
 
     def get_all_rows(self):
         tab = self.tabs["listings"]
-        values = self.api.read_range(tab, "A:BB")
+        values = self.api.read_range(tab, "A:BC")
         if not values or len(values) < 2:
             return []
         headers = [h.strip() for h in values[0]]

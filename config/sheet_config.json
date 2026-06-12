@@ -62,7 +62,8 @@
     "AY": "キャンセル理由",
     "AZ": "フィードバック送信",
     "BA": "サンクスレター",
-    "BB": "備考"
+    "BB": "備考",
+    "BC": "Schedule_Time"
   },
   "status_column": "AI",
   "sku_column": "A",
