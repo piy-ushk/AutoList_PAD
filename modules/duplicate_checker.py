@@ -23,7 +23,8 @@ def compute_phash(image_urls):
         return ""
     first_url = urls[0]
     try:
-        response = requests.get(first_url, timeout=10)
+        headers = {"User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"}
+        response = requests.get(first_url, headers=headers, timeout=10)
         response.raise_for_status()
         img = Image.open(BytesIO(response.content))
         return str(imagehash.phash(img))

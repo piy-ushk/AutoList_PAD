@@ -115,12 +115,17 @@ class GoogleSheetsClient:
         values = self.api.read_range(tab, "A:BC")
         if not values or len(values) < 2:
             return []
-        headers = [h.strip() for h in values[0]]
+        
+        col_map = self.config["column_mapping"]
         rows = []
         for row_idx, row in enumerate(values[1:], start=1):
             row_data = {}
-            for col_idx, header in enumerate(headers):
-                row_data[header] = row[col_idx] if col_idx < len(row) else ""
+            # Iterate through all configured columns
+            for i in range(55):  # 55 columns for A to BC
+                col_letter = chr(65 + (i % 26)) if i < 26 else chr(65 + (i // 26) - 1) + chr(65 + (i % 26))
+                field_name = col_map.get(col_letter)
+                if field_name:
+                    row_data[field_name] = row[i] if i < len(row) else ""
             row_data["_sheet_row"] = row_idx + 1
             rows.append(row_data)
         return rows

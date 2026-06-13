@@ -62,7 +62,7 @@ def insert_test_data():
 
     rows_to_insert = []
     for item in listings:
-        row_data = [""] * 54
+        row_data = [""] * 55
         mapping = {
             "管理ID_SKU": item["管理ID_SKU"],
             "出品日": datetime.now(timezone.utc).strftime("%Y-%m-%d"),
@@ -84,7 +84,7 @@ def insert_test_data():
         for k, v in item.items():
             mapping[k] = v
         
-        for i in range(54):
+        for i in range(55):
             col_letter = chr(65 + (i % 26)) if i < 26 else chr(65 + (i // 26) - 1) + chr(65 + (i % 26))
             field_name = col_map.get(col_letter)
             if field_name in mapping:
@@ -92,7 +92,7 @@ def insert_test_data():
         rows_to_insert.append(row_data)
             
     try:
-        client.api.append_range(tab, "A:BB", rows_to_insert)
+        client.api.append_range(tab, "A:BC", rows_to_insert)
         print(f"Successfully inserted {len(rows_to_insert)} TEST listings into the Google Sheet!")
     except Exception as e:
         print(f"Error inserting TEST listings: {e}")
