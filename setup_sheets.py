@@ -26,7 +26,7 @@ TABS = {
                    "eBay手数料_JPY", "広告費_JPY", "利益_JPY", "利益率", "キャンセル有無",
                    "キャンセル理由", "フィードバック送信", "サンクスレター", "備考"],
     "重複チェックDB": ["SKU", "Title_Hash", "JAN_Code", "Model_Number", "Brand",
-                       "Source_URL", "Image_Hash", "Status", "Listed_Date", "eBay_Item_ID"],
+                       "Source_URL", "Image_Hash", "Status", "Listed_Date", "eBay_Item_ID", "Image_PHash"],
     "禁止用語辞書": ["Keyword", "Category", "Match_Type", "Action", "Replacement", "Notes"],
     "エラーログ": ["Timestamp", "SKU", "Error_Type", "Error_Field", "Error_Message",
                    "PAD_Step", "Screenshot_Path", "Resolved", "Resolution_Notes"],

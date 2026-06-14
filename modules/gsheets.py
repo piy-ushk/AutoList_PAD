@@ -248,7 +248,7 @@ class GoogleSheetsClient:
     def get_duplicate_db_entries(self):
         tab = self.tabs["duplicate_db"]
         try:
-            values = self.api.read_range(tab, "A:J")
+            values = self.api.read_range(tab, "A:K")
             if not values or len(values) < 2:
                 return []
             entries = []
@@ -265,6 +265,7 @@ class GoogleSheetsClient:
                         "Status": row[7] if len(row) > 7 else "",
                         "Listed_Date": row[8] if len(row) > 8 else "",
                         "eBay_Item_ID": row[9] if len(row) > 9 else "",
+                        "Image_PHash": row[10] if len(row) > 10 else "",
                     })
             return entries
         except Exception:
@@ -285,8 +286,9 @@ class GoogleSheetsClient:
             fp["Status"],
             datetime.now(timezone.utc).isoformat(),
             fp["eBay_Item_ID"],
+            fp["Image_PHash"],
         ]
-        self.api.append_range(tab, "A:J", [row_data])
+        self.api.append_range(tab, "A:K", [row_data])
         return True
 
     def update_staff_metrics(self, staff_name, is_success, error_type=None):

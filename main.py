@@ -162,8 +162,6 @@ def process_validation(sheet_client, error_handler):
             sheet_client.batch_update_cells(sheet_row, updates)
 
         dup = check_duplicate(row, duplicates)
-        if ONLY_PROCESS_TEST_CARDS:
-            dup["is_duplicate"] = False
         if dup["is_duplicate"]:
             sheet_client.update_validation_status(sheet_row, "duplicate_suspected")
             error_handler.log_duplicate_error(sku, dup["reason"])
@@ -177,21 +175,36 @@ def process_validation(sheet_client, error_handler):
         validated += 1
         if staff_name: sheet_client.update_staff_metrics(staff_name, is_success=True)
         log(f"    OK.")
+        
+        # Append to in-memory duplicates list for same-run duplicate detection
+        duplicates.append(generate_fingerprint(row))
     log(f"  Complete: {validated} passed, {blocked} blocked.")
 
 
 def format_schedule_date(date_str):
     if not date_str:
         return ""
+    date_str = str(date_str).strip()
+    # If the date is represented as a Google Sheets serial number (e.g. "46198")
+    if date_str.isdigit():
+        try:
+            days = int(date_str)
+            from datetime import date, timedelta
+            base_date = date(1899, 12, 30)
+            target_date = base_date + timedelta(days=days)
+            return target_date.strftime("%Y/%m/%d")
+        except Exception:
+            pass
+            
     # Try different formats commonly entered in sheets
     for fmt in ("%Y/%m/%d", "%Y-%m-%d", "%Y/%m/%d %H:%M:%S", "%Y-%m-%d %H:%M:%S", "%Y/%m/%d %H:%M", "%Y-%m-%d %H:%M"):
         try:
-            dt = datetime.strptime(str(date_str).strip(), fmt)
+            dt = datetime.strptime(date_str, fmt)
             return dt.strftime("%Y/%m/%d")
         except ValueError:
             continue
     # Fallback to cleaning slashes if it's already close
-    cleaned = str(date_str).replace("-", "/").strip()
+    cleaned = date_str.replace("-", "/").strip()
     return cleaned
 
 
@@ -239,7 +252,7 @@ def process_monodas_drafts(sheet_client):
         elif automation_action == "draft":
             scheduled_date = "2099/01/01"
         else:
-            scheduled_date = datetime.now().strftime("%Y/%m/%d")
+            scheduled_date = "" # Leave empty to publish immediately (avoiding past/present schedule errors in Monodas)
 
         # Ensure both titles are synchronized if one is missing (backfill)
         ebay_title = row.get("eBay_Title", "").strip()

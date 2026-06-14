@@ -17,7 +17,7 @@ def insert_test_data():
             "管理ID_SKU": "TEST-001",
             "商品名_JP": "テストカード 1",
             "仕入URL": "https://jp.mercari.com/item/m35656046994",
-            "出品価格_USD": "10",
+            "出品価格_USD": "9999.99",
             "Shipping_Policy": "DDP(1～50USD)Economy",
             "eBay_Title": "テストカード 1 Pokémon Card From Japan",
             "ChatGPT_Title": "テストカード 1 Pokémon Card From Japan"
@@ -26,7 +26,7 @@ def insert_test_data():
             "管理ID_SKU": "TEST-002",
             "商品名_JP": "テストカード 2",
             "仕入URL": "https://jp.mercari.com/item/m19206380831",
-            "出品価格_USD": "20",
+            "出品価格_USD": "9999.99",
             "Shipping_Policy": "DDP(101～200USD)Expedited",
             "eBay_Title": "テストカード 2 Pokemon Card Nintendo From Japan",
             "ChatGPT_Title": "テストカード 2 Pokemon Card Nintendo From Japan"
@@ -35,7 +35,7 @@ def insert_test_data():
             "管理ID_SKU": "TEST-003",
             "商品名_JP": "テストカード 3",
             "仕入URL": "https://jp.mercari.com/item/m93431796197",
-            "出品価格_USD": "30",
+            "出品価格_USD": "9999.99",
             "Shipping_Policy": "DDP(101～200USD)Expedited無在庫10日handling",
             "eBay_Title": "テストカード 3 Pokémon Card From Japan",
             "ChatGPT_Title": "テストカード 3 Pokémon Card From Japan"
@@ -44,7 +44,7 @@ def insert_test_data():
             "管理ID_SKU": "TEST-004",
             "商品名_JP": "テストカード 4",
             "仕入URL": "https://jp.mercari.com/item/m89746857993",
-            "出品価格_USD": "40",
+            "出品価格_USD": "9999.99",
             "Shipping_Policy": "DDP(101～200USD)Expedited荷物大南米除外",
             "eBay_Title": "テストカード 4 Pokémon Card Nintendo From Japan",
             "ChatGPT_Title": "テストカード 4 Pokémon Card Nintendo From Japan"
@@ -53,7 +53,7 @@ def insert_test_data():
             "管理ID_SKU": "TEST-005",
             "商品名_JP": "テストカード 5",
             "仕入URL": "https://jp.mercari.com/item/m31314525197",
-            "出品価格_USD": "50",
+            "出品価格_USD": "9999.99",
             "Shipping_Policy": "DDP(101～200USD)Expedited無在庫20日handling",
             "eBay_Title": "テストカード 5 Pokémon Card Nintendo From Japan",
             "ChatGPT_Title": "テストカード 5 Pokémon Card Nintendo From Japan"
