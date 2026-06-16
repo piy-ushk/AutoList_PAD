@@ -68,6 +68,8 @@ def check_duplicate(new_listing, existing_listings):
     if not new_phash and new_listing.get("画像URLs"):
         new_phash = compute_phash(new_listing.get("画像URLs", ""))
 
+    IGNORE_VALUES = {"n/a", "na", "none", "nan", "", "-"}
+
     for existing in existing_listings:
         existing_sku = existing.get("SKU", "")
         existing_jan = normalize_text(existing.get("JAN_Code", ""))
@@ -77,13 +79,13 @@ def check_duplicate(new_listing, existing_listings):
         existing_title = normalize_text(existing.get("Title_Hash", ""))
         existing_phash = existing.get("Image_PHash", "")
 
-        if new_jan and existing_jan and new_jan == existing_jan:
+        if new_jan and existing_jan and new_jan not in IGNORE_VALUES and existing_jan not in IGNORE_VALUES and new_jan == existing_jan:
             matches.append({"type": "JAN_Code", "priority": "HIGH", "existing_sku": existing_sku, "detail": f"JAN code match: {new_jan}"})
 
-        if new_model and existing_model and new_model == existing_model:
+        if new_model and existing_model and new_model not in IGNORE_VALUES and existing_model not in IGNORE_VALUES and new_model == existing_model:
             matches.append({"type": "Model_Number", "priority": "HIGH", "existing_sku": existing_sku, "detail": f"Model number match: {new_model}"})
 
-        if new_url and existing_url and new_url == existing_url:
+        if new_url and existing_url and new_url not in IGNORE_VALUES and existing_url and new_url == existing_url:
             matches.append({"type": "Source_URL", "priority": "HIGH", "existing_sku": existing_sku, "detail": f"Source URL match: {new_url}"})
 
         if new_title and existing_title:
