@@ -21,12 +21,20 @@ def match_genre(category_str, product_name_str):
     cat_lower = (category_str or "").lower().strip()
     name_lower = (product_name_str or "").lower().strip()
     
-    # Check category string match first, then product name string match
+    # Pass 1: Match by Category
     for genre_key, genre_data in config.get("genres", {}).items():
         if genre_key == "default":
             continue
         for kw in genre_data.get("keywords", []):
-            if kw in cat_lower or kw in name_lower:
+            if kw in cat_lower:
+                return genre_key
+                
+    # Pass 2: Match by Product Name
+    for genre_key, genre_data in config.get("genres", {}).items():
+        if genre_key == "default":
+            continue
+        for kw in genre_data.get("keywords", []):
+            if kw in name_lower:
                 return genre_key
                 
     return "default"

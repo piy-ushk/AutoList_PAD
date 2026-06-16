@@ -4,6 +4,7 @@
       "display_name": "Pokemon Cards",
       "keywords": ["pokemon", "ポケモン", "card", "カード", "tcg", "トレカ", "遊戯王", "yugioh", "デュエマ"],
       "specialization": "trading cards, card games, and collectible card singles",
+      "ebay_ref_id": "126445359794",
       "item_specifics_schema": "{\"Card Name\":\"string\",\"Character\":\"string\",\"Language\":\"Japanese\",\"Manufacturer\":\"string (e.g. Nintendo, Pokemon, Bandai)\",\"Card Type\":\"string\",\"Rarity\":\"string\",\"Condition\":\"string\",\"Set\":\"string\",\"Year\":\"string\",\"Grade\":\"string or N/A\",\"Features\":\"string\"}",
       "item_specifics_keys": ["Card Name", "Character", "Language", "Manufacturer", "Card Type", "Rarity", "Condition", "Set", "Year", "Grade", "Features"],
       "genre_fields": ""
@@ -12,6 +13,7 @@
       "display_name": "Figure",
       "keywords": ["figure", "フィギュア", "statue", "スタチュー", "ねんどろいど", "nendoroid", "figma", "ロボット魂", "shfiguarts"],
       "specialization": "anime/manga figures, scale statues, and action figures",
+      "ebay_ref_id": "335048259021",
       "item_specifics_schema": "{\"Character\":\"string\",\"Franchise\":\"string\",\"Brand\":\"string (e.g. Bandai, Good Smile Company, Kotobukiya)\",\"Type\":\"string (e.g. Action Figure, Static Figure, Scale Figure)\",\"Material\":\"string (e.g. PVC, ABS, Diecast)\",\"Scale\":\"string (e.g. 1/7, 1/8, N/A)\",\"Packaging\":\"string (e.g. Original Opened, Original Unopened, No Box)\",\"Theme\":\"Anime & Manga\",\"Country/Region of Manufacture\":\"Japan\"}",
       "item_specifics_keys": ["Character", "Franchise", "Brand", "Type", "Material", "Scale", "Packaging", "Theme", "Country/Region of Manufacture"],
       "genre_fields": ""
@@ -20,6 +22,7 @@
       "display_name": "Vintage Plastic Model",
       "keywords": ["model kit", "plastic model", "プラモデル", "プラモ", "tamiya", "タミヤ", "hasegawa", "ハセガワ", "aoshima", "アオシマ", "fujimi", "フジミ", "gunpla", "ガンプラ"],
       "specialization": "vintage model kits, plastic model kits, and unassembled models",
+      "ebay_ref_id": "364719250102",
       "item_specifics_schema": "{\"Assembly Status\":\"Unassembled Kit\",\"Scale\":\"string (e.g. 1/24, 1/144, 1/48, N/A)\",\"Brand\":\"string (e.g. Tamiya, Bandai, Hasegawa)\",\"Subject\":\"string (e.g. Car, Airplane, Gundam, Tank)\",\"Material\":\"Plastic\",\"Year Manufactured\":\"string\",\"Vintage\":\"Yes\",\"Country/Region of Manufacture\":\"Japan\"}",
       "item_specifics_keys": ["Assembly Status", "Scale", "Brand", "Subject", "Material", "Year Manufactured", "Vintage", "Country/Region of Manufacture"],
       "genre_fields": ""
@@ -28,6 +31,7 @@
       "display_name": "Vintage Toy",
       "keywords": ["toy", "おもちゃ", "玩具", "vintage toy", "ビンテージ玩具", "レトロ玩具", "popy", "ポピー", "sofubi", "ソフビ", "chogokin", "超合金", "tin plate", "ブリキ", "bullmark", "ブルマァク"],
       "specialization": "vintage Japanese toys, retro wind-up toys, Chogokin, and Sofubi (soft vinyl)",
+      "ebay_ref_id": "186290192501",
       "item_specifics_schema": "{\"Brand\":\"string (e.g. Popy, Bandai, Takara)\",\"Year\":\"string\",\"Material\":\"string (e.g. Chogokin, Sofubi, Tin, Plastic)\",\"Character Family\":\"string\",\"Vintage\":\"Yes\",\"Theme\":\"string\",\"Country/Region of Manufacture\":\"Japan\"}",
       "item_specifics_keys": ["Brand", "Year", "Material", "Character Family", "Vintage", "Theme", "Country/Region of Manufacture"],
       "genre_fields": ""
@@ -36,6 +40,7 @@
       "display_name": "RC Related",
       "keywords": ["rc", "ラジコン", "radio control", "yokomo", "ヨコモ", "kyosho", "京商", "futaba", "フタバ", "sanwa", "サンワ", "propo", "プロポ", "esc", "servo", "サーボ"],
       "specialization": "radio-controlled (RC) models, cars, buggies, parts, transmitters, and accessories",
+      "ebay_ref_id": "156091028302",
       "item_specifics_schema": "{\"Brand\":\"string (e.g. Tamiya, Kyosho, Yokomo)\",\"Scale\":\"string (e.g. 1/10, 1/12, N/A)\",\"Fuel Type\":\"string (e.g. Electric, Nitro, N/A)\",\"Required Assembly\":\"string (e.g. Ready to Go/RTR, Unassembled Kit, N/A)\",\"Type\":\"string (e.g. Car, Buggy, Truck, Controller)\",\"Model\":\"string\",\"Country/Region of Manufacture\":\"Japan\"}",
       "item_specifics_keys": ["Brand", "Scale", "Fuel Type", "Required Assembly", "Type", "Model", "Country/Region of Manufacture"],
       "genre_fields": ""
@@ -44,6 +49,7 @@
       "display_name": "Game Related",
       "keywords": ["game", "ゲーム", "console", "本体", "ソフト", "retro game", "レトロゲーム", "famicom", "ファミコン", "super famicom", "sfc", "スーパーファミコン", "playstation", "プレイステーション", "nintendo", "任天堂", "sega", "セガ", "game boy", "ゲームボーイ", "sega saturn", "セガサターン", "dreamcast", "ドリームキャスト", "megadrive", "メガドライブ"],
       "specialization": "vintage retro video games, consoles, controllers, and gaming accessories",
+      "ebay_ref_id": "266591028392",
       "item_specifics_schema": "{\"Platform\":\"string (e.g. Nintendo NES, Game Boy, Sega Genesis, Sony PlayStation, N/A)\",\"Publisher\":\"string\",\"Region Code\":\"NTSC-J (Japan)\",\"Game Name\":\"string\",\"Genre\":\"string\",\"Rating\":\"string (e.g. CERO, N/A)\",\"Country/Region of Manufacture\":\"Japan\"}",
       "item_specifics_keys": ["Platform", "Publisher", "Region Code", "Game Name", "Genre", "Rating", "Country/Region of Manufacture"],
       "genre_fields": "Platform/Console: {model}\n"
@@ -52,6 +58,7 @@
       "display_name": "General Collectibles",
       "keywords": [],
       "specialization": "Japanese vintage collectibles, hobby products, and retro goods",
+      "ebay_ref_id": "126445359794",
       "item_specifics_schema": "{\"Brand\":\"string\",\"Manufacturer\":\"string\",\"Condition\":\"string\",\"Year\":\"string\",\"Country/Region of Manufacture\":\"Japan\"}",
       "item_specifics_keys": ["Brand", "Manufacturer", "Condition", "Year", "Country/Region of Manufacture"],
       "genre_fields": ""

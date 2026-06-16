@@ -264,6 +264,15 @@ def process_monodas_drafts(sheet_client):
             sheet_client.update_cell(row["_sheet_row"], "ChatGPT_Title", ebay_title)
             row["ChatGPT_Title"] = ebay_title
 
+        # Determine the Category-Specific eBay Reference ID for PAD
+        from modules.chatgpt import match_genre, load_genre_config
+        try:
+            genre_conf = load_genre_config()
+            g_key = match_genre(row.get("Category", ""), row.get("商品名_JP", ""))
+            ebay_ref_id = genre_conf.get("genres", {}).get(g_key, {}).get("ebay_ref_id", "126445359794")
+        except Exception:
+            ebay_ref_id = "126445359794"
+
         tasks.append({
             "sheet_row": row["_sheet_row"],
             "sku": row.get("管理ID_SKU", ""),
@@ -279,6 +288,7 @@ def process_monodas_drafts(sheet_client):
             "item_specifics": row.get("ChatGPT_ItemSpecifics", "{}"),
             "automation_action": automation_action,
             "scheduled_date": scheduled_date,
+            "ebay_ref_id": ebay_ref_id,
         })
     path = os.path.join(os.path.dirname(__file__), "logs", "monodas_task_batch.json")
     os.makedirs(os.path.dirname(path), exist_ok=True)

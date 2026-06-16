@@ -96,7 +96,7 @@ pip install -r requirements.txt
   - `openai.api_key`: ChatGPT通信用キー
   - `google.spreadsheet_id`: ターゲットスプレッドシートID
   - `google.service_account_key_file`: サービスアカウントキーパス
-- `config/genre_templates.json`: 各ジャンル（フィギュア、プラモデル、おもちゃ、ラジコン、ゲーム、カード）ごとのAI指示書および出力項目を定義。
+- `config/genre_templates.json`: 各ジャンル（フィギュア、プラモデル、おもちゃ、ラジコン、ゲーム、カード）ごとのAI指示書、出力項目、およびMonodasカテゴリ複製用のeBay参照ID (`ebay_ref_id`) を定義。ジャンルの複製元eBay商品が変更になった場合はこのIDを変更します。
 - `config/selectors_config.json`: MonodasやeBayのHTML要素のCSSセレクタ。画面変更時はこのファイルのセレクタを修正することで、PADのコードを変更することなく対応可能です。
 
 ### 5-2. 環境変数
