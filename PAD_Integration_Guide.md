@@ -34,7 +34,10 @@ Before accessing the listing editor, Monodas requires a reference eBay Item ID t
 2. **Supplier Select:** Select **メルカリ** (Mercari) in the supplier dropdown (Selector: `select[name='supplier']` or `#supplier-select`).
 3. **Supplier URL:** Populate the URL field (Selector: `#source-url`) with the supplier URL from the JSON object: `%CurrentItem.source_url%`.
 4. **Search/Import:** Click the blue **検索** (Search) button (Selector: `button[type='submit']` or `.btn-search`).
-5. **Wait:** Wait 5–10 seconds for Monodas to import the eBay structure and Mercari images, loading the main Listing Editor page.
+5. **Wait for Loading Spinner:** After clicking search, Monodas displays a loading spinner overlay (`取得中...`). Use the **Wait for web page content** action. Configure it to wait for the `loading_spinner` element (from `selectors_config.json`) to **disappear**.
+6. **Check for Timeout Error:** Network or fetching issues can cause Monodas to show an error (`Timeout Error!! 取得できませんでした...`). Add an **If web page contains** action to check for the `timeout_error_msg` selector.
+   - **If Error Exists:** Log this item as a failure or set it for retry, then use a **Next loop** action to skip to the next listing.
+   - **If No Error:** Wait for the main Listing Editor page to fully load, then proceed.
 
 #### C. Fill in Form Fields (Stage 2 Editor)
 Once the Listing Editor page has loaded, use the **Populate text field on web page** actions to fill/overwrite the following values:

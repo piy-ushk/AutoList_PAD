@@ -7,6 +7,8 @@
     "ebay_ref_id_field": "input[name='ebay_item_id'], #ebay-item-id, input[placeholder*='eBay']",
     "supplier_dropdown": "select[name='supplier'], select[name='site_type'], #supplier-select",
     "search_submit_btn": "button[type='submit'], .btn-search, input[value='検索']",
+    "loading_spinner": ".loading, .spinner, div:contains('取得中'), img[src*='loading']",
+    "timeout_error_msg": ".text-danger:contains('Timeout Error'), .error-text, span:contains('取得できませんでした')",
     "title_field": "#item-title",
     "category_dropdown": "#category-select",
     "price_field": "#item-price",

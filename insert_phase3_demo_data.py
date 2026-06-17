@@ -24,7 +24,7 @@ def insert_phase3_demo_data():
             "JAN_Code": "N/A",
             "Condition": "Used",
             "出品価格_USD": "85.00",
-            "仕入URL": "https://jp.mercari.com/item/m11111111111",
+            "仕入URL": "https://jp.mercari.com/item/m10228250509",
             "画像URLs": "https://picsum.photos/id/1025/400/400",
             "Listing_Status": "pending_ai"
         },
@@ -37,7 +37,7 @@ def insert_phase3_demo_data():
             "JAN_Code": "4571245298881",
             "Condition": "Used",
             "出品価格_USD": "120.00",
-            "仕入URL": "https://jp.mercari.com/item/m22222222222",
+            "仕入URL": "https://jp.mercari.com/item/m34397728095",
             "画像URLs": "https://picsum.photos/id/1062/400/400",
             "Listing_Status": "pending_ai"
         },
@@ -50,7 +50,7 @@ def insert_phase3_demo_data():
             "JAN_Code": "4950344243211",
             "Condition": "New",
             "出品価格_USD": "55.00",
-            "仕入URL": "https://jp.mercari.com/item/m33333333333",
+            "仕入URL": "https://jp.mercari.com/item/m67651719063",
             "画像URLs": "https://picsum.photos/id/1074/400/400",
             "Listing_Status": "pending_ai"
         },
@@ -63,7 +63,7 @@ def insert_phase3_demo_data():
             "JAN_Code": "N/A",
             "Condition": "Used",
             "出品価格_USD": "250.00",
-            "仕入URL": "https://jp.mercari.com/item/m44444444444",
+            "仕入URL": "https://jp.mercari.com/item/m98612018792",
             "画像URLs": "https://picsum.photos/id/1084/400/400",
             "Listing_Status": "pending_ai"
         },
@@ -76,7 +76,7 @@ def insert_phase3_demo_data():
             "JAN_Code": "4950344583362",
             "Condition": "New",
             "出品価格_USD": "160.00",
-            "仕入URL": "https://jp.mercari.com/item/m55555555555",
+            "仕入URL": "https://jp.mercari.com/item/m81485250076",
             "画像URLs": "https://picsum.photos/id/101/400/400",
             "Listing_Status": "pending_ai"
         },
@@ -89,7 +89,7 @@ def insert_phase3_demo_data():
             "JAN_Code": "N/A",
             "Condition": "Used",
             "出品価格_USD": "75.00",
-            "仕入URL": "https://jp.mercari.com/item/m66666666666",
+            "仕入URL": "https://jp.mercari.com/item/m77404548657",
             "画像URLs": "https://picsum.photos/id/201/400/400",
             "Listing_Status": "pending_ai"
         }
