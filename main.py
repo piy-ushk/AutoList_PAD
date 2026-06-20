@@ -208,6 +208,18 @@ def format_schedule_date(date_str):
     return cleaned
 
 
+def determine_supplier(url):
+    url = url.lower()
+    if "yahoo" in url or "paypayfleamarket" in url:
+        return "ヤフーフリマ"
+    elif "rakuma.rakuten" in url:
+        return "ラクマ"
+    elif "auctions.yahoo" in url:
+        return "ヤフオク"
+    else:
+        return "メルカリ" # Default to Mercari
+
+
 def process_monodas_drafts(sheet_client):
     log("Step 5/5: Preparing Monodas draft tasks...")
     rows = sheet_client.get_validated_rows()
@@ -282,6 +294,7 @@ def process_monodas_drafts(sheet_client):
             "price_usd": row.get("出品価格_USD", ""),
             "description": row.get("ChatGPT_Description", ""),
             "source_url": row.get("仕入URL", ""),
+            "supplier_type": determine_supplier(row.get("仕入URL", "")),
             "image_urls": row.get("画像URLs", ""),
             "shipping_policy": policy,
             "handling_time": row.get("Handling_Time", "10日"),

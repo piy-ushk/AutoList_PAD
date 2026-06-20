@@ -31,7 +31,7 @@ For each item in the parsed JSON:
 #### B. Initialize Listing via eBay Reference ID (Stage 1 Form)
 Before accessing the listing editor, Monodas requires a reference eBay Item ID to clone the category and item specifics, and the supplier URL to pull image data.
 1. **Reference eBay Item ID:** Populate the **eBayアイテムID** field (Selector: `input[name='ebay_item_id']` or `#ebay-item-id`) with the category-specific reference ID from the task JSON: `%CurrentItem.ebay_ref_id%`. This ensures Monodas clones the correct category (e.g. Figures, Models, or Games).
-2. **Supplier Select:** Select **メルカリ** (Mercari) in the supplier dropdown (Selector: `select[name='supplier']` or `#supplier-select`).
+3. **Supplier Select:** Select the supplier dropdown (Selector: `select[name='supplier']` or `#supplier-select`) and match the value from `%CurrentItem.supplier_type%` (e.g. メルカリ, ヤフーフリマ, ラクマ).
 3. **Supplier URL:** Populate the URL field (Selector: `#source-url`) with the supplier URL from the JSON object: `%CurrentItem.source_url%`.
 4. **Search/Import:** Click the blue **検索** (Search) button (Selector: `button[type='submit']` or `.btn-search`).
 5. **Wait for Loading Spinner:** After clicking search, Monodas displays a loading spinner overlay (`取得中...`). Use the **Wait for web page content** action. Configure it to wait for the `loading_spinner` element (from `selectors_config.json`) to **disappear**.
