@@ -75,6 +75,11 @@ def process_ai_generation(sheet_client, error_handler):
     for i, row in enumerate(rows):
         sku = row.get("管理ID_SKU", f"row_{row['_sheet_row']}")
         sheet_row = row["_sheet_row"]
+        
+        if row.get("AI_Status", "").strip() == "ai_complete" or row.get("ChatGPT_Description", "").strip():
+            log(f"  [{i+1}/{len(rows)}] Skipping SKU: {sku} (AI content already exists)")
+            continue
+            
         log(f"  [{i+1}/{len(rows)}] Generating for SKU: {sku}")
         try:
             output = chatgpt.generate_listing(row)
@@ -172,6 +177,11 @@ def process_validation(sheet_client, error_handler):
 
         sheet_client.update_validation_status(sheet_row, "validated")
         sheet_client.append_duplicate_entry(row)
+        
+        # Dynamically append to memory list so subsequent rows in this same batch are checked against it
+        from modules.duplicate_checker import generate_fingerprint
+        duplicates.append(generate_fingerprint(row))
+        
         validated += 1
         if staff_name: sheet_client.update_staff_metrics(staff_name, is_success=True)
         log(f"    OK.")

@@ -189,7 +189,7 @@ class ChatGPTCaller:
         # Combine the AI output into the final HTML template
         title = parsed.get("title", product_data.get("商品名_JP", ""))
         condition = product_data.get("Condition", "Used")
-        parsed["ChatGPT_Description"] = build_html_description(title, parsed, condition)
+        parsed["description"] = build_html_description(title, parsed, condition)
         
         # We store itemSpecifics as JSON string in the sheet so we can use it later
         parsed["ChatGPT_ItemSpecifics"] = json.dumps(parsed.get("itemSpecifics", {}), ensure_ascii=False)

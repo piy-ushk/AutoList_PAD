@@ -17,14 +17,13 @@ def clear_test_data():
         "Content-Type": "application/json"
     }
     
-    # Clear from row 2 downwards for all tabs to reset them, except VERO which has 15 rows initially.
+    # Clear from row 2 downwards for all tabs to reset them, except configuration tabs.
     ranges = []
     for tab_key, tab_name in client.tabs.items():
-        if tab_key == "vero_dict":
-            # setup_sheets.py creates 1 header + 14 sample rows = 15 rows. Clear from row 16.
-            ranges.append(f"'{tab_name}'!A16:BC1000")
-        else:
-            ranges.append(f"'{tab_name}'!A2:BC1000")
+        if tab_key in ["vero_dict", "shipping", "staff"]:
+            # Do not clear configuration tabs
+            continue
+        ranges.append(f"'{tab_name}'!A2:BC1000")
             
     body = json.dumps({"ranges": ranges}).encode("utf-8")
     req = urllib.request.Request(base_url, data=body, headers=headers, method="POST")

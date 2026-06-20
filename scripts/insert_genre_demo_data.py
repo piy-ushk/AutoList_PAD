@@ -1,8 +1,8 @@
-import json, os, sys
+import json, os, sys, random
 from datetime import datetime, timezone
 
-# Add current directory to path
-sys.path.append(os.path.dirname(os.path.abspath(__file__)))
+# Add parent directory to path
+sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
 from modules.gsheets import GoogleSheetsClient
 
@@ -11,15 +11,16 @@ def insert_genre_demo_data():
     tab = client.tabs["listings"]
     col_map = client.config["column_mapping"]
     
-    # 1 Pokemon Card and 1 Plastic Model/Figure to show genre adaptation
+    rand_id = str(random.randint(10000, 99999))
+    
     listings = [
         {
-            "管理ID_SKU": "DEMO-POKE-001",
+            "管理ID_SKU": "TEST-POKE-001",
             "商品名_JP": "ポケモンカード ピカチュウ プロモ",
             "Category": "Pokemon Cards",
             "Condition": "Used",
             "Brand": "Nintendo",
-            "仕入URL": "https://jp.mercari.com/item/m12345678901",
+            "仕入URL": f"https://jp.mercari.com/item/m{rand_id}111",
             "出品価格_USD": "85.00",
             "Shipping_Policy": "STOCK_3D_1-50_ECO",
             "画像URLs": "https://picsum.photos/id/1025/400/400",
@@ -27,15 +28,41 @@ def insert_genre_demo_data():
             "Listing_Status": "pending_ai"
         },
         {
-            "管理ID_SKU": "DEMO-FIG-002",
+            "管理ID_SKU": "TEST-FIG-002",
             "商品名_JP": "機動戦士ガンダム RX-78-2 プラモデル",
             "Category": "Plastic Models",
             "Condition": "New",
             "Brand": "Bandai",
-            "仕入URL": "https://jp.mercari.com/item/m10987654321",
+            "仕入URL": f"https://jp.mercari.com/item/m{rand_id}222",
             "出品価格_USD": "120.00",
             "Shipping_Policy": "STOCK_3D_1-50_ECO",
             "画像URLs": "https://picsum.photos/id/1062/400/400",
+            "担当者": "Final Demo",
+            "Listing_Status": "pending_ai"
+        },
+        {
+            "管理ID_SKU": "TEST-VERO-003",
+            "商品名_JP": "初音ミク フィギュア 1/7スケール", # "初音ミク" triggers Patent Troll block
+            "Category": "Figures",
+            "Condition": "New",
+            "Brand": "Good Smile Company",
+            "仕入URL": f"https://jp.mercari.com/item/m{rand_id}333",
+            "出品価格_USD": "150.00",
+            "Shipping_Policy": "STOCK_3D_1-50_ECO",
+            "画像URLs": "https://picsum.photos/id/1074/400/400",
+            "担当者": "Final Demo",
+            "Listing_Status": "pending_ai"
+        },
+        {
+            "管理ID_SKU": "TEST-DUP-004",
+            "商品名_JP": "ポケモンカード ピカチュウ プロモ", # Duplicate of item 1
+            "Category": "Pokemon Cards",
+            "Condition": "Used",
+            "Brand": "Nintendo",
+            "仕入URL": f"https://jp.mercari.com/item/m{rand_id}111", # Duplicate URL
+            "出品価格_USD": "85.00",
+            "Shipping_Policy": "STOCK_3D_1-50_ECO",
+            "画像URLs": "https://picsum.photos/id/1025/400/400",
             "担当者": "Final Demo",
             "Listing_Status": "pending_ai"
         }

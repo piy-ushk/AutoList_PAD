@@ -79,6 +79,10 @@ def check_duplicate(new_listing, existing_listings):
         existing_title = normalize_text(existing.get("Title_Hash", ""))
         existing_phash = existing.get("Image_PHash", "")
 
+        new_sku = new_listing.get("管理ID_SKU", new_listing.get("SKU", ""))
+        if new_sku and existing_sku and new_sku == existing_sku:
+            continue
+
         if new_jan and existing_jan and new_jan not in IGNORE_VALUES and existing_jan not in IGNORE_VALUES and new_jan == existing_jan:
             matches.append({"type": "JAN_Code", "priority": "HIGH", "existing_sku": existing_sku, "detail": f"JAN code match: {new_jan}"})
 

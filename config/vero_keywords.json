@@ -1,426 +1,6 @@
 {
-  "_description": "VeRO/Patent keyword dictionary cache. Loaded from Google Sheets 禁止用語辞書 tab at startup.",
-  "_source": "Google Sheets: 禁止用語辞書",
-  "_last_updated": null,
-  "keywords": [
-    {
-      "keyword": "Pokémon",
-      "category": "VeRO",
-      "match_type": "contains",
-      "action": "block",
-      "replacement": null,
-      "notes": "Trademarked franchise name"
-    },
-    {
-      "keyword": "Pikachu",
-      "category": "VeRO",
-      "match_type": "contains",
-      "action": "block",
-      "replacement": null,
-      "notes": "Pokémon character"
-    },
-    {
-      "keyword": "Charizard",
-      "category": "VeRO",
-      "match_type": "contains",
-      "action": "block",
-      "replacement": null,
-      "notes": "Pokémon character"
-    },
-    {
-      "keyword": "Nintendo",
-      "category": "VeRO",
-      "match_type": "contains",
-      "action": "block",
-      "replacement": null,
-      "notes": ""
-    },
-    {
-      "keyword": "Game Freak",
-      "category": "VeRO",
-      "match_type": "contains",
-      "action": "block",
-      "replacement": null,
-      "notes": ""
-    },
-    {
-      "keyword": "Barbie",
-      "category": "VeRO",
-      "match_type": "contains",
-      "action": "block",
-      "replacement": null,
-      "notes": "Mattel brand"
-    },
-    {
-      "keyword": "Mattel",
-      "category": "VeRO",
-      "match_type": "contains",
-      "action": "block",
-      "replacement": null,
-      "notes": ""
-    },
-    {
-      "keyword": "Disney",
-      "category": "VeRO",
-      "match_type": "contains",
-      "action": "block",
-      "replacement": null,
-      "notes": ""
-    },
-    {
-      "keyword": "Marvel",
-      "category": "VeRO",
-      "match_type": "contains",
-      "action": "block",
-      "replacement": null,
-      "notes": ""
-    },
-    {
-      "keyword": "DC Comics",
-      "category": "VeRO",
-      "match_type": "contains",
-      "action": "block",
-      "replacement": null,
-      "notes": ""
-    },
-    {
-      "keyword": "Adidas",
-      "category": "VeRO",
-      "match_type": "contains",
-      "action": "block",
-      "replacement": null,
-      "notes": ""
-    },
-    {
-      "keyword": "Nike",
-      "category": "VeRO",
-      "match_type": "contains",
-      "action": "block",
-      "replacement": null,
-      "notes": ""
-    },
-    {
-      "keyword": "Casio",
-      "category": "VeRO",
-      "match_type": "contains",
-      "action": "block",
-      "replacement": null,
-      "notes": ""
-    },
-    {
-      "keyword": "Canon",
-      "category": "VeRO",
-      "match_type": "contains",
-      "action": "block",
-      "replacement": null,
-      "notes": ""
-    },
-    {
-      "keyword": "Dyson",
-      "category": "VeRO",
-      "match_type": "contains",
-      "action": "block",
-      "replacement": null,
-      "notes": ""
-    },
-    {
-      "keyword": "Lego",
-      "category": "VeRO",
-      "match_type": "contains",
-      "action": "block",
-      "replacement": null,
-      "notes": ""
-    },
-    {
-      "keyword": "LEGO",
-      "category": "VeRO",
-      "match_type": "contains",
-      "action": "block",
-      "replacement": null,
-      "notes": ""
-    },
-    {
-      "keyword": "Crocs",
-      "category": "VeRO",
-      "match_type": "contains",
-      "action": "block",
-      "replacement": null,
-      "notes": ""
-    },
-    {
-      "keyword": "Funko",
-      "category": "VeRO",
-      "match_type": "contains",
-      "action": "block",
-      "replacement": null,
-      "notes": ""
-    },
-    {
-      "keyword": "Bandai",
-      "category": "VeRO",
-      "match_type": "contains",
-      "action": "block",
-      "replacement": null,
-      "notes": ""
-    },
-    {
-      "keyword": "Hasbro",
-      "category": "VeRO",
-      "match_type": "contains",
-      "action": "block",
-      "replacement": null,
-      "notes": ""
-    },
-    {
-      "keyword": "Levi's",
-      "category": "VeRO",
-      "match_type": "contains",
-      "action": "block",
-      "replacement": null,
-      "notes": ""
-    },
-    {
-      "keyword": "Louis Vuitton",
-      "category": "VeRO",
-      "match_type": "contains",
-      "action": "block",
-      "replacement": null,
-      "notes": ""
-    },
-    {
-      "keyword": "Chanel",
-      "category": "VeRO",
-      "match_type": "contains",
-      "action": "block",
-      "replacement": null,
-      "notes": ""
-    },
-    {
-      "keyword": "Gucci",
-      "category": "VeRO",
-      "match_type": "contains",
-      "action": "block",
-      "replacement": null,
-      "notes": ""
-    },
-    {
-      "keyword": "Fendi",
-      "category": "VeRO",
-      "match_type": "contains",
-      "action": "block",
-      "replacement": null,
-      "notes": ""
-    },
-    {
-      "keyword": "Dior",
-      "category": "VeRO",
-      "match_type": "contains",
-      "action": "block",
-      "replacement": null,
-      "notes": ""
-    },
-    {
-      "keyword": "Cartier",
-      "category": "VeRO",
-      "match_type": "contains",
-      "action": "block",
-      "replacement": null,
-      "notes": ""
-    },
-    {
-      "keyword": "Rolex",
-      "category": "VeRO",
-      "match_type": "contains",
-      "action": "block",
-      "replacement": null,
-      "notes": ""
-    },
-    {
-      "keyword": "Bose",
-      "category": "VeRO",
-      "match_type": "contains",
-      "action": "block",
-      "replacement": null,
-      "notes": ""
-    },
-    {
-      "keyword": "GoPro",
-      "category": "VeRO",
-      "match_type": "contains",
-      "action": "block",
-      "replacement": null,
-      "notes": ""
-    },
-    {
-      "keyword": "Apple",
-      "category": "VeRO",
-      "match_type": "contains",
-      "action": "block",
-      "replacement": null,
-      "notes": ""
-    },
-    {
-      "keyword": "Sony",
-      "category": "VeRO",
-      "match_type": "contains",
-      "action": "block",
-      "replacement": null,
-      "notes": ""
-    },
-    {
-      "keyword": "Samsung",
-      "category": "VeRO",
-      "match_type": "contains",
-      "action": "block",
-      "replacement": null,
-      "notes": ""
-    },
-    {
-      "keyword": "Panasonic",
-      "category": "VeRO",
-      "match_type": "contains",
-      "action": "block",
-      "replacement": null,
-      "notes": ""
-    },
-    {
-      "keyword": "Yamaha",
-      "category": "VeRO",
-      "match_type": "contains",
-      "action": "block",
-      "replacement": null,
-      "notes": ""
-    },
-    {
-      "keyword": "Honda",
-      "category": "VeRO",
-      "match_type": "contains",
-      "action": "block",
-      "replacement": null,
-      "notes": ""
-    },
-    {
-      "keyword": "Toyota",
-      "category": "VeRO",
-      "match_type": "contains",
-      "action": "block",
-      "replacement": null,
-      "notes": ""
-    },
-    {
-      "keyword": "Converse",
-      "category": "VeRO",
-      "match_type": "contains",
-      "action": "block",
-      "replacement": null,
-      "notes": ""
-    },
-    {
-      "keyword": "Burberry",
-      "category": "VeRO",
-      "match_type": "contains",
-      "action": "block",
-      "replacement": null,
-      "notes": ""
-    },
-    {
-      "keyword": "Chevrolet",
-      "category": "VeRO",
-      "match_type": "contains",
-      "action": "block",
-      "replacement": null,
-      "notes": ""
-    },
-    {
-      "keyword": "Cadillac",
-      "category": "VeRO",
-      "match_type": "contains",
-      "action": "block",
-      "replacement": null,
-      "notes": ""
-    },
-    {
-      "keyword": "Angry Birds",
-      "category": "Patent",
-      "match_type": "contains",
-      "action": "block",
-      "replacement": null,
-      "notes": ""
-    },
-    {
-      "keyword": "ASSASSIN'S CREED",
-      "category": "Patent",
-      "match_type": "contains",
-      "action": "block",
-      "replacement": null,
-      "notes": ""
-    },
-    {
-      "keyword": "Baby Shark",
-      "category": "Patent",
-      "match_type": "contains",
-      "action": "block",
-      "replacement": null,
-      "notes": ""
-    },
-    {
-      "keyword": "Bluey",
-      "category": "VeRO",
-      "match_type": "contains",
-      "action": "block",
-      "replacement": null,
-      "notes": ""
-    },
-    {
-      "keyword": "replica",
-      "category": "NG_Word",
-      "match_type": "contains",
-      "action": "block",
-      "replacement": null,
-      "notes": "Prohibited selling term"
-    },
-    {
-      "keyword": "copy",
-      "category": "NG_Word",
-      "match_type": "exact",
-      "action": "block",
-      "replacement": null,
-      "notes": "Use exact match to avoid false positives"
-    },
-    {
-      "keyword": "fake",
-      "category": "NG_Word",
-      "match_type": "contains",
-      "action": "block",
-      "replacement": null,
-      "notes": ""
-    },
-    {
-      "keyword": "inspired",
-      "category": "NG_Word",
-      "match_type": "contains",
-      "action": "block",
-      "replacement": null,
-      "notes": ""
-    },
-    {
-      "keyword": "unauthorized",
-      "category": "NG_Word",
-      "match_type": "contains",
-      "action": "block",
-      "replacement": null,
-      "notes": ""
-    },
-    {
-      "keyword": "counterfeit",
-      "category": "NG_Word",
-      "match_type": "contains",
-      "action": "block",
-      "replacement": null,
-      "notes": ""
-    }
-  ],
   "prohibited_keywords": [
+    "2-D artwork",
     "3 bees & me",
     "60 second salad",
     "abercrombie & fitch",
@@ -488,7 +68,6 @@
     "bluey",
     "booba",
     "boogie",
-    "bootleg",
     "borderlands",
     "borderlands and other games",
     "bore snake",
@@ -553,7 +132,6 @@
     "corner desk",
     "corset belt",
     "costa del mar",
-    "counterfeit",
     "counting crows",
     "cozyphones",
     "crayola",
@@ -609,14 +187,11 @@
     "episodic drawing works",
     "epoch company, ltd",
     "ess",
-    "euは新品ng。初期アカウントは中古も控える",
-    "euは新品・中古ともにng",
     "everratchet",
     "exercise mat",
     "exercise means",
     "expendables",
     "facial hair shaping tool",
-    "fake",
     "fear of god",
     "fence fixer",
     "fendi",
@@ -653,7 +228,6 @@
     "giro",
     "givenchy",
     "glider capo",
-    "global",
     "gm",
     "gmc",
     "godzilla",
@@ -731,7 +305,6 @@
     "keyboard cat",
     "kids ride shotgun bike seat",
     "king crimson",
-    "king crimsonのリーダー",
     "king diamond",
     "ktm",
     "lacoste alligator",
@@ -924,7 +497,6 @@
     "razorbacks",
     "rebord baby",
     "red light therapy belts",
-    "replica",
     "richemont international s",
     "richemont international sa",
     "rimowa",
@@ -1077,7 +649,6 @@
     "ugg",
     "ukap",
     "uloveido",
-    "unauthorized",
     "under the bed restraint system",
     "unicorn shaped board games",
     "uniqlo",
@@ -1131,38 +702,6 @@
     "zhen3ao",
     "zippo",
     "zipstring",
-    "zorro",
-    "おもちゃ",
-    "アイテム",
-    "アインシュタイン 科学者",
-    "アウトドア",
-    "アーティスト 有名人",
-    "カメラ",
-    "キッチン",
-    "ゴルフ",
-    "スキンケア",
-    "スピーカー",
-    "タイヤ",
-    "タンブラー",
-    "ハーモニカ",
-    "バンド",
-    "パテント・トロール（著作権侵害で訴訟）",
-    "ブランド",
-    "モーター",
-    "レーザー",
-    "充電",
-    "家電 工具",
-    "工具",
-    "新品ng。中古でも警告がきたという報告あり",
-    "新品は欧州向け仕様でないとトラブルの可能性あり",
-    "時計",
-    "楽器",
-    "炭酸",
-    "筋トレ用品",
-    "絵具",
-    "自動車",
-    "芸能",
-    "衣料品",
-    "釣具"
+    "zorro"
   ]
 }
