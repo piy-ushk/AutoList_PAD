@@ -245,8 +245,8 @@ def batch_generate(products):
 def build_html_description(title, ai_output, condition):
     def make_ol(bullets):
         if not bullets: return ""
-        items = "".join(f"<li>{b}</li>" for b in bullets)
-        return f"<ol>{items}</ol>"
+        items = "".join(f"<li style='margin-bottom: 8px; line-height: 1.6;'>{b}</li>" for b in bullets)
+        return f"<ul style='margin: 0; padding-left: 20px; list-style-type: disc;'>{items}</ul>"
 
     bg_html = make_ol(ai_output.get("background_bullets", []))
     rarity_html = make_ol(ai_output.get("rarity_bullets", []))
@@ -254,38 +254,146 @@ def build_html_description(title, ai_output, condition):
     features_html = make_ol(ai_output.get("features_bullets", []))
 
     about_items = ""
-    if bg_html: about_items += f"<h4 style='font-size:14px; margin-bottom:5px;'>Product Background / 経緯</h4>{bg_html}"
-    if rarity_html: about_items += f"<h4 style='font-size:14px; margin-bottom:5px; margin-top:10px;'>Rarity / 希少性</h4>{rarity_html}"
-    if desc_html: about_items += f"<h4 style='font-size:14px; margin-bottom:5px; margin-top:10px;'>Description / 商品詳細</h4>{desc_html}"
-    if features_html: about_items += f"<h4 style='font-size:14px; margin-bottom:5px; margin-top:10px;'>Features / 特徴</h4>{features_html}"
+    if bg_html: about_items += f"<h4 style='font-size:16px; margin: 15px 0 8px 0; color: #111820; border-bottom: 1px solid #e5e5e5; padding-bottom: 4px;'>Product Background / 経緯</h4>{bg_html}"
+    if rarity_html: about_items += f"<h4 style='font-size:16px; margin: 15px 0 8px 0; color: #111820; border-bottom: 1px solid #e5e5e5; padding-bottom: 4px;'>Rarity / 希少性</h4>{rarity_html}"
+    if desc_html: about_items += f"<h4 style='font-size:16px; margin: 15px 0 8px 0; color: #111820; border-bottom: 1px solid #e5e5e5; padding-bottom: 4px;'>Description / 商品詳細</h4>{desc_html}"
+    if features_html: about_items += f"<h4 style='font-size:16px; margin: 15px 0 8px 0; color: #111820; border-bottom: 1px solid #e5e5e5; padding-bottom: 4px;'>Features / 特徴</h4>{features_html}"
 
-    html = f'''<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"> <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"><style>.template__main.main6 h2, .template__main.main1 h2{{color: #000;}} .template__main {{word-break: break-word; width: 100%;background: #fff;border: 1px solid #000;padding: 0 20px 30px 20px !important;-webkit-box-sizing: border-box;box-sizing: border-box;word-break: break-all; }} .template__main h1 {{ font-family: "Verdana", sans-serif,sans-serif!important; font-weight: bold; font-size: 22px !important;margin: 30px 0;text-align: center;color: #111; word-break: break-word;}} .template__main h2 {{ font-family: "Verdana", sans-serif,sans-serif!important; margin: 0 0 15px 0; font-size: 18px;line-height: 1.2;text-align: left; word-break: break-word; }} .template__main h3 {{margin: 0; padding-left: 10px; font-size: 14px;color: #111; word-break: break-word;}} .template__main .main__table {{ font-family: "Verdana", sans-serif,sans-serif!important; width: auto; padding-left: 50px; padding-bottom: 40px; }} .template__main .main__table h3 {{margin: 0; padding: 0 0 10px 0; font-size: 14px;color: #111;text-align: center; word-wrap: break-word; word-break: break-word;}} .template__main .main__table table th {{text-align:left; font-weight: bold;}} .template__main .product_dec {{margin: 0;padding: 0 0 20px 0;color: #111;text-align: left;}} .template__main .product__intro {{line-height: 24px;font-size: 14px;padding: 0 30px 20px;}} .template__main .product__intro ol {{margin: 0; padding: 0;}} .template__main .product__intro ol li {{ font-family: "Verdana", sans-serif,sans-serif!important; list-style-type: disc; font-size: 14px; word-break: break-word; color: #111;}} .template__main p {{ word-break: break-word; font-family: "Verdana", sans-serif,sans-serif!important; margin: 0;padding: 0 10px 20px;color: #111;text-align: left;line-height: 24px;font-size: 14px;}} .template__main table {{ border-collapse: separate; border-spacing: revert; width: 100%!important; font-size: 14px;}} .template__main table tr {{background-color: #eee;color: #111;}} .template__main table tr:first-of-type {{background-color: #FFF100;color: #111;}} .template__main table th, .template__main table td {{ font-family: "Verdana", sans-serif,sans-serif!important; padding: 0.5em 0 0.5em 0.5em; word-break: break-word;}} .template__main h3 {{padding-bottom: 10px; font-weight: bold; font-family: "Verdana", sans-serif,sans-serif!important;}} .aside__item:not(:last-of-type) {{ padding-bottom: 20px; }} .template__main section {{padding-bottom: 20px;}} .template__main .img-area {{text-align:center;}} .template__main img {{max-width: 100%; object-fiv: cover; }} .template__main h2 {{ background-color: #FFF100; color: #fff;padding: 10px 10px;}}</style>
-<div class="template__main main1 change-color-1">
-<h1>{title}</h1>
-<section class="product_dec">
-<h2 class="change-color-background">Description</h2>
-<div class="product">
-<div class="main__item"><h3 class="pBottom-10">About This Items</h3>
-<div class="product__intro" property="description">{about_items}</div></div>
-<div class="main__item"><h3 class="pBottom-10">Appearance</h3>
-<div class="product__intro" property="description"><ol><li>Please see the attached photos.</li></ol></div></div>
-<div class="main__item"><h3 class="pBottom-10">Condition</h3>
-<div class="product__intro" property="description"><ol><li>{condition}</li></ol></div></div>
-<div class="main__item"><h3 class="pBottom-10">Included Items</h3>
-<div class="product__intro" property="description"><ol><li>Please see the attached photos.</li></ol></div></div>
-</div>
-</section>
-<aside>
-<div class="shipping aside__item"><h2 class="change-color-background">Shipping</h2>
-<div class="product__intro" property="description">
-<ol><li>We always send the item with a tracking number. So please place an order without any concern on delivery. You can always track the delivery status.</li>
-<li>Shipping is only available to the address registered in eBay. If you want us to send another address, please change your address on eBay and then place an order.</li>
-<li>Shipping is available from Monday to Friday. Weekends are not available because freight (shipping) companies are closed.</li>
-<li>We do not mark merchandise values below value or mark items as "gifts" -- Japan, US and International government regulations prohibit such behavior.</li></ol>
-</div></div>
-<div class="tyuui aside__item"><h2 class="change-color-background">About Importer's Obligation</h2>
-<p class="margin-bottom_change">Import duties, taxes, and charges are not included in the item price or shipping cost. These charges are the buyer's responsibility. Please check with your country's customs office to determine what these additional costs will be prior to bidding or buying.</p>
-<p>Thank you for your understanding.</p>
-</div></aside></div>'''
+    html = f'''<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<style>
+    .premium-desc-wrapper {{
+        font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+        color: #333;
+        background-color: #f7f9fa;
+        padding: 40px 20px;
+        line-height: 1.6;
+    }}
+    .premium-desc-container {{
+        max-width: 900px;
+        margin: 0 auto;
+        background: #ffffff;
+        border-radius: 12px;
+        box-shadow: 0 4px 20px rgba(0,0,0,0.06);
+        overflow: hidden;
+        border: 1px solid #eaeaea;
+    }}
+    .premium-header {{
+        background: linear-gradient(135deg, #0053a0 0%, #0064d2 100%);
+        color: #ffffff;
+        padding: 30px;
+        text-align: center;
+    }}
+    .premium-header h1 {{
+        margin: 0;
+        font-size: 26px;
+        font-weight: 700;
+        letter-spacing: 0.5px;
+    }}
+    .premium-header p {{
+        margin: 10px 0 0 0;
+        font-size: 16px;
+        opacity: 0.9;
+    }}
+    .premium-section {{
+        padding: 30px;
+        border-bottom: 1px solid #f0f0f0;
+    }}
+    .premium-section:last-child {{
+        border-bottom: none;
+    }}
+    .premium-section-title {{
+        font-size: 20px;
+        font-weight: 700;
+        color: #0064d2;
+        margin: 0 0 20px 0;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+    }}
+    .premium-section-title i {{
+        font-size: 22px;
+        width: 30px;
+        text-align: center;
+    }}
+    .premium-content {{
+        font-size: 15px;
+        color: #444;
+    }}
+    .premium-grid {{
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 20px;
+    }}
+    .info-box {{
+        background: #f8fafd;
+        border-left: 4px solid #0064d2;
+        padding: 15px 20px;
+        border-radius: 0 8px 8px 0;
+        margin-bottom: 20px;
+    }}
+    .warning-box {{
+        background: #fffdf5;
+        border: 1px solid #ffeb3b;
+        border-left: 4px solid #ffc107;
+        padding: 15px 20px;
+        border-radius: 4px;
+        font-size: 14px;
+    }}
+</style>
+
+<div class="premium-desc-wrapper">
+    <div class="premium-desc-container">
+        <div class="premium-header">
+            <h1>{title}</h1>
+            <p>100% Authentic • Ships Directly from Japan</p>
+        </div>
+
+        <div class="premium-section">
+            <h2 class="premium-section-title"><i class="fas fa-info-circle"></i> About This Item</h2>
+            <div class="premium-content">
+                {about_items}
+            </div>
+        </div>
+
+        <div class="premium-grid">
+            <div class="premium-section">
+                <h2 class="premium-section-title"><i class="fas fa-camera"></i> Appearance</h2>
+                <div class="info-box">
+                    <p style="margin:0; font-weight: 600;">Please check the photos carefully.</p>
+                    <p style="margin:5px 0 0 0; font-size:14px;">The item shown in the images is the exact item you will receive. Minor cosmetic wear may be present due to age.</p>
+                </div>
+            </div>
+
+            <div class="premium-section">
+                <h2 class="premium-section-title"><i class="fas fa-clipboard-check"></i> Condition</h2>
+                <div class="info-box">
+                    <p style="margin:0; font-weight: 600;">{condition}</p>
+                    <p style="margin:5px 0 0 0; font-size:14px;">Our items are carefully inspected. If you have specific questions about the condition, please ask before purchasing.</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="premium-section">
+            <h2 class="premium-section-title"><i class="fas fa-plane-departure"></i> Shipping Details</h2>
+            <div class="premium-content">
+                <ul style="margin: 0; padding-left: 20px; list-style-type: disc;">
+                    <li style="margin-bottom: 8px;">We always send the item with a <strong>tracking number</strong>. Please place an order without any concern on delivery.</li>
+                    <li style="margin-bottom: 8px;">Shipping is only available to the address registered in eBay.</li>
+                    <li style="margin-bottom: 8px;">Shipping operations are available from Monday to Friday (Closed on weekends).</li>
+                    <li style="margin-bottom: 8px;">We do not mark merchandise values below value or mark items as "gifts" — International government regulations prohibit such behavior.</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="premium-section">
+            <h2 class="premium-section-title"><i class="fas fa-exclamation-triangle"></i> International Buyers - Please Note:</h2>
+            <div class="warning-box">
+                <p style="margin:0 0 10px 0;">Import duties, taxes, and charges are <strong>not included</strong> in the item price or shipping cost. These charges are the buyer's responsibility.</p>
+                <p style="margin:0;">Please check with your country's customs office to determine what these additional costs will be prior to bidding or buying. Thank you for your understanding.</p>
+            </div>
+        </div>
+    </div>
+</div>'''
     return html
 
