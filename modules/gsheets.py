@@ -140,7 +140,8 @@ class GoogleSheetsClient:
 
     def get_validated_rows(self):
         rows = self.get_all_rows()
-        return [r for r in rows if r.get("Validation_Status", "").strip() == "validated"]
+        # Prevent re-exporting rows that have already been saved as drafts or listed
+        return [r for r in rows if r.get("Validation_Status", "").strip() == "validated" and r.get("Listing_Status", "").strip() not in ["draft_saved", "listed", "active", "error"]]
 
     def get_draft_saved_rows(self):
         rows = self.get_all_rows()
