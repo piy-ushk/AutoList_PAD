@@ -192,7 +192,8 @@ class ChatGPTCaller:
         parsed["description"] = build_html_description(title, parsed, condition)
         
         # We store itemSpecifics as JSON string in the sheet so we can use it later
-        parsed["ChatGPT_ItemSpecifics"] = json.dumps(parsed.get("itemSpecifics", {}), ensure_ascii=False)
+        item_specs_dict = parsed.get("itemSpecifics", {})
+        parsed["ChatGPT_ItemSpecifics"] = " | ".join(f"{k}: {v}" for k, v in item_specs_dict.items())
         
         return parsed
 
