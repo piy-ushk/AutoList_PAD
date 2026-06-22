@@ -12,51 +12,53 @@ def insert_test_data():
     
     col_map = client.config["column_mapping"]
     
+    run_id = datetime.now(timezone.utc).strftime("%m%d%H%M%S")
+    
     listings = [
         {
-            "管理ID_SKU": "TEST-001",
-            "商品名_JP": "テストカード 1",
-            "仕入URL": "https://jp.mercari.com/item/m35656046994",
+            "管理ID_SKU": f"TEST-{run_id}-001",
+            "商品名_JP": f"テストカード 1 {run_id}",
+            "仕入URL": f"https://jp.mercari.com/item/m35656046994?rid={run_id}",
             "出品価格_USD": "9999.99",
             "Shipping_Policy": "DDP(1～50USD)Economy",
-            "eBay_Title": "テストカード 1 Pokémon Card From Japan",
-            "ChatGPT_Title": "テストカード 1 Pokémon Card From Japan"
+            "eBay_Title": f"テストカード 1 {run_id} Pokémon Card From Japan",
+            "ChatGPT_Title": f"テストカード 1 {run_id} Pokémon Card From Japan"
         },
         {
-            "管理ID_SKU": "TEST-002",
-            "商品名_JP": "テストカード 2",
-            "仕入URL": "https://jp.mercari.com/item/m19206380831",
+            "管理ID_SKU": f"TEST-{run_id}-002",
+            "商品名_JP": f"テストカード 2 {run_id}",
+            "仕入URL": f"https://jp.mercari.com/item/m19206380831?rid={run_id}",
             "出品価格_USD": "9999.99",
             "Shipping_Policy": "DDP(101～200USD)Expedited",
-            "eBay_Title": "テストカード 2 Pokemon Card Nintendo From Japan",
-            "ChatGPT_Title": "テストカード 2 Pokemon Card Nintendo From Japan"
+            "eBay_Title": f"テストカード 2 {run_id} Pokemon Card Nintendo From Japan",
+            "ChatGPT_Title": f"テストカード 2 {run_id} Pokemon Card Nintendo From Japan"
         },
         {
-            "管理ID_SKU": "TEST-003",
-            "商品名_JP": "テストカード 3",
-            "仕入URL": "https://jp.mercari.com/item/m93431796197",
+            "管理ID_SKU": f"TEST-{run_id}-003",
+            "商品名_JP": f"テストカード 3 {run_id}",
+            "仕入URL": f"https://jp.mercari.com/item/m93431796197?rid={run_id}",
             "出品価格_USD": "9999.99",
             "Shipping_Policy": "DDP(101～200USD)Expedited無在庫10日handling",
-            "eBay_Title": "テストカード 3 Pokémon Card From Japan",
-            "ChatGPT_Title": "テストカード 3 Pokémon Card From Japan"
+            "eBay_Title": f"テストカード 3 {run_id} Pokémon Card From Japan",
+            "ChatGPT_Title": f"テストカード 3 {run_id} Pokémon Card From Japan"
         },
         {
-            "管理ID_SKU": "TEST-004",
-            "商品名_JP": "テストカード 4",
-            "仕入URL": "https://jp.mercari.com/item/m89746857993",
+            "管理ID_SKU": f"TEST-{run_id}-004",
+            "商品名_JP": f"テストカード 4 {run_id}",
+            "仕入URL": f"https://jp.mercari.com/item/m89746857993?rid={run_id}",
             "出品価格_USD": "9999.99",
             "Shipping_Policy": "DDP(101～200USD)Expedited荷物大南米除外",
-            "eBay_Title": "テストカード 4 Pokémon Card Nintendo From Japan",
-            "ChatGPT_Title": "テストカード 4 Pokémon Card Nintendo From Japan"
+            "eBay_Title": f"テストカード 4 {run_id} Pokémon Card Nintendo From Japan",
+            "ChatGPT_Title": f"テストカード 4 {run_id} Pokémon Card Nintendo From Japan"
         },
         {
-            "管理ID_SKU": "TEST-005",
-            "商品名_JP": "テストカード 5",
-            "仕入URL": "https://jp.mercari.com/item/m31314525197",
+            "管理ID_SKU": f"TEST-{run_id}-005",
+            "商品名_JP": f"テストカード 5 {run_id}",
+            "仕入URL": f"https://jp.mercari.com/item/m31314525197?rid={run_id}",
             "出品価格_USD": "9999.99",
             "Shipping_Policy": "DDP(101～200USD)Expedited無在庫20日handling",
-            "eBay_Title": "テストカード 5 Pokémon Card Nintendo From Japan",
-            "ChatGPT_Title": "テストカード 5 Pokémon Card Nintendo From Japan"
+            "eBay_Title": f"テストカード 5 {run_id} Pokémon Card Nintendo From Japan",
+            "ChatGPT_Title": f"テストカード 5 {run_id} Pokémon Card Nintendo From Japan"
         }
     ]
 

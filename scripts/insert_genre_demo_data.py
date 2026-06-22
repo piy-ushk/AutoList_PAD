@@ -12,11 +12,12 @@ def insert_genre_demo_data():
     col_map = client.config["column_mapping"]
     
     rand_id = str(random.randint(10000, 99999))
+    run_id = datetime.now(timezone.utc).strftime("%m%d%H%M%S")
     
     listings = [
         {
-            "管理ID_SKU": "TEST-POKE-001",
-            "商品名_JP": "ポケモンカード ピカチュウ プロモ",
+            "管理ID_SKU": f"TEST-POKE-{run_id}-001",
+            "商品名_JP": f"ポケモンカード ピカチュウ プロモ {run_id}",
             "Category": "Pokemon Cards",
             "Condition": "Used",
             "Brand": "Nintendo",
@@ -28,8 +29,8 @@ def insert_genre_demo_data():
             "Listing_Status": "pending_ai"
         },
         {
-            "管理ID_SKU": "TEST-FIG-002",
-            "商品名_JP": "機動戦士ガンダム RX-78-2 プラモデル",
+            "管理ID_SKU": f"TEST-FIG-{run_id}-002",
+            "商品名_JP": f"機動戦士ガンダム RX-78-2 プラモデル {run_id}",
             "Category": "Plastic Models",
             "Condition": "New",
             "Brand": "Bandai",
@@ -41,8 +42,8 @@ def insert_genre_demo_data():
             "Listing_Status": "pending_ai"
         },
         {
-            "管理ID_SKU": "TEST-VERO-003",
-            "商品名_JP": "初音ミク フィギュア 1/7スケール", # "初音ミク" triggers Patent Troll block
+            "管理ID_SKU": f"TEST-VERO-{run_id}-003",
+            "商品名_JP": f"初音ミク フィギュア 1/7スケール {run_id}", # "初音ミク" triggers Patent Troll block
             "Category": "Figures",
             "Condition": "New",
             "Brand": "Good Smile Company",
@@ -54,8 +55,8 @@ def insert_genre_demo_data():
             "Listing_Status": "pending_ai"
         },
         {
-            "管理ID_SKU": "TEST-DUP-004",
-            "商品名_JP": "ポケモンカード ピカチュウ プロモ", # Duplicate of item 1
+            "管理ID_SKU": f"TEST-DUP-{run_id}-004",
+            "商品名_JP": f"ポケモンカード ピカチュウ プロモ {run_id}", # Duplicate of item 1
             "Category": "Pokemon Cards",
             "Condition": "Used",
             "Brand": "Nintendo",
