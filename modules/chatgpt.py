@@ -114,13 +114,18 @@ class ChatGPTCaller:
             '  "background_bullets": ["string (English) - (Japanese translation)", ...],\n'
             '  "rarity_bullets": ["string (English) - (Japanese translation)", ...],\n'
             '  "description_bullets": ["string (English) - (Japanese translation)", ...],\n'
-            '  "features_bullets": ["string (English) - (Japanese translation)", ...]\n'
+            '  "features_bullets": ["string (English) - (Japanese translation)", ...],\n'
+            '  "appearance_bullets": ["string (English) - (Japanese translation)", ...],\n'
+            '  "optics_bullets": ["string (English) - (Japanese translation)", ...],\n'
+            '  "functional_bullets": ["string (English) - (Japanese translation)", ...],\n'
+            '  "bundled_items_bullets": ["string (English) - (Japanese translation)", ...]\n'
             "}\n\n"
             "INSTRUCTIONS FOR BULLETS:\n"
-            "- For 'background_bullets' (Product Development Background), write concise points about why the manufacturer made this product, mixing in expert knowledge. Provide each point in English, followed immediately by its Japanese translation in the same bullet string.\n"
-            "- For 'rarity_bullets' (Rarity), explain why it's hard to find. Provide English then Japanese translation.\n"
-            "- For 'description_bullets' (Description) and 'features_bullets' (Features), highlight the main selling points. Provide English then Japanese translation.\n"
-            "- Write to appeal to foreign collectors, showcasing deep specialized knowledge.\n"
+            "- For 'background_bullets' (Product Development Background), write concise points about why the manufacturer made this product. Provide each point in English, followed immediately by Japanese translation.\n"
+            "- For 'rarity_bullets' (Rarity), explain why it's hard to find.\n"
+            "- For 'description_bullets' (Description) and 'features_bullets' (Features), highlight the main selling points.\n"
+            "- For 'appearance_bullets', 'optics_bullets', 'functional_bullets', 'bundled_items_bullets', make reasonable assumptions based on the condition provided if photos are not available.\n"
+            "- Provide all bullets in English then Japanese translation.\n"
         )
 
         genre_fields_txt = genre_data.get("genre_fields", "")
@@ -189,7 +194,10 @@ class ChatGPTCaller:
         # Combine the AI output into the final HTML template
         title = parsed.get("title", product_data.get("商品名_JP", ""))
         condition = product_data.get("Condition", "Used")
-        parsed["description"] = build_html_description(title, parsed, condition)
+        category = product_data.get("Category", "")
+        name = product_data.get("商品名_JP", "")
+        genre_key = match_genre(category, name)
+        parsed["description"] = build_html_description(title, parsed, condition, genre_key)
         
         # We store itemSpecifics as JSON string in the sheet so we can use it later
         item_specs_dict = parsed.get("itemSpecifics", {})
@@ -243,7 +251,7 @@ def batch_generate(products):
     return results, failed
 
 
-def build_html_description(title, ai_output, condition):
+def build_html_description(title, ai_output, condition, genre_key="default"):
     def make_ol(bullets):
         if not bullets: return ""
         items = "".join(f"<li>{b}</li>" for b in bullets)
@@ -260,7 +268,48 @@ def build_html_description(title, ai_output, condition):
     if desc_html: about_items += f"<p><strong>Description</strong></p>{desc_html}"
     if features_html: about_items += f"<p><strong>Features</strong></p>{features_html}"
 
-    html = f'''<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"> <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    camera_genres = ["Digital SLR Cameras", "Mirrorless Cameras", "Compact Cameras", "Camera Lenses"]
+    
+    if genre_key in camera_genres:
+        # Camera Specific Layout
+        app_html = make_ol(ai_output.get("appearance_bullets", ["Please see the attached photo."]))
+        opt_html = make_ol(ai_output.get("optics_bullets", ["Please see the attached photo."]))
+        func_html = make_ol(ai_output.get("functional_bullets", ["Please see the attached photo."]))
+        bundle_html = make_ol(ai_output.get("bundled_items_bullets", ["Please see the attached photo."]))
+        
+        if app_html: about_items += f"<p><strong>Appearance</strong></p>{app_html}"
+        if opt_html: about_items += f"<p><strong>Optics</strong></p>{opt_html}"
+        if func_html: about_items += f"<p><strong>Functional</strong></p>{func_html}"
+        if bundle_html: about_items += f"<p><strong>Bundled Items</strong></p>{bundle_html}"
+        
+        html = f'''<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"> <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+<style>.template__main.main6 h2, .template__main.main1 h2{{color: #000;}}  .template__main {{word-break: break-word; width: 100%;background: #fff;border: 1px solid #000;padding: 0 20px 30px 20px !important;-webkit-box-sizing: border-box;box-sizing: border-box;word-break: break-all; }} .template__main h1 {{ font-family: "Verdana", sans-serif,sans-serif!important; font-weight: bold; font-size: 22px !important;margin: 30px 0;text-align: center;color: #111; word-break: break-word;}} .template__main h2 {{ font-family: "Verdana", sans-serif,sans-serif!important; margin: 0 0 15px 0; font-size: 18px;line-height: 1.2;text-align: left; word-break: break-word; }} .template__main h3 {{margin: 0; padding-left: 10px; font-size: 14px;color: #111; word-break: break-word;}} .template__main .main__table {{ font-family: "Verdana", sans-serif,sans-serif!important; width: auto; padding-left: 50px; padding-bottom: 40px; }} .template__main .main__table h3 {{margin: 0; padding: 0 0 10px 0; font-size: 14px;color: #111;text-align: center; word-wrap: break-word; word-break: break-word;}}  .template__main .main__table table th {{text-align:left; font-weight: bold;}} .template__main .product_dec {{margin: 0;padding: 0 0 20px 0;color: #111;text-align: left;}} .template__main .product__intro {{line-height: 24px;font-size: 14px;padding: 0 30px 20px;}} .template__main .product__intro ol {{margin: 0; padding: 0;}} .template__main .product__intro ol li {{ font-family: "Verdana", sans-serif,sans-serif!important; list-style-type: disc; font-size: 14px; word-break: break-word; color: #111;}} .template__main p {{ word-break: break-word; font-family: "Verdana", sans-serif,sans-serif!important; margin: 0;padding: 0 10px 20px;color: #111;text-align: left;line-height: 24px;font-size: 14px;}} .template__main table {{ border-collapse: separate; border-spacing: revert; width: 100%!important; font-size: 14px;}} .template__main table tr {{background-color: #eee;color: #111;}} .template__main table tr:first-of-type {{background-color: #FFF100;color: #111;}} .template__main table th, .template__main table td {{ font-family: "Verdana", sans-serif,sans-serif!important; padding: 0.5em 0 0.5em 0.5em;  word-break: break-word;}} .template__main h3 {{padding-bottom: 10px; font-weight: bold; font-family: "Verdana", sans-serif,sans-serif!important;}} .aside__item:not(:last-of-type) {{ padding-bottom: 20px; }}  .template__main section {{padding-bottom: 20px;}} .template__main .img-area {{text-align:center;}} .template__main img {{max-width: 100%; object-fiv: cover; }}  .template__main h2 {{ background-color: #FFF100; color: #fff;padding: 10px 10px;}}</style>
+<div class="template__main main1 change-color-1">
+<h1>{title}</h1>
+<section class="product_dec">
+<h2 class="change-color-background">Description</h2>
+<div class="product">
+<div class="main__item"><h3 class="pBottom-10">About This Items</h3>
+<div class="product__intro" property="description">
+{about_items}
+</div>
+</div>
+</div>
+</section>
+<aside>
+<div class="shipping aside__item"><h2 class="change-color-background">Shipping</h2>
+<div class="product__intro" property="description"><ol><li>We always send the item with a tracking number. So please place an order without any concern on delivery. You can always track the delivery status.</li><li>Shipping is only available to the address registered in eBay. If you want us to send another address, please change your address on eBay and then place an order.</li><li>Shipping is available from Monday to Friday. Weekends are not available because freight (shipping) companies are closed.</li><li>We do not mark merchandise values below value or mark items as “gifts” – Japan, US and International government regulations prohibit such behavior.</li></ol></div>
+</div>
+<div class="tyuui aside__item"><h2 class="change-color-background">About Importer's Obligation</h2>
+<p class="margin-bottom_change">Import duties, taxes, and charges are not included in the item price or shipping cost. These charges are the buyer's responsibility. Please check with your country's customs office to determine what these additional costs will be prior to bidding or buying.</p>
+<p>Thank you for your understanding.</p>
+</div>
+</aside>
+</div>'''
+        return html
+    else:
+        # Standard Main Account Layout
+        html = f'''<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"> <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
 <style>.template__main.main6 h2, .template__main.main1 h2{{color: #000;}}  .template__main {{word-break: break-word; width: 100%;background: #fff;border: 1px solid #000;padding: 0 20px 30px 20px !important;-webkit-box-sizing: border-box;box-sizing: border-box;word-break: break-all; }} .template__main h1 {{ font-family: "Verdana", sans-serif,sans-serif!important; font-weight: bold; font-size: 22px !important;margin: 30px 0;text-align: center;color: #111; word-break: break-word;}} .template__main h2 {{ font-family: "Verdana", sans-serif,sans-serif!important; margin: 0 0 15px 0; font-size: 18px;line-height: 1.2;text-align: left; word-break: break-word; }} .template__main h3 {{margin: 0; padding-left: 10px; font-size: 14px;color: #111; word-break: break-word;}} .template__main .main__table {{ font-family: "Verdana", sans-serif,sans-serif!important; width: auto; padding-left: 50px; padding-bottom: 40px; }} .template__main .main__table h3 {{margin: 0; padding: 0 0 10px 0; font-size: 14px;color: #111;text-align: center; word-wrap: break-word; word-break: break-word;}}  .template__main .main__table table th {{text-align:left; font-weight: bold;}} .template__main .product_dec {{margin: 0;padding: 0 0 20px 0;color: #111;text-align: left;}} .template__main .product__intro {{line-height: 24px;font-size: 14px;padding: 0 30px 20px;}} .template__main .product__intro ol {{margin: 0; padding: 0;}} .template__main .product__intro ol li {{ font-family: "Verdana", sans-serif,sans-serif!important; list-style-type: disc; font-size: 14px; word-break: break-word; color: #111;}} .template__main p {{ word-break: break-word; font-family: "Verdana", sans-serif,sans-serif!important; margin: 0;padding: 0 10px 20px;color: #111;text-align: left;line-height: 24px;font-size: 14px;}} .template__main table {{ border-collapse: separate; border-spacing: revert; width: 100%!important; font-size: 14px;}} .template__main table tr {{background-color: #eee;color: #111;}} .template__main table tr:first-of-type {{background-color: #FFF100;color: #111;}} .template__main table th, .template__main table td {{ font-family: "Verdana", sans-serif,sans-serif!important; padding: 0.5em 0 0.5em 0.5em;  word-break: break-word;}} .template__main h3 {{padding-bottom: 10px; font-weight: bold; font-family: "Verdana", sans-serif,sans-serif!important;}} .aside__item:not(:last-of-type) {{ padding-bottom: 20px; }}  .template__main section {{padding-bottom: 20px;}} .template__main .img-area {{text-align:center;}} .template__main img {{max-width: 100%; object-fiv: cover; }}  .template__main h2 {{ background-color: #FFF100; color: #fff;padding: 10px 10px;}}</style>
 <div class="template__main main1 change-color-1">
 <h1>{title}</h1>
@@ -293,4 +342,4 @@ def build_html_description(title, ai_output, condition):
 </div>
 </aside>
 </div>'''
-    return html
+        return html

@@ -48,11 +48,16 @@ def init_sheets():
 
 def init_vero_dictionary(sheet_client):
     log("Step 2/5: Loading VeRO keyword dictionary...")
-    keywords = sheet_client.get_vero_keywords()
+    sheet_keywords = sheet_client.get_vero_keywords()
+    local_keywords = load_keyword_dictionary()
+    
+    # Combine them, prioritizing sheet keywords or just combining the lists
+    keywords = local_keywords + sheet_keywords
+    
     if not keywords:
-        log("  WARNING: Could not load from Sheets, falling back to local config.")
-        keywords = load_keyword_dictionary()
-    log(f"  Loaded {len(keywords)} keywords.")
+        log("  WARNING: Could not load any VeRO keywords.")
+    else:
+        log(f"  Loaded {len(keywords)} keywords ({len(sheet_keywords)} from Sheets, {len(local_keywords)} local).")
     return keywords
 
 

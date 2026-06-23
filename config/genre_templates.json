@@ -481,6 +481,564 @@
         "Genre"
       ],
       "genre_fields": ""
+    },
+    "Digital SLR Cameras": {
+      "description": "Digital SLR (DSLR) Cameras",
+      "match_keywords": [
+        "dslr",
+        "デジタル一眼レフ",
+        "一眼レフ"
+      ],
+      "item_specifics_keys": [
+        "Brand",
+        "Model",
+        "Series",
+        "Type",
+        "Color",
+        "Features",
+        "Maximum Resolution",
+        "Optical Zoom",
+        "Digital Zoom",
+        "Screen Size",
+        "Battery Type",
+        "Storage Type",
+        "Lens Mount",
+        "Compatible Brand",
+        "Compatible Series",
+        "Focus Type",
+        "Auto Focus",
+        "Manual Focus",
+        "Viewfinder Type",
+        "Image Stabilization",
+        "Maximum Aperture",
+        "Maximum Shutter Speed",
+        "Minimum Shutter Speed",
+        "Connectivity",
+        "Wi-Fi",
+        "Bluetooth",
+        "USB",
+        "HDMI",
+        "Video Recording",
+        "MPN",
+        "Country/Region of Manufacture",
+        "Item Height",
+        "Item Length",
+        "Item Width",
+        "Item Weight",
+        "UPC"
+      ],
+      "item_specifics_schema": {
+        "type": "object",
+        "properties": {
+          "Brand": {
+            "type": "string"
+          },
+          "Model": {
+            "type": "string"
+          },
+          "Series": {
+            "type": "string"
+          },
+          "Type": {
+            "type": "string"
+          },
+          "Color": {
+            "type": "string"
+          },
+          "Features": {
+            "type": "string"
+          },
+          "Maximum Resolution": {
+            "type": "string"
+          },
+          "Optical Zoom": {
+            "type": "string"
+          },
+          "Digital Zoom": {
+            "type": "string"
+          },
+          "Screen Size": {
+            "type": "string"
+          },
+          "Battery Type": {
+            "type": "string"
+          },
+          "Storage Type": {
+            "type": "string"
+          },
+          "Lens Mount": {
+            "type": "string"
+          },
+          "Compatible Brand": {
+            "type": "string"
+          },
+          "Compatible Series": {
+            "type": "string"
+          },
+          "Focus Type": {
+            "type": "string"
+          },
+          "Auto Focus": {
+            "type": "string"
+          },
+          "Manual Focus": {
+            "type": "string"
+          },
+          "Viewfinder Type": {
+            "type": "string"
+          },
+          "Image Stabilization": {
+            "type": "string"
+          },
+          "Maximum Aperture": {
+            "type": "string"
+          },
+          "Maximum Shutter Speed": {
+            "type": "string"
+          },
+          "Minimum Shutter Speed": {
+            "type": "string"
+          },
+          "Connectivity": {
+            "type": "string"
+          },
+          "Wi-Fi": {
+            "type": "string"
+          },
+          "Bluetooth": {
+            "type": "string"
+          },
+          "USB": {
+            "type": "string"
+          },
+          "HDMI": {
+            "type": "string"
+          },
+          "Video Recording": {
+            "type": "string"
+          },
+          "MPN": {
+            "type": "string"
+          },
+          "Country/Region of Manufacture": {
+            "type": "string"
+          },
+          "Item Height": {
+            "type": "string"
+          },
+          "Item Length": {
+            "type": "string"
+          },
+          "Item Width": {
+            "type": "string"
+          },
+          "Item Weight": {
+            "type": "string"
+          },
+          "UPC": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "Brand",
+          "Model",
+          "Type",
+          "Maximum Resolution",
+          "Lens Mount"
+        ]
+      },
+      "ebay_ref_id": "31388"
+    },
+    "Mirrorless Cameras": {
+      "description": "Mirrorless Cameras",
+      "match_keywords": [
+        "mirrorless",
+        "ミラーレスカメラ",
+        "ミラーレス"
+      ],
+      "item_specifics_keys": [
+        "Brand",
+        "Model",
+        "Series",
+        "Type",
+        "Color",
+        "Features",
+        "Maximum Resolution",
+        "Screen Size",
+        "Battery Type",
+        "Storage Type",
+        "Lens Mount",
+        "Compatible Brand",
+        "Compatible Series",
+        "Focus Type",
+        "Image Stabilization",
+        "Maximum Aperture",
+        "Viewfinder Type",
+        "Connectivity",
+        "Wi-Fi",
+        "Bluetooth",
+        "USB",
+        "HDMI",
+        "Video Recording",
+        "Recording Definition",
+        "MPN",
+        "Country/Region of Manufacture",
+        "Item Height",
+        "Item Length",
+        "Item Width",
+        "Item Weight",
+        "UPC"
+      ],
+      "item_specifics_schema": {
+        "type": "object",
+        "properties": {
+          "Brand": {
+            "type": "string"
+          },
+          "Model": {
+            "type": "string"
+          },
+          "Series": {
+            "type": "string"
+          },
+          "Type": {
+            "type": "string"
+          },
+          "Color": {
+            "type": "string"
+          },
+          "Features": {
+            "type": "string"
+          },
+          "Maximum Resolution": {
+            "type": "string"
+          },
+          "Screen Size": {
+            "type": "string"
+          },
+          "Battery Type": {
+            "type": "string"
+          },
+          "Storage Type": {
+            "type": "string"
+          },
+          "Lens Mount": {
+            "type": "string"
+          },
+          "Compatible Brand": {
+            "type": "string"
+          },
+          "Compatible Series": {
+            "type": "string"
+          },
+          "Focus Type": {
+            "type": "string"
+          },
+          "Image Stabilization": {
+            "type": "string"
+          },
+          "Maximum Aperture": {
+            "type": "string"
+          },
+          "Viewfinder Type": {
+            "type": "string"
+          },
+          "Connectivity": {
+            "type": "string"
+          },
+          "Wi-Fi": {
+            "type": "string"
+          },
+          "Bluetooth": {
+            "type": "string"
+          },
+          "USB": {
+            "type": "string"
+          },
+          "HDMI": {
+            "type": "string"
+          },
+          "Video Recording": {
+            "type": "string"
+          },
+          "Recording Definition": {
+            "type": "string"
+          },
+          "MPN": {
+            "type": "string"
+          },
+          "Country/Region of Manufacture": {
+            "type": "string"
+          },
+          "Item Height": {
+            "type": "string"
+          },
+          "Item Length": {
+            "type": "string"
+          },
+          "Item Width": {
+            "type": "string"
+          },
+          "Item Weight": {
+            "type": "string"
+          },
+          "UPC": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "Brand",
+          "Model",
+          "Type",
+          "Maximum Resolution",
+          "Lens Mount"
+        ]
+      },
+      "ebay_ref_id": "31388"
+    },
+    "Compact Cameras": {
+      "description": "Compact Digital Cameras",
+      "match_keywords": [
+        "compact camera",
+        "コンパクトデジタルカメラ",
+        "コンデジ"
+      ],
+      "item_specifics_keys": [
+        "Brand",
+        "Model",
+        "Series",
+        "Type",
+        "Color",
+        "Features",
+        "Maximum Resolution",
+        "Optical Zoom",
+        "Digital Zoom",
+        "Screen Size",
+        "Battery Type",
+        "Storage Type",
+        "Focus Type",
+        "Image Stabilization",
+        "Built-in Flash",
+        "Connectivity",
+        "Wi-Fi",
+        "Bluetooth",
+        "USB",
+        "Video Recording",
+        "Waterproof",
+        "Dustproof",
+        "MPN",
+        "Country/Region of Manufacture",
+        "Item Height",
+        "Item Length",
+        "Item Width",
+        "Item Weight",
+        "UPC"
+      ],
+      "item_specifics_schema": {
+        "type": "object",
+        "properties": {
+          "Brand": {
+            "type": "string"
+          },
+          "Model": {
+            "type": "string"
+          },
+          "Series": {
+            "type": "string"
+          },
+          "Type": {
+            "type": "string"
+          },
+          "Color": {
+            "type": "string"
+          },
+          "Features": {
+            "type": "string"
+          },
+          "Maximum Resolution": {
+            "type": "string"
+          },
+          "Optical Zoom": {
+            "type": "string"
+          },
+          "Digital Zoom": {
+            "type": "string"
+          },
+          "Screen Size": {
+            "type": "string"
+          },
+          "Battery Type": {
+            "type": "string"
+          },
+          "Storage Type": {
+            "type": "string"
+          },
+          "Focus Type": {
+            "type": "string"
+          },
+          "Image Stabilization": {
+            "type": "string"
+          },
+          "Built-in Flash": {
+            "type": "string"
+          },
+          "Connectivity": {
+            "type": "string"
+          },
+          "Wi-Fi": {
+            "type": "string"
+          },
+          "Bluetooth": {
+            "type": "string"
+          },
+          "USB": {
+            "type": "string"
+          },
+          "Video Recording": {
+            "type": "string"
+          },
+          "Waterproof": {
+            "type": "string"
+          },
+          "Dustproof": {
+            "type": "string"
+          },
+          "MPN": {
+            "type": "string"
+          },
+          "Country/Region of Manufacture": {
+            "type": "string"
+          },
+          "Item Height": {
+            "type": "string"
+          },
+          "Item Length": {
+            "type": "string"
+          },
+          "Item Width": {
+            "type": "string"
+          },
+          "Item Weight": {
+            "type": "string"
+          },
+          "UPC": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "Brand",
+          "Model",
+          "Type",
+          "Maximum Resolution",
+          "Optical Zoom"
+        ]
+      },
+      "ebay_ref_id": "31388"
+    },
+    "Camera Lenses": {
+      "description": "Camera Lenses",
+      "match_keywords": [
+        "lens",
+        "lenses",
+        "レンズ",
+        "カメラレンズ"
+      ],
+      "item_specifics_keys": [
+        "Brand",
+        "Model",
+        "Type",
+        "Compatible Brand",
+        "Mount",
+        "Focal Length",
+        "Maximum Aperture",
+        "Focus Type",
+        "Image Stabilization",
+        "Lens Front",
+        "Lens Rear",
+        "Exterior Material",
+        "Series",
+        "Country/Region of Manufacture",
+        "MPN",
+        "Item Height",
+        "Item Length",
+        "Item Width",
+        "Item Weight",
+        "UPC"
+      ],
+      "item_specifics_schema": {
+        "type": "object",
+        "properties": {
+          "Brand": {
+            "type": "string"
+          },
+          "Model": {
+            "type": "string"
+          },
+          "Type": {
+            "type": "string"
+          },
+          "Compatible Brand": {
+            "type": "string"
+          },
+          "Mount": {
+            "type": "string"
+          },
+          "Focal Length": {
+            "type": "string"
+          },
+          "Maximum Aperture": {
+            "type": "string"
+          },
+          "Focus Type": {
+            "type": "string"
+          },
+          "Image Stabilization": {
+            "type": "string"
+          },
+          "Lens Front": {
+            "type": "string"
+          },
+          "Lens Rear": {
+            "type": "string"
+          },
+          "Exterior Material": {
+            "type": "string"
+          },
+          "Series": {
+            "type": "string"
+          },
+          "Country/Region of Manufacture": {
+            "type": "string"
+          },
+          "MPN": {
+            "type": "string"
+          },
+          "Item Height": {
+            "type": "string"
+          },
+          "Item Length": {
+            "type": "string"
+          },
+          "Item Width": {
+            "type": "string"
+          },
+          "Item Weight": {
+            "type": "string"
+          },
+          "UPC": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "Brand",
+          "Model",
+          "Type",
+          "Mount",
+          "Focal Length",
+          "Maximum Aperture"
+        ]
+      },
+      "ebay_ref_id": "3323"
     }
   }
 }
