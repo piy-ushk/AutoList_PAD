@@ -21,7 +21,7 @@ def insert_genre_demo_data():
             "Category": "Pokemon Cards",
             "Condition": "Used",
             "Brand": "Nintendo",
-            "仕入URL": f"https://jp.mercari.com/item/m{rand_id}111",
+            "仕入URL": "https://jp.mercari.com/item/m82903746200",
             "出品価格_USD": "85.00",
             "Shipping_Policy": "STOCK_3D_1-50_ECO",
             "画像URLs": "https://picsum.photos/id/1025/400/400",
@@ -34,7 +34,7 @@ def insert_genre_demo_data():
             "Category": "Plastic Models",
             "Condition": "New",
             "Brand": "Bandai",
-            "仕入URL": f"https://jp.mercari.com/item/m{rand_id}222",
+            "仕入URL": "https://jp.mercari.com/item/m94586029311",
             "出品価格_USD": "120.00",
             "Shipping_Policy": "STOCK_3D_1-50_ECO",
             "画像URLs": "https://picsum.photos/id/1062/400/400",
@@ -47,7 +47,7 @@ def insert_genre_demo_data():
             "Category": "Figures",
             "Condition": "New",
             "Brand": "Good Smile Company",
-            "仕入URL": f"https://jp.mercari.com/item/m{rand_id}333",
+            "仕入URL": "https://jp.mercari.com/item/m40291048572",
             "出品価格_USD": "150.00",
             "Shipping_Policy": "STOCK_3D_1-50_ECO",
             "画像URLs": "https://picsum.photos/id/1074/400/400",
@@ -60,12 +60,26 @@ def insert_genre_demo_data():
             "Category": "Pokemon Cards",
             "Condition": "Used",
             "Brand": "Nintendo",
-            "仕入URL": f"https://jp.mercari.com/item/m{rand_id}111", # Duplicate URL
+            "仕入URL": "https://jp.mercari.com/item/m82903746200", # Duplicate URL
             "出品価格_USD": "85.00",
             "Shipping_Policy": "STOCK_3D_1-50_ECO",
             "画像URLs": "https://picsum.photos/id/1025/400/400",
             "担当者": "Final Demo",
             "Listing_Status": "pending_ai"
+        },
+        {
+            "管理ID_SKU": f"TEST-CAM-{run_id}-005",
+            "商品名_JP": f"Nikon D850 ボディ デジタル一眼レフ {run_id}",
+            "Category": "Digital SLR Cameras",
+            "Condition": "Used",
+            "Brand": "Nikon",
+            "仕入URL": "https://jp.mercari.com/item/m78749872589",
+            "出品価格_USD": "1800.00",
+            "Shipping_Policy": "STOCK_3D_1-50_ECO",
+            "画像URLs": "https://picsum.photos/id/1080/400/400",
+            "担当者": "Final Demo",
+            "Listing_Status": "pending_ai",
+            "eBayアカウント": "store_third"
         }
     ]
 
@@ -75,7 +89,7 @@ def insert_genre_demo_data():
         mapping = {
             "管理ID_SKU": item["管理ID_SKU"],
             "出品日": datetime.now(timezone.utc).strftime("%Y-%m-%d"),
-            "eBayアカウント": "store_main",
+            "eBayアカウント": item.get("eBayアカウント", "store_main"),
             "販売形式": "FixedPrice",
             "商品名_JP": item["商品名_JP"],
             "Category": item["Category"],
