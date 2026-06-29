@@ -25,7 +25,8 @@ def match_genre(category_str, product_name_str):
     for genre_key, genre_data in config.get("genres", {}).items():
         if genre_key == "default":
             continue
-        for kw in genre_data.get("keywords", []):
+        keywords = genre_data.get("keywords", []) + genre_data.get("match_keywords", [])
+        for kw in keywords:
             if kw in cat_lower:
                 return genre_key
                 
@@ -33,7 +34,8 @@ def match_genre(category_str, product_name_str):
     for genre_key, genre_data in config.get("genres", {}).items():
         if genre_key == "default":
             continue
-        for kw in genre_data.get("keywords", []):
+        keywords = genre_data.get("keywords", []) + genre_data.get("match_keywords", [])
+        for kw in keywords:
             if kw in name_lower:
                 return genre_key
                 
