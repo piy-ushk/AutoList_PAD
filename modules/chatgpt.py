@@ -277,11 +277,6 @@ def build_html_description(title, ai_output, condition, genre_key="default"):
         func_html = make_ol(ai_output.get("functional_bullets", ["Please see the attached photo."]))
         bundle_html = make_ol(ai_output.get("bundled_items_bullets", ["Please see the attached photo."]))
         
-        if app_html: about_items += f"<p><strong>Appearance</strong></p>{app_html}"
-        if opt_html: about_items += f"<p><strong>Optics</strong></p>{opt_html}"
-        if func_html: about_items += f"<p><strong>Functional</strong></p>{func_html}"
-        if bundle_html: about_items += f"<p><strong>Bundled Items</strong></p>{bundle_html}"
-        
         html = f'''<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"> <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
 <style>.template__main.main6 h2, .template__main.main1 h2{{color: #000;}}  .template__main {{word-break: break-word; width: 100%;background: #fff;border: 1px solid #000;padding: 0 20px 30px 20px !important;-webkit-box-sizing: border-box;box-sizing: border-box;word-break: break-all; }} .template__main h1 {{ font-family: "Verdana", sans-serif,sans-serif!important; font-weight: bold; font-size: 22px !important;margin: 30px 0;text-align: center;color: #111; word-break: break-word;}} .template__main h2 {{ font-family: "Verdana", sans-serif,sans-serif!important; margin: 0 0 15px 0; font-size: 18px;line-height: 1.2;text-align: left; word-break: break-word; }} .template__main h3 {{margin: 0; padding-left: 10px; font-size: 14px;color: #111; word-break: break-word;}} .template__main .main__table {{ font-family: "Verdana", sans-serif,sans-serif!important; width: auto; padding-left: 50px; padding-bottom: 40px; }} .template__main .main__table h3 {{margin: 0; padding: 0 0 10px 0; font-size: 14px;color: #111;text-align: center; word-wrap: break-word; word-break: break-word;}}  .template__main .main__table table th {{text-align:left; font-weight: bold;}} .template__main .product_dec {{margin: 0;padding: 0 0 20px 0;color: #111;text-align: left;}} .template__main .product__intro {{line-height: 24px;font-size: 14px;padding: 0 30px 20px;}} .template__main .product__intro ol {{margin: 0; padding: 0;}} .template__main .product__intro ol li {{ font-family: "Verdana", sans-serif,sans-serif!important; list-style-type: disc; font-size: 14px; word-break: break-word; color: #111;}} .template__main p {{ word-break: break-word; font-family: "Verdana", sans-serif,sans-serif!important; margin: 0;padding: 0 10px 20px;color: #111;text-align: left;line-height: 24px;font-size: 14px;}} .template__main table {{ border-collapse: separate; border-spacing: revert; width: 100%!important; font-size: 14px;}} .template__main table tr {{background-color: #eee;color: #111;}} .template__main table tr:first-of-type {{background-color: #FFF100;color: #111;}} .template__main table th, .template__main table td {{ font-family: "Verdana", sans-serif,sans-serif!important; padding: 0.5em 0 0.5em 0.5em;  word-break: break-word;}} .template__main h3 {{padding-bottom: 10px; font-weight: bold; font-family: "Verdana", sans-serif,sans-serif!important;}} .aside__item:not(:last-of-type) {{ padding-bottom: 20px; }}  .template__main section {{padding-bottom: 20px;}} .template__main .img-area {{text-align:center;}} .template__main img {{max-width: 100%; object-fiv: cover; }}  .template__main h2 {{ background-color: #FFF100; color: #fff;padding: 10px 10px;}}</style>
 <div class="template__main main1 change-color-1">
@@ -292,6 +287,26 @@ def build_html_description(title, ai_output, condition, genre_key="default"):
 <div class="main__item"><h3 class="pBottom-10">About This Items</h3>
 <div class="product__intro" property="description">
 {about_items}
+</div>
+</div>
+<div class="main__item"><h3 class="pBottom-10">Appearance</h3>
+<div class="product__intro" property="description">
+{app_html}
+</div>
+</div>
+<div class="main__item"><h3 class="pBottom-10">Optics</h3>
+<div class="product__intro" property="description">
+{opt_html}
+</div>
+</div>
+<div class="main__item"><h3 class="pBottom-10">Functional</h3>
+<div class="product__intro" property="description">
+{func_html}
+</div>
+</div>
+<div class="main__item"><h3 class="pBottom-10">Bundled Items</h3>
+<div class="product__intro" property="description">
+{bundle_html}
 </div>
 </div>
 </div>
