@@ -94,7 +94,7 @@ class ChatGPTCaller:
             notes=product_data.get("備考", ""),
         )
 
-    def build_prompts(self, product_data):
+    def build_prompts(self, product_data, vero_kw=None):
         category = product_data.get("Category", "")
         name = product_data.get("商品名_JP", "")
         genre_key = match_genre(category, name)
@@ -129,6 +129,11 @@ class ChatGPTCaller:
             "- For 'appearance_bullets', 'optics_bullets', 'functional_bullets', 'bundled_items_bullets', make reasonable assumptions based on the condition provided if photos are not available.\n"
             "- Provide all bullets in English then Japanese translation.\n"
         )
+        if vero_kw:
+            system_prompt += (
+                f"\n\nCRITICAL RULE: You MUST NOT use ANY of the following blacklisted VeRO keywords in your generated text (title, description, or bullets). "
+                f"Using these words will cause the listing to be banned! Blacklisted words:\n{', '.join(vero_kw)}\n"
+            )
 
         genre_fields_txt = genre_data.get("genre_fields", "")
         if genre_key == "game_related":
@@ -179,13 +184,9 @@ class ChatGPTCaller:
                 return self._send_request(system_prompt, user_prompt, retries + 1)
             raise
 
-    def generate_listing(self, product_data, system_prompt=None):
-        if system_prompt:
-            user_prompt = self.build_user_prompt(product_data)
-            result = self._send_request(system_prompt, user_prompt)
-        else:
-            dyn_sys, dyn_user = self.build_prompts(product_data)
-            result = self._send_request(dyn_sys, dyn_user)
+    def generate_listing(self, product_data, vero_kw=None):
+        dyn_sys, dyn_user = self.build_prompts(product_data, vero_kw)
+        result = self._send_request(dyn_sys, dyn_user)
         if "choices" not in result or not result["choices"]:
             raise ValueError("API response contained no choices")
         content = result["choices"][0].get("message", {}).get("content", "")

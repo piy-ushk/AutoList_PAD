@@ -61,7 +61,7 @@ def init_vero_dictionary(sheet_client):
     return keywords
 
 
-def process_ai_generation(sheet_client, error_handler):
+def process_ai_generation(sheet_client, error_handler, vero_kw):
     log("Step 3/5: Processing AI content generation...")
     rows = sheet_client.get_pending_ai_rows()
     if ONLY_PROCESS_TEST_CARDS:
@@ -87,7 +87,7 @@ def process_ai_generation(sheet_client, error_handler):
             
         log(f"  [{i+1}/{len(rows)}] Generating for SKU: {sku}")
         try:
-            output = chatgpt.generate_listing(row)
+            output = chatgpt.generate_listing(row, vero_kw)
             if validate_ai_output(output):
                 sheet_client.write_ai_content(sheet_row, output)
                 success += 1
@@ -379,8 +379,8 @@ def main():
         sheet = init_sheets()
         process_monodas_results(sheet)
         err = ErrorHandler(sheet_logger=sheet)
-        init_vero_dictionary(sheet)
-        process_ai_generation(sheet, err)
+        vero_kw = init_vero_dictionary(sheet)
+        process_ai_generation(sheet, err, vero_kw)
         process_validation(sheet, err)
         process_monodas_drafts(sheet)
         log("Cycle complete.")
