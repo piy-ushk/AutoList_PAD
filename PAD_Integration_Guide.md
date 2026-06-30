@@ -43,6 +43,7 @@ Before accessing the listing editor, Monodas requires a reference eBay Item ID t
 Once the Listing Editor page has loaded, use the **Populate text field on web page** actions to fill/overwrite the following values:
 - **Title:** Clear the existing cloned title and write `%CurrentItem.title%` (Selector: `#item-title`).
 - **Price:** Clear the existing price and write `%CurrentItem.price_usd%` (Selector: `#item-price`).
+- **Quantity:** Clear the existing quantity and write `%CurrentItem.quantity%` (Selector: `input[name='quantity']`).
 - **Description:** Select the description text box or description iframe (`#description-iframe`) and overwrite it with `%CurrentItem.description%`.
 - **Shipping Policy:** Select the shipping policy dropdown (`#shipping-policy-select`) and match the value from `%CurrentItem.shipping_policy%`.
 - **Handling Time:** Select the handling time dropdown (`#handling-time-select`) and match the value from `%CurrentItem.handling_time%`.

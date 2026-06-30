@@ -300,13 +300,20 @@ def process_monodas_drafts(sheet_client):
         except Exception:
             ebay_ref_id = "126445359794"
 
+        sku = row.get("管理ID_SKU", "")
+        is_test = sku.startswith("TEST-")
+        
+        final_price = "0" if is_test else row.get("出品価格_USD", "")
+        final_quantity = 0 if is_test else 1
+
         tasks.append({
             "sheet_row": row["_sheet_row"],
-            "sku": row.get("管理ID_SKU", ""),
+            "sku": sku,
             "title": row.get("eBay_Title", "").strip() or row.get("ChatGPT_Title", "").strip(),
             "category": row.get("Category", ""),
             "condition": row.get("Condition", ""),
-            "price_usd": row.get("出品価格_USD", ""),
+            "price_usd": final_price,
+            "quantity": final_quantity,
             "description": row.get("ChatGPT_Description", ""),
             "source_url": row.get("仕入URL", ""),
             "supplier_type": determine_supplier(row.get("仕入URL", "")),
