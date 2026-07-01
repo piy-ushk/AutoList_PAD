@@ -34,10 +34,10 @@ def insert_demo3_data():
             "Category": "Digital SLR Cameras",
             "Condition": "Used",
             "Brand": "Nikon",
-            "仕入URL": f"https://jp.mercari.com/item/m35415760638?rid={run_id}",
+            "仕入URL": f"https://jp.mercari.com/item/m86545246712?rid={run_id}",
             "出品価格_USD": "1800.00",
             "Shipping_Policy": "DDP(101～200USD)Expedited",
-            "画像URLs": "https://static.mercdn.net/item/detail/orig/photos/m35415760638_1.jpg",
+            "画像URLs": "https://static.mercdn.net/item/detail/orig/photos/m86545246712_1.jpg",
             "担当者": "Final Demo",
             "Listing_Status": "pending_ai"
         },

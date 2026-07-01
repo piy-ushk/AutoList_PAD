@@ -1,6 +1,14 @@
 {
     "keywords": [
         {
+            "keyword": "cap",
+            "category": "VeRO",
+            "match_type": "exact",
+            "action": "auto_replace",
+            "replacement": "cover",
+            "notes": "Auto-replace cap with cover to avoid VeRO blocks on camera accessories"
+        },
+        {
             "keyword": "Santas Christmas Town",
             "category": "VeRO",
             "match_type": "contains",

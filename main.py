@@ -106,7 +106,7 @@ def process_ai_generation(sheet_client, error_handler, vero_kw):
 import time
 
 
-def process_validation(sheet_client, error_handler):
+def process_validation(sheet_client, error_handler, vero_kw):
     log("Step 4/5: Running validation...")
     rows = sheet_client.get_ai_complete_rows()
     if ONLY_PROCESS_TEST_CARDS:
@@ -117,7 +117,7 @@ def process_validation(sheet_client, error_handler):
 
     log(f"  Found {len(rows)} rows.")
     duplicates = sheet_client.get_duplicate_db_entries()
-    vero_kw = sheet_client.get_vero_keywords() or load_keyword_dictionary()
+    # vero_kw is now passed in as a parameter
     validated, blocked = 0, 0
 
     for row in rows:
@@ -388,7 +388,7 @@ def main():
         err = ErrorHandler(sheet_logger=sheet)
         vero_kw = init_vero_dictionary(sheet)
         process_ai_generation(sheet, err, vero_kw)
-        process_validation(sheet, err)
+        process_validation(sheet, err, vero_kw)
         process_monodas_drafts(sheet)
         log("Cycle complete.")
         return 0
