@@ -130,9 +130,10 @@ class ChatGPTCaller:
             "- Provide all bullets in English then Japanese translation.\n"
         )
         if vero_kw:
+            vero_kw_strs = [k.get("keyword", str(k)) if isinstance(k, dict) else str(k) for k in vero_kw]
             system_prompt += (
                 f"\n\nCRITICAL RULE: You MUST NOT use ANY of the following blacklisted VeRO keywords in your generated text (title, description, or bullets). "
-                f"Using these words will cause the listing to be banned! Blacklisted words:\n{', '.join(vero_kw)}\n"
+                f"Using these words will cause the listing to be banned! Blacklisted words:\n{', '.join(vero_kw_strs)}\n"
             )
 
         genre_fields_txt = genre_data.get("genre_fields", "")
