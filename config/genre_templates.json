@@ -14,7 +14,7 @@
         "デュエマ"
       ],
       "specialization": "trading cards, card games, and collectible card singles",
-      "ebay_ref_id": "126445359794",
+      "ebay_ref_id": "153121169168",
       "item_specifics_schema": "{\"Game\": \"string\", \"UPC\": \"string\", \"Card Type\": \"string\", \"Speciality\": \"string\", \"Stage\": \"string\", \"Set\": \"string\", \"Card Name\": \"string\", \"Character\": \"string\", \"Age Level\": \"string\", \"Features\": \"string\", \"Rarity\": \"string\", \"Attribute/MTG:Color\": \"string\", \"Finish\": \"string\", \"Manufacturer\": \"string\", \"Creature/Monster Type\": \"string\", \"Autographed\": \"string\", \"Signed By\": \"string\", \"Autograph Format\": \"string\", \"Card Number\": \"string\", \"Language\": \"string\", \"Year Manufactured\": \"string\", \"Card Size\": \"string\", \"Convention/Event\": \"string\", \"Material\": \"string\", \"Vintage\": \"string\", \"Country/Region of Manufacture\": \"string\", \"Illustrator\": \"string\", \"HP\": \"string\", \"Attack/Power\": \"string\", \"Defense/Toughness\": \"string\", \"California Prop 65 Warning\": \"string\", \"Cost\": \"string\", \"Edition\": \"string\"}",
       "item_specifics_keys": [
         "Game",
@@ -67,7 +67,7 @@
         "shfiguarts"
       ],
       "specialization": "anime/manga figures, scale statues, and action figures",
-      "ebay_ref_id": "366161252724",
+      "ebay_ref_id": "134249642234",
       "item_specifics_schema": "{\"Type\": \"string\", \"UPC\": \"string\", \"Exclusive Event/Retailer\": \"string\", \"Franchise\": \"string\", \"Character\": \"string\", \"Theme\": \"string\", \"Brand\": \"string\", \"TV/Streaming Show\": \"string\", \"Movie\": \"string\", \"Features\": \"string\", \"Featured Person/Artist\": \"string\", \"Material\": \"string\", \"Grade\": \"string\", \"Professional Grader\": \"string\", \"Sport\": \"string\", \"Vintage\": \"string\", \"Trending\": \"string\", \"MPN\": \"string\", \"Model\": \"string\", \"Collection\": \"string\", \"Product Line\": \"string\", \"Size\": \"string\", \"Color\": \"string\", \"Release Year\": \"string\", \"Series\": \"string\", \"Age Level\": \"string\", \"Animation Studio\": \"string\", \"Country of Origin\": \"string\", \"Items Included\": \"string\", \"Autographed\": \"string\", \"Autographed By\": \"string\", \"Autograph Authentication Number\": \"string\", \"Autograph Format\": \"string\", \"Customized\": \"string\", \"Production Run\": \"string\", \"Designer\": \"string\", \"Item Height\": \"string\", \"Packaging\": \"string\", \"California Prop 65 Warning\": \"string\", \"Box Number\": \"string\", \"Item Length\": \"string\", \"Item Weight\": \"string\", \"Item Width\": \"string\", \"Number in Pack\": \"string\"}",
       "item_specifics_keys": [
         "Type",
@@ -136,7 +136,7 @@
         "ガンプラ"
       ],
       "specialization": "vintage model kits, plastic model kits, and unassembled models",
-      "ebay_ref_id": "286656404512",
+      "ebay_ref_id": "157661952833",
       "item_specifics_schema": "{\"Brand\": \"string\", \"Type\": \"string\", \"UPC\": \"string\", \"Scale\": \"string\", \"Subject\": \"string\", \"Character\": \"string\", \"Item Height\": \"string\", \"Item Width\": \"string\", \"Item Length\": \"string\", \"Theme\": \"string\", \"Features\": \"string\", \"Franchise\": \"string\", \"Assembly Status\": \"string\", \"Customized\": \"string\", \"Item Weight\": \"string\", \"Set Includes\": \"string\", \"Material\": \"string\", \"Country/Region of Manufacture\": \"string\", \"Color\": \"string\", \"Year Manufactured\": \"string\", \"Unit of Sale\": \"string\", \"Age Level\": \"string\", \"Vintage\": \"string\", \"Style\": \"string\", \"Skill Level\": \"string\", \"California Prop 65 Warning\": \"string\", \"MPN\": \"string\", \"Model\": \"string\", \"Unit Quantity\": \"string\", \"Unit Type\": \"string\"}",
       "item_specifics_keys": [
         "Brand",
@@ -250,7 +250,7 @@
         "サーボ"
       ],
       "specialization": "radio-controlled (RC) models, cars, buggies, parts, transmitters, and accessories",
-      "ebay_ref_id": "358687148695",
+      "ebay_ref_id": "236332714055",
       "item_specifics_schema": "{\"Brand\": \"string\", \"UPC\": \"string\", \"Type\": \"string\", \"Scale\": \"string\", \"Product Line\": \"string\", \"Model\": \"string\", \"Motor Type\": \"string\", \"Fuel Type\": \"string\", \"4WD/2WD\": \"string\", \"Color\": \"string\", \"Recommended Surface\": \"string\", \"Model Grade\": \"string\", \"Required Assembly\": \"string\", \"Material\": \"string\", \"Vintage\": \"string\", \"Characteristics\": \"string\", \"MPN\": \"string\", \"Age Level\": \"string\", \"Replica of\": \"string\", \"California Prop 65 Warning\": \"string\", \"Country of Origin\": \"string\", \"Subject\": \"string\", \"Character\": \"string\", \"Item Height\": \"string\", \"Item Width\": \"string\", \"Item Length\": \"string\", \"Theme\": \"string\", \"Features1\": \"string\", \"Features2\": \"string\", \"Features3\": \"string\", \"Features4\": \"string\", \"Features5\": \"string\", \"Franchise\": \"string\", \"Assembly Status\": \"string\", \"Customized\": \"string\", \"Item Weight\": \"string\", \"Set Includes\": \"string\", \"Country/Region of Manufacture\": \"string\", \"Year Manufactured\": \"string\", \"Unit of Sale\": \"string\", \"Style\": \"string\", \"Skill Level\": \"string\", \"Unit Quantity\": \"string\", \"Unit Type\": \"string\"}",
       "item_specifics_keys": [
         "Brand",
@@ -331,7 +331,7 @@
         "メガドライブ"
       ],
       "specialization": "vintage retro video games, consoles, controllers, and gaming accessories",
-      "ebay_ref_id": "265724070291",
+      "ebay_ref_id": "267652293740",
       "item_specifics_schema": "{\"Brand\": \"string\", \"Model\": \"string\", \"UPC\": \"string\", \"Platform\": \"string\", \"Region Code\": \"string\", \"Color\": \"string\", \"Type\": \"string\", \"Storage Capacity\": \"string\", \"Connectivity\": \"string\", \"MPN\": \"string\", \"Year Manufactured\": \"string\", \"Charger Included\": \"string\", \"Device Charging Range\": \"string\", \"Features\": \"string\", \"Resolution\": \"string\", \"California Prop 65 Warning\": \"string\", \"Country of Origin\": \"string\", \"Item Depth\": \"string\", \"Item Height\": \"string\", \"Item Length\": \"string\", \"Item Weight\": \"string\", \"Manufacturer Warranty\": \"string\", \"Unit Quantity\": \"string\", \"Unit Type\": \"string\", \"Materials sourced from\": \"string\"}",
       "item_specifics_keys": [
         "Brand",
@@ -366,7 +366,7 @@
       "display_name": "General Collectibles",
       "keywords": [],
       "specialization": "Japanese vintage collectibles, hobby products, and retro goods",
-      "ebay_ref_id": "126445359794",
+      "ebay_ref_id": "168209526733",
       "item_specifics_schema": "{\"Brand\":\"string\",\"Manufacturer\":\"string\",\"Condition\":\"string\",\"Year\":\"string\",\"Country/Region of Manufacture\":\"string\"}",
       "item_specifics_keys": [
         "Brand",
@@ -389,7 +389,7 @@
         "本"
       ],
       "specialization": "vintage Japanese picture books and pop-up books",
-      "ebay_ref_id": "126445359794",
+      "ebay_ref_id": "257554698962",
       "item_specifics_schema": "{\"ISBN\": \"string\", \"Topic\": \"string\", \"Publisher\": \"string\", \"Author\": \"string\", \"Binding\": \"string\", \"Subject\": \"string\", \"Special Attributes\": \"string\", \"Language\": \"string\", \"Character Family\": \"string\", \"Original/Facsimile\": \"string\", \"Region\": \"string\", \"Signed\": \"string\", \"Illustrator\": \"string\", \"Personalized\": \"string\", \"Place of Publication\": \"string\", \"Year Printed\": \"string\", \"Country/Region of Manufacture\": \"string\", \"California Prop 65 Warning\": \"string\", \"Unit Quantity\": \"string\", \"Unit Type\": \"string\"}",
       "item_specifics_keys": [
         "ISBN",
@@ -427,7 +427,7 @@
         "タペストリー"
       ],
       "specialization": "Japanese animation merchandise, cels, posters, and related goods",
-      "ebay_ref_id": "126445359794",
+      "ebay_ref_id": "287300803173",
       "item_specifics_schema": "{\"Type\": \"string\", \"UPC\": \"string\", \"Franchise\": \"string\", \"Character\": \"string\", \"Brand\": \"string\", \"Movie\": \"string\", \"TV Show\": \"string\", \"Featured Person/Artist\": \"string\", \"Material\": \"string\", \"Scale\": \"string\", \"Theme\": \"string\", \"Model\": \"string\", \"Grade\": \"string\", \"Professional Grader\": \"string\", \"Certification Number\": \"string\", \"Sport\": \"string\", \"Convention/Event\": \"string\", \"Original/Licensed Reproduction\": \"string\", \"Vintage\": \"string\", \"Time Period Manufactured\": \"string\", \"MPN\": \"string\", \"Series\": \"string\", \"Year Manufactured\": \"string\", \"Color\": \"string\", \"Animal Species\": \"string\", \"Items Included\": \"string\", \"Features\": \"string\", \"Animation Studio\": \"string\", \"Vehicle Type\": \"string\", \"Country/Region of Manufacture\": \"string\", \"Item Height\": \"string\", \"Signed\": \"string\", \"Signed By\": \"string\", \"Autograph Format\": \"string\", \"Personalize\": \"string\", \"Personalization Instructions\": \"string\", \"Age Level\": \"string\", \"Transformer Faction\": \"string\", \"Item Length\": \"string\", \"Item Width\": \"string\", \"Item Weight\": \"string\", \"California Prop 65 Warning\": \"string\", \"Unit Quantity\": \"string\", \"Unit Type\": \"string\", \"Customized\": \"string\", \"Custom Bundle\": \"string\", \"Number in Pack\": \"string\", \"Packaging\": \"string\", \"Genre\": \"string\"}",
       "item_specifics_keys": [
         "Type",
@@ -647,7 +647,7 @@
           "Lens Mount"
         ]
       },
-      "ebay_ref_id": "31388"
+      "ebay_ref_id": "188412969360"
     },
     "Mirrorless Cameras": {
       "description": "Mirrorless Cameras",
@@ -794,7 +794,7 @@
           "Lens Mount"
         ]
       },
-      "ebay_ref_id": "31388"
+      "ebay_ref_id": "147408060838"
     },
     "Compact Cameras": {
       "description": "Compact Digital Cameras",
@@ -933,7 +933,7 @@
           "Optical Zoom"
         ]
       },
-      "ebay_ref_id": "31388"
+      "ebay_ref_id": "298462687090"
     },
     "Camera Lenses": {
       "description": "Camera Lenses",
@@ -1038,7 +1038,7 @@
           "Maximum Aperture"
         ]
       },
-      "ebay_ref_id": "3323"
+      "ebay_ref_id": "178269991775"
     }
   }
 }
