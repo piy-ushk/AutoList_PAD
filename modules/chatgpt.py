@@ -109,15 +109,24 @@ class ChatGPTCaller:
             f"You are a professional eBay listing copywriter specializing in {sys_specialization}. "
             "You write highly detailed, accurate, SEO-optimized eBay listings. You NEVER invent facts, but you MUST perform deep research to provide comprehensive information. "
             "You MUST output valid JSON only, with no extra text. Do not use Markdown formatting for the JSON output (no ```json).\n\n"
-            "Output schema:\n"
             "{\n"
             '  "title": "string (max 80 chars, SEO optimized)",\n'
             f'  "itemSpecifics": {item_specifics_schema},\n'
-            '  "description": "string (English HTML with <p> and <br>)"\n'
+            '  "background_bullets": ["string (English)", ...],\n'
+            '  "rarity_bullets": ["string (English)", ...],\n'
+            '  "description_bullets": ["string (English)", ...],\n'
+            '  "features_bullets": ["string (English)", ...],\n'
+            '  "appearance_bullets": ["string (English)", ...],\n'
+            '  "optics_bullets": ["string (English)", ...],\n'
+            '  "functional_bullets": ["string (English)", ...],\n'
+            '  "bundled_items_bullets": ["string (English)", ...]\n'
             "}\n\n"
             "INSTRUCTIONS FOR CONTENT (ALL TEXT MUST BE IN ENGLISH ONLY - NO JAPANESE TEXT ALLOWED):\n"
             "- 'itemSpecifics': You MUST perform deep internet research on the product to fill out AS MANY FIELDS AS POSSIBLE. Do not leave fields empty if the information is publicly available (e.g., release year, animation studio, material, character names). Exhaustively populate this schema!\n"
-            "- For 'description': Write a cohesive, highly detailed, flowing product description formatted in HTML paragraphs (<p>). Do NOT use bullet points (<ol>, <ul>, <li>) or subheaders (<h3>, <h2>). Seamlessly weave the product development background, rarity, condition details, and features into one beautiful, professional description. Use <p> tags for paragraph breaks so it renders cleanly in HTML.\n"
+            "- For 'background_bullets' (Product Development Background): Write 4-6 highly detailed, comprehensive sentences/bullet points about why the manufacturer made this product, its history, and its significance.\n"
+            "- For 'rarity_bullets' (Rarity): Write 4-6 highly detailed sentences/bullets explaining why it is hard to find, production numbers, and desirability.\n"
+            "- For 'description_bullets' (Description) and 'features_bullets' (Features): Write 4-6 highly detailed sentences/bullets highlighting the main selling points, intricacies, and specific features of the product.\n"
+            "- For 'appearance_bullets', 'optics_bullets', 'functional_bullets', 'bundled_items_bullets', make reasonable assumptions based on the condition provided if photos are not available. Use 2-3 detailed sentences for each.\n"
             "- Ensure the tone is 'collector to collector'.\n"
             "- AGAIN: DO NOT INCLUDE ANY JAPANESE TEXT IN THE OUTPUT.\n"
         )
@@ -188,7 +197,7 @@ class ChatGPTCaller:
             raise ValueError("AI output failed validation")
             
         # Combine the AI output into the final HTML template
-        title = parsed.get("title", product_data.get("商品名_JP", ""))
+        title = parsed.get("title", "Item Description")
         condition = product_data.get("Condition", "Used")
         category = product_data.get("Category", "")
         name = product_data.get("商品名_JP", "")
@@ -248,28 +257,62 @@ def batch_generate(products):
 
 
 def build_html_description(title, ai_output, condition, genre_key="default"):
-    desc_html = ai_output.get("description", "")
+    def make_li(bullets):
+        if not bullets: return ""
+        return "".join(f"<li>{b}</li>" for b in bullets)
+
+    bg_html = make_li(ai_output.get("background_bullets", []))
+    rarity_html = make_li(ai_output.get("rarity_bullets", []))
+    desc_html = make_li(ai_output.get("description_bullets", []))
+    features_html = make_li(ai_output.get("features_bullets", []))
+
+    about_items = ""
+    about_items += "<li>This product is rarely seen online or in stores in Japan, so if this product is sold out, it will be out of stock.</li>"
+    about_items += "<li>We recommend that you purchase this opportunity as this is a wonderful product that is difficult to obtain.</li>"
+    if bg_html: about_items += f"<li><strong>Product Development Background</strong><ul style='margin-top: 10px; margin-bottom: 10px;'>{bg_html}</ul></li>"
+    if rarity_html: about_items += f"<li><strong>Rarity</strong><ul style='margin-top: 10px; margin-bottom: 10px;'>{rarity_html}</ul></li>"
+    if desc_html: about_items += f"<li><strong>Description</strong><ul style='margin-top: 10px; margin-bottom: 10px;'>{desc_html}</ul></li>"
+    if features_html: about_items += f"<li><strong>Features</strong><ul style='margin-top: 10px; margin-bottom: 10px;'>{features_html}</ul></li>"
+
+    app_html = make_li(ai_output.get("appearance_bullets", ["Please see the attached photo."]))
+    bundle_html = make_li(ai_output.get("bundled_items_bullets", ["Please see the attached photo."]))
     
     html = f'''<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"> <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-<style>.template__main.main6 h2, .template__main.main1 h2{{color: #000;}}  .template__main {{word-break: break-word; width: 100%;background: #fff;border: 1px solid #000;padding: 0 20px 30px 20px !important;-webkit-box-sizing: border-box;box-sizing: border-box;word-break: break-all; }} .template__main h1 {{ font-family: "Verdana", sans-serif,sans-serif!important; font-weight: bold; font-size: 22px !important;margin: 30px 0;text-align: center;color: #111; word-break: break-word;}} .template__main h2 {{ font-family: "Verdana", sans-serif,sans-serif!important; margin: 0 0 15px 0; font-size: 18px;line-height: 1.2;text-align: left; word-break: break-word; }} .template__main p {{ word-break: break-word; font-family: "Verdana", sans-serif,sans-serif!important; margin: 0;padding: 0 10px 20px;color: #111;text-align: left;line-height: 24px;font-size: 14px;}} .template__main .product_dec {{margin: 0;padding: 0 0 20px 0;color: #111;text-align: left;}} .template__main .product__intro {{line-height: 24px;font-size: 14px;padding: 0 30px 20px;}} .aside__item:not(:last-of-type) {{ padding-bottom: 20px; }} .template__main section {{padding-bottom: 20px;}} .template__main h2 {{ background-color: #FFF100; color: #111;padding: 10px 10px; font-weight: bold;}}</style>
+<style>.template__main.main6 h2, .template__main.main1 h2{{color: #000;}}  .template__main {{word-break: break-word; width: 100%;background: #fff;border: 1px solid #000;padding: 0 20px 30px 20px !important;-webkit-box-sizing: border-box;box-sizing: border-box;word-break: break-all; }} .template__main h1 {{ font-family: "Verdana", sans-serif,sans-serif!important; font-weight: bold; font-size: 22px !important;margin: 30px 0;text-align: center;color: #111; word-break: break-word;}} .template__main h2 {{ font-family: "Verdana", sans-serif,sans-serif!important; margin: 0 0 15px 0; font-size: 18px;line-height: 1.2;text-align: left; word-break: break-word; }} .template__main p {{ word-break: break-word; font-family: "Verdana", sans-serif,sans-serif!important; margin: 0;padding: 0 10px 10px;color: #111;text-align: left;line-height: 24px;font-size: 14px;}} .template__main .product_dec {{margin: 0;padding: 0 0 20px 0;color: #111;text-align: left;}} .template__main .product__intro {{line-height: 24px;font-size: 14px;padding: 0 30px 20px;}} .template__main ul {{ margin: 0 0 20px 0; padding-left: 20px; }} .template__main li {{ font-family: "Verdana", sans-serif,sans-serif!important; font-size: 14px; line-height: 24px; margin-bottom: 5px; }} .aside__item:not(:last-of-type) {{ padding-bottom: 20px; }} .template__main section {{padding-bottom: 20px;}} .template__main h2 {{ background-color: #FFF100; color: #111;padding: 10px 10px; font-weight: bold;}}</style>
 <div class="template__main main1 change-color-1">
+<h1>{title}</h1>
 <section class="product_dec">
 <h2 class="change-color-background">Description</h2>
 <div class="product">
 <div class="product__intro" property="description">
-<p><strong>Condition: {condition}</strong></p>
-{desc_html}
+<p><strong>About This Items</strong></p>
+<ul>
+{about_items}
+</ul>
+
+<p><strong>Appearance</strong></p>
+<ul>{app_html}</ul>
+
+<p><strong>Condition</strong></p>
+<ul><li>{condition}</li></ul>
+
+<p><strong>Included Items</strong></p>
+<ul>{bundle_html}</ul>
 </div>
 </div>
 </section>
 <aside>
 <div class="shipping aside__item"><h2 class="change-color-background">Shipping</h2>
 <div class="product__intro" property="description">
-<p><strong>Shipping Method:</strong><br>Standard Shipping (FedEx or DHL or EMS)<br>We will ship by the most suitable method for your area.</p>
-<p>We always send the item with a tracking number. So please place an order without any concern on delivery. You can always track the delivery status.<br>Shipping is only available to the address registered in eBay. If you want us to send another address, please change your address on eBay and then place an order.<br>Shipping is available from Monday to Friday. Weekends are not available because freight (shipping) companies are closed.<br>We do not mark merchandise values below value or mark items as “gifts” – Japan, US and International government regulations prohibit such behavior.</p>
+<ul>
+<li>We always send the item with a tracking number. So please place an order without any concern on delivery. You can always track the delivery status.</li>
+<li>Shipping is only available to the address registered in eBay. If you want us to send another address, please change your address on eBay and then place an order.</li>
+<li>Shipping is available from Monday to Friday. Weekends are not available because freight (shipping) companies are closed.</li>
+<li>We do not mark merchandise values below value or mark items as "gifts" – Japan, US and International government regulations prohibit such behavior.</li>
+</ul>
 </div>
 </div>
-<div class="tyuui aside__item"><h2 class="change-color-background">International Buyers - Please Note:</h2>
+<div class="tyuui aside__item"><h2 class="change-color-background">About Importer's Obligation</h2>
 <div class="product__intro" property="description">
 <p class="margin-bottom_change">Import duties, taxes, and charges are not included in the item price or shipping cost. These charges are the buyer's responsibility.<br>Please check with your country's customs office to determine what these additional costs will be prior to bidding or buying.</p>
 <p>Thank you for your understanding.</p>

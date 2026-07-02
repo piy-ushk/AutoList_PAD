@@ -60,31 +60,31 @@ def insert_all_genres_demo_data():
             "備考": "Some pop-up mechanics are slightly bent but fully functional. No torn pages. Japanese text."
         },
         {
-            "商品名_JP": "Studio Ghibli My Neighbor Totoro Original Cel with Douga and Background",
-            "Brand": "Studio Ghibli",
-            "Model_Number": "Totoro Cel",
+            "商品名_JP": "おやこでいっしょにアンパンマンシアター",
+            "Brand": "Bandai",
+            "Model_Number": "Anpanman Theater",
             "Condition": "Used",
-            "Category": "Animation Merch",
-            "想定仕入額_JPY": "150000",
-            "備考": "Authentic production cel used in the movie. Features Totoro with umbrella. Slight vinegar syndrome smell, stored in temperature-controlled archive."
+            "Category": "Toys",
+            "想定仕入額_JPY": "5000",
+            "備考": "Works perfectly. Slight scratches on the body but does not affect projection."
         }
     ]
 
     real_urls = [
         "https://jp.mercari.com/item/m61126572832",
         "https://jp.mercari.com/item/m97579951845",
-        "https://jp.mercari.com/item/m61699166795",
+        "https://jp.mercari.com/item/m38644870547",
         "https://jp.mercari.com/item/m80279095083",
         "https://jp.mercari.com/item/m55203513386",
-        "https://jp.mercari.com/item/m77306677800"
+        "https://jp.mercari.com/item/m30599064139"
     ]
     real_images = [
         "https://static.mercdn.net/item/detail/orig/photos/m61126572832_1.jpg",
         "https://static.mercdn.net/item/detail/orig/photos/m97579951845_1.jpg",
-        "https://static.mercdn.net/item/detail/orig/photos/m61699166795_1.jpg",
+        "https://static.mercdn.net/item/detail/orig/photos/m38644870547_1.jpg",
         "https://static.mercdn.net/item/detail/orig/photos/m80279095083_1.jpg",
         "https://static.mercdn.net/item/detail/orig/photos/m55203513386_1.jpg",
-        "https://static.mercdn.net/item/detail/orig/photos/m77306677800_1.jpg"
+        "https://static.mercdn.net/item/detail/orig/photos/m30599064139_1.jpg"
     ]
 
     rows_to_insert = []
