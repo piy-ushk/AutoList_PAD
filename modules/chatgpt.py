@@ -107,27 +107,19 @@ class ChatGPTCaller:
         
         system_prompt = (
             f"You are a professional eBay listing copywriter specializing in {sys_specialization}. "
-            "You write clean, accurate, SEO-optimized eBay listings. You NEVER invent facts. "
+            "You write highly detailed, accurate, SEO-optimized eBay listings. You NEVER invent facts, but you MUST perform deep research to provide comprehensive information. "
             "You MUST output valid JSON only, with no extra text. Do not use Markdown formatting for the JSON output (no ```json).\n\n"
             "Output schema:\n"
             "{\n"
             '  "title": "string (max 80 chars, SEO optimized)",\n'
             f'  "itemSpecifics": {item_specifics_schema},\n'
-            '  "background_bullets": ["string (English) - (Japanese translation)", ...],\n'
-            '  "rarity_bullets": ["string (English) - (Japanese translation)", ...],\n'
-            '  "description_bullets": ["string (English) - (Japanese translation)", ...],\n'
-            '  "features_bullets": ["string (English) - (Japanese translation)", ...],\n'
-            '  "appearance_bullets": ["string (English) - (Japanese translation)", ...],\n'
-            '  "optics_bullets": ["string (English) - (Japanese translation)", ...],\n'
-            '  "functional_bullets": ["string (English) - (Japanese translation)", ...],\n'
-            '  "bundled_items_bullets": ["string (English) - (Japanese translation)", ...]\n'
+            '  "description": "string (English HTML with <p> and <br>)"\n'
             "}\n\n"
-            "INSTRUCTIONS FOR BULLETS:\n"
-            "- For 'background_bullets' (Product Development Background), write concise points about why the manufacturer made this product. Provide each point in English, followed immediately by Japanese translation.\n"
-            "- For 'rarity_bullets' (Rarity), explain why it's hard to find.\n"
-            "- For 'description_bullets' (Description) and 'features_bullets' (Features), highlight the main selling points.\n"
-            "- For 'appearance_bullets', 'optics_bullets', 'functional_bullets', 'bundled_items_bullets', make reasonable assumptions based on the condition provided if photos are not available.\n"
-            "- Provide all bullets in English then Japanese translation.\n"
+            "INSTRUCTIONS FOR CONTENT (ALL TEXT MUST BE IN ENGLISH ONLY - NO JAPANESE TEXT ALLOWED):\n"
+            "- 'itemSpecifics': You MUST perform deep internet research on the product to fill out AS MANY FIELDS AS POSSIBLE. Do not leave fields empty if the information is publicly available (e.g., release year, animation studio, material, character names). Exhaustively populate this schema!\n"
+            "- For 'description': Write a cohesive, highly detailed, flowing product description formatted in HTML paragraphs (<p>). Do NOT use bullet points (<ol>, <ul>, <li>) or subheaders (<h3>, <h2>). Seamlessly weave the product development background, rarity, condition details, and features into one beautiful, professional description. Use <p> tags for paragraph breaks so it renders cleanly in HTML.\n"
+            "- Ensure the tone is 'collector to collector'.\n"
+            "- AGAIN: DO NOT INCLUDE ANY JAPANESE TEXT IN THE OUTPUT.\n"
         )
         if vero_kw:
             vero_kw_strs = [k.get("keyword", str(k)) if isinstance(k, dict) else str(k) for k in vero_kw]
@@ -256,109 +248,33 @@ def batch_generate(products):
 
 
 def build_html_description(title, ai_output, condition, genre_key="default"):
-    def make_ol(bullets):
-        if not bullets: return ""
-        items = "".join(f"<li>{b}</li>" for b in bullets)
-        return f"<ol>{items}</ol>"
-
-    bg_html = make_ol(ai_output.get("background_bullets", []))
-    rarity_html = make_ol(ai_output.get("rarity_bullets", []))
-    desc_html = make_ol(ai_output.get("description_bullets", []))
-    features_html = make_ol(ai_output.get("features_bullets", []))
-
-    about_items = ""
-    if bg_html: about_items += f"<p><strong>Product Development Background</strong></p>{bg_html}"
-    if rarity_html: about_items += f"<p><strong>Rarity</strong></p>{rarity_html}"
-    if desc_html: about_items += f"<p><strong>Description</strong></p>{desc_html}"
-    if features_html: about_items += f"<p><strong>Features</strong></p>{features_html}"
-
-    camera_genres = ["Digital SLR Cameras", "Mirrorless Cameras", "Compact Cameras", "Camera Lenses"]
+    desc_html = ai_output.get("description", "")
     
-    if genre_key in camera_genres:
-        # Camera Specific Layout
-        app_html = make_ol(ai_output.get("appearance_bullets", ["Please see the attached photo."]))
-        opt_html = make_ol(ai_output.get("optics_bullets", ["Please see the attached photo."]))
-        func_html = make_ol(ai_output.get("functional_bullets", ["Please see the attached photo."]))
-        bundle_html = make_ol(ai_output.get("bundled_items_bullets", ["Please see the attached photo."]))
-        
-        html = f'''<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"> <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-<style>.template__main.main6 h2, .template__main.main1 h2{{color: #000;}}  .template__main {{word-break: break-word; width: 100%;background: #fff;border: 1px solid #000;padding: 0 20px 30px 20px !important;-webkit-box-sizing: border-box;box-sizing: border-box;word-break: break-all; }} .template__main h1 {{ font-family: "Verdana", sans-serif,sans-serif!important; font-weight: bold; font-size: 22px !important;margin: 30px 0;text-align: center;color: #111; word-break: break-word;}} .template__main h2 {{ font-family: "Verdana", sans-serif,sans-serif!important; margin: 0 0 15px 0; font-size: 18px;line-height: 1.2;text-align: left; word-break: break-word; }} .template__main h3 {{margin: 0; padding-left: 10px; font-size: 14px;color: #111; word-break: break-word;}} .template__main .main__table {{ font-family: "Verdana", sans-serif,sans-serif!important; width: auto; padding-left: 50px; padding-bottom: 40px; }} .template__main .main__table h3 {{margin: 0; padding: 0 0 10px 0; font-size: 14px;color: #111;text-align: center; word-wrap: break-word; word-break: break-word;}}  .template__main .main__table table th {{text-align:left; font-weight: bold;}} .template__main .product_dec {{margin: 0;padding: 0 0 20px 0;color: #111;text-align: left;}} .template__main .product__intro {{line-height: 24px;font-size: 14px;padding: 0 30px 20px;}} .template__main .product__intro ol {{margin: 0; padding: 0;}} .template__main .product__intro ol li {{ font-family: "Verdana", sans-serif,sans-serif!important; list-style-type: disc; font-size: 14px; word-break: break-word; color: #111;}} .template__main p {{ word-break: break-word; font-family: "Verdana", sans-serif,sans-serif!important; margin: 0;padding: 0 10px 20px;color: #111;text-align: left;line-height: 24px;font-size: 14px;}} .template__main table {{ border-collapse: separate; border-spacing: revert; width: 100%!important; font-size: 14px;}} .template__main table tr {{background-color: #eee;color: #111;}} .template__main table tr:first-of-type {{background-color: #FFF100;color: #111;}} .template__main table th, .template__main table td {{ font-family: "Verdana", sans-serif,sans-serif!important; padding: 0.5em 0 0.5em 0.5em;  word-break: break-word;}} .template__main h3 {{padding-bottom: 10px; font-weight: bold; font-family: "Verdana", sans-serif,sans-serif!important;}} .aside__item:not(:last-of-type) {{ padding-bottom: 20px; }}  .template__main section {{padding-bottom: 20px;}} .template__main .img-area {{text-align:center;}} .template__main img {{max-width: 100%; object-fiv: cover; }}  .template__main h2 {{ background-color: #FFF100; color: #fff;padding: 10px 10px;}}</style>
+    html = f'''<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"> <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+<style>.template__main.main6 h2, .template__main.main1 h2{{color: #000;}}  .template__main {{word-break: break-word; width: 100%;background: #fff;border: 1px solid #000;padding: 0 20px 30px 20px !important;-webkit-box-sizing: border-box;box-sizing: border-box;word-break: break-all; }} .template__main h1 {{ font-family: "Verdana", sans-serif,sans-serif!important; font-weight: bold; font-size: 22px !important;margin: 30px 0;text-align: center;color: #111; word-break: break-word;}} .template__main h2 {{ font-family: "Verdana", sans-serif,sans-serif!important; margin: 0 0 15px 0; font-size: 18px;line-height: 1.2;text-align: left; word-break: break-word; }} .template__main p {{ word-break: break-word; font-family: "Verdana", sans-serif,sans-serif!important; margin: 0;padding: 0 10px 20px;color: #111;text-align: left;line-height: 24px;font-size: 14px;}} .template__main .product_dec {{margin: 0;padding: 0 0 20px 0;color: #111;text-align: left;}} .template__main .product__intro {{line-height: 24px;font-size: 14px;padding: 0 30px 20px;}} .aside__item:not(:last-of-type) {{ padding-bottom: 20px; }} .template__main section {{padding-bottom: 20px;}} .template__main h2 {{ background-color: #FFF100; color: #111;padding: 10px 10px; font-weight: bold;}}</style>
 <div class="template__main main1 change-color-1">
-<h1>{title}</h1>
 <section class="product_dec">
 <h2 class="change-color-background">Description</h2>
 <div class="product">
-<div class="main__item"><h3 class="pBottom-10">About This Items</h3>
 <div class="product__intro" property="description">
-{about_items}
-</div>
-</div>
-<div class="main__item"><h3 class="pBottom-10">Appearance</h3>
-<div class="product__intro" property="description">
-{app_html}
-</div>
-</div>
-<div class="main__item"><h3 class="pBottom-10">Optics</h3>
-<div class="product__intro" property="description">
-{opt_html}
-</div>
-</div>
-<div class="main__item"><h3 class="pBottom-10">Functional</h3>
-<div class="product__intro" property="description">
-{func_html}
-</div>
-</div>
-<div class="main__item"><h3 class="pBottom-10">Bundled Items</h3>
-<div class="product__intro" property="description">
-{bundle_html}
-</div>
+<p><strong>Condition: {condition}</strong></p>
+{desc_html}
 </div>
 </div>
 </section>
 <aside>
 <div class="shipping aside__item"><h2 class="change-color-background">Shipping</h2>
-<div class="product__intro" property="description"><ol><li>We always send the item with a tracking number. So please place an order without any concern on delivery. You can always track the delivery status.</li><li>Shipping is only available to the address registered in eBay. If you want us to send another address, please change your address on eBay and then place an order.</li><li>Shipping is available from Monday to Friday. Weekends are not available because freight (shipping) companies are closed.</li><li>We do not mark merchandise values below value or mark items as “gifts” – Japan, US and International government regulations prohibit such behavior.</li></ol></div>
-</div>
-<div class="tyuui aside__item"><h2 class="change-color-background">About Importer's Obligation</h2>
-<p class="margin-bottom_change">Import duties, taxes, and charges are not included in the item price or shipping cost. These charges are the buyer's responsibility. Please check with your country's customs office to determine what these additional costs will be prior to bidding or buying.</p>
-<p>Thank you for your understanding.</p>
-</div>
-</aside>
-</div>'''
-        return html
-    else:
-        # Standard Main Account Layout
-        html = f'''<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"> <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-<style>.template__main.main6 h2, .template__main.main1 h2{{color: #000;}}  .template__main {{word-break: break-word; width: 100%;background: #fff;border: 1px solid #000;padding: 0 20px 30px 20px !important;-webkit-box-sizing: border-box;box-sizing: border-box;word-break: break-all; }} .template__main h1 {{ font-family: "Verdana", sans-serif,sans-serif!important; font-weight: bold; font-size: 22px !important;margin: 30px 0;text-align: center;color: #111; word-break: break-word;}} .template__main h2 {{ font-family: "Verdana", sans-serif,sans-serif!important; margin: 0 0 15px 0; font-size: 18px;line-height: 1.2;text-align: left; word-break: break-word; }} .template__main h3 {{margin: 0; padding-left: 10px; font-size: 14px;color: #111; word-break: break-word;}} .template__main .main__table {{ font-family: "Verdana", sans-serif,sans-serif!important; width: auto; padding-left: 50px; padding-bottom: 40px; }} .template__main .main__table h3 {{margin: 0; padding: 0 0 10px 0; font-size: 14px;color: #111;text-align: center; word-wrap: break-word; word-break: break-word;}}  .template__main .main__table table th {{text-align:left; font-weight: bold;}} .template__main .product_dec {{margin: 0;padding: 0 0 20px 0;color: #111;text-align: left;}} .template__main .product__intro {{line-height: 24px;font-size: 14px;padding: 0 30px 20px;}} .template__main .product__intro ol {{margin: 0; padding: 0;}} .template__main .product__intro ol li {{ font-family: "Verdana", sans-serif,sans-serif!important; list-style-type: disc; font-size: 14px; word-break: break-word; color: #111;}} .template__main p {{ word-break: break-word; font-family: "Verdana", sans-serif,sans-serif!important; margin: 0;padding: 0 10px 20px;color: #111;text-align: left;line-height: 24px;font-size: 14px;}} .template__main table {{ border-collapse: separate; border-spacing: revert; width: 100%!important; font-size: 14px;}} .template__main table tr {{background-color: #eee;color: #111;}} .template__main table tr:first-of-type {{background-color: #FFF100;color: #111;}} .template__main table th, .template__main table td {{ font-family: "Verdana", sans-serif,sans-serif!important; padding: 0.5em 0 0.5em 0.5em;  word-break: break-word;}} .template__main h3 {{padding-bottom: 10px; font-weight: bold; font-family: "Verdana", sans-serif,sans-serif!important;}} .aside__item:not(:last-of-type) {{ padding-bottom: 20px; }}  .template__main section {{padding-bottom: 20px;}} .template__main .img-area {{text-align:center;}} .template__main img {{max-width: 100%; object-fiv: cover; }}  .template__main h2 {{ background-color: #FFF100; color: #fff;padding: 10px 10px;}}</style>
-<div class="template__main main1 change-color-1">
-<h1>{title}</h1>
-<section class="product_dec">
-<h2 class="change-color-background">Description</h2>
-<div class="product">
-<div class="main__item"><h3 class="pBottom-10">About This Items</h3>
 <div class="product__intro" property="description">
-{about_items}
+<p><strong>Shipping Method:</strong><br>Standard Shipping (FedEx or DHL or EMS)<br>We will ship by the most suitable method for your area.</p>
+<p>We always send the item with a tracking number. So please place an order without any concern on delivery. You can always track the delivery status.<br>Shipping is only available to the address registered in eBay. If you want us to send another address, please change your address on eBay and then place an order.<br>Shipping is available from Monday to Friday. Weekends are not available because freight (shipping) companies are closed.<br>We do not mark merchandise values below value or mark items as “gifts” – Japan, US and International government regulations prohibit such behavior.</p>
 </div>
 </div>
-<div class="main__item"><h3 class="pBottom-10">Appearance</h3>
-<div class="product__intro" property="description"><ol><li>Please see the attached photo.</li></ol></div>
-</div>
-<div class="main__item"><h3 class="pBottom-10">Condition</h3>
-<div class="product__intro" property="description"><ol><li>{condition}</li></ol></div>
-</div>
-<div class="main__item"><h3 class="pBottom-10">Included Items</h3>
-<div class="product__intro" property="description"><ol><li>Please see the attached photo.</li></ol></div>
-</div>
-</div>
-</section>
-<aside>
-<div class="shipping aside__item"><h2 class="change-color-background">Shipping</h2>
-<div class="product__intro" property="description"><ol><li>We always send the item with a tracking number. So please place an order without any concern on delivery. You can always track the delivery status.</li><li>Shipping is only available to the address registered in eBay. If you want us to send another address, please change your address on eBay and then place an order.</li><li>Shipping is available from Monday to Friday. Weekends are not available because freight (shipping) companies are closed.</li><li>We do not mark merchandise values below value or mark items as “gifts” – Japan, US and International government regulations prohibit such behavior.</li></ol></div>
-</div>
-<div class="tyuui aside__item"><h2 class="change-color-background">About Importer's Obligation</h2>
-<p class="margin-bottom_change">Import duties, taxes, and charges are not included in the item price or shipping cost. These charges are the buyer's responsibility. Please check with your country's customs office to determine what these additional costs will be prior to bidding or buying.</p>
+<div class="tyuui aside__item"><h2 class="change-color-background">International Buyers - Please Note:</h2>
+<div class="product__intro" property="description">
+<p class="margin-bottom_change">Import duties, taxes, and charges are not included in the item price or shipping cost. These charges are the buyer's responsibility.<br>Please check with your country's customs office to determine what these additional costs will be prior to bidding or buying.</p>
 <p>Thank you for your understanding.</p>
+</div>
 </div>
 </aside>
 </div>'''
-        return html
+    return html
