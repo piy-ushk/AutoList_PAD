@@ -64,7 +64,7 @@ def insert_all_genres_demo_data():
             "Brand": "Bandai",
             "Model_Number": "Anpanman Theater",
             "Condition": "Used",
-            "Category": "Toys",
+            "Category": "Animation Merch",
             "想定仕入額_JPY": "5000",
             "備考": "Works perfectly. Slight scratches on the body but does not affect projection."
         }
