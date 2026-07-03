@@ -112,21 +112,17 @@ class ChatGPTCaller:
             "{\n"
             '  "title": "string (max 80 chars, SEO optimized)",\n'
             f'  "itemSpecifics": {item_specifics_schema},\n'
-            '  "background_bullets": ["string (English)", ...],\n'
-            '  "rarity_bullets": ["string (English)", ...],\n'
-            '  "description_bullets": ["string (English)", ...],\n'
-            '  "features_bullets": ["string (English)", ...],\n'
-            '  "appearance_bullets": ["string (English)", ...],\n'
-            '  "optics_bullets": ["string (English)", ...],\n'
-            '  "functional_bullets": ["string (English)", ...],\n'
-            '  "bundled_items_bullets": ["string (English)", ...]\n'
+            '  "nested_sections": [\n'
+            '    {"header": "string", "bullets": ["string", "string"]}\n'
+            '  ],\n'
+            '  "flat_sections": [\n'
+            '    {"header": "string", "bullets": ["string", "string"]}\n'
+            '  ]\n'
             "}\n\n"
             "INSTRUCTIONS FOR CONTENT (ALL TEXT MUST BE IN ENGLISH ONLY - NO JAPANESE TEXT ALLOWED):\n"
-            "- 'itemSpecifics': You MUST perform deep internet research on the product to fill out AS MANY FIELDS AS POSSIBLE. Do not leave fields empty if the information is publicly available (e.g., release year, animation studio, material, character names). Exhaustively populate this schema!\n"
-            "- For 'background_bullets' (Product Development Background): Write 4-6 highly detailed, comprehensive sentences/bullet points about why the manufacturer made this product, its history, and its significance.\n"
-            "- For 'rarity_bullets' (Rarity): Write 4-6 highly detailed sentences/bullets explaining why it is hard to find, production numbers, and desirability.\n"
-            "- For 'description_bullets' (Description) and 'features_bullets' (Features): Write 4-6 highly detailed sentences/bullets highlighting the main selling points, intricacies, and specific features of the product.\n"
-            "- For 'appearance_bullets', 'optics_bullets', 'functional_bullets', 'bundled_items_bullets', make reasonable assumptions based on the condition provided if photos are not available. Use 2-3 detailed sentences for each.\n"
+            "- 'itemSpecifics': You MUST perform deep internet research on the product to fill out AS MANY FIELDS AS POSSIBLE. CRITICAL FOR ITEM SPECIFICS: You MUST meticulously extract ALL details like Scale, Brand, Model, Year, etc. from the Title/Product Name. Ensure the Scale (e.g., 1:12, 1/10) perfectly matches the Title. Do not leave fields empty if the information is publicly available. Exhaustively populate this schema!\n"
+            "- 'nested_sections': These sections will be rendered as nested bullets inside the 'About This Items' list. You MUST include sections for 'Product Development Background', 'Rarity', 'Description', and 'Features'. Write 4-6 highly detailed, comprehensive sentences/bullet points for each of these sections.\n"
+            "- 'flat_sections': These sections will be rendered below the main description as bold headers followed by bullet points. You MUST intelligently decide what sections make sense for the product! For example, for RC Cars or Models, include sections like 'Items Required to Run (Not included)' or 'Optional Tune-Up Parts (Not included)'. Always include 'Appearance', 'Condition', and 'Included Items' sections if applicable to the condition. Use 2-3 detailed sentences/bullets for each.\n"
             "- Ensure the tone is 'collector to collector'.\n"
             "- AGAIN: DO NOT INCLUDE ANY JAPANESE TEXT IN THE OUTPUT.\n"
         )
@@ -261,21 +257,24 @@ def build_html_description(title, ai_output, condition, genre_key="default"):
         if not bullets: return ""
         return "".join(f"<li>{b}</li>" for b in bullets)
 
-    bg_html = make_li(ai_output.get("background_bullets", []))
-    rarity_html = make_li(ai_output.get("rarity_bullets", []))
-    desc_html = make_li(ai_output.get("description_bullets", []))
-    features_html = make_li(ai_output.get("features_bullets", []))
-
     about_items = ""
     about_items += "<li>This product is rarely seen online or in stores in Japan, so if this product is sold out, it will be out of stock.</li>"
     about_items += "<li>We recommend that you purchase this opportunity as this is a wonderful product that is difficult to obtain.</li>"
-    if bg_html: about_items += f"<li><strong>Product Development Background</strong><ul style='margin-top: 10px; margin-bottom: 10px;'>{bg_html}</ul></li>"
-    if rarity_html: about_items += f"<li><strong>Rarity</strong><ul style='margin-top: 10px; margin-bottom: 10px;'>{rarity_html}</ul></li>"
-    if desc_html: about_items += f"<li><strong>Description</strong><ul style='margin-top: 10px; margin-bottom: 10px;'>{desc_html}</ul></li>"
-    if features_html: about_items += f"<li><strong>Features</strong><ul style='margin-top: 10px; margin-bottom: 10px;'>{features_html}</ul></li>"
+    
+    for sec in ai_output.get("nested_sections", []):
+        header = sec.get("header", "")
+        bullets = sec.get("bullets", [])
+        if header and bullets:
+            bullets_html = make_li(bullets)
+            about_items += f"<li><strong>{header}</strong><ul style='margin-top: 10px; margin-bottom: 10px;'>{bullets_html}</ul></li>"
 
-    app_html = make_li(ai_output.get("appearance_bullets", ["Please see the attached photo."]))
-    bundle_html = make_li(ai_output.get("bundled_items_bullets", ["Please see the attached photo."]))
+    flat_sections_html = ""
+    for sec in ai_output.get("flat_sections", []):
+        header = sec.get("header", "")
+        bullets = sec.get("bullets", [])
+        if header and bullets:
+            bullets_html = make_li(bullets)
+            flat_sections_html += f"<p><strong>{header}</strong></p>\n<ul>{bullets_html}</ul>\n"
     
     html = f'''<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"> <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
 <style>.template__main.main6 h2, .template__main.main1 h2{{color: #000;}}  .template__main {{word-break: break-word; width: 100%;background: #fff;border: 1px solid #000;padding: 0 20px 30px 20px !important;-webkit-box-sizing: border-box;box-sizing: border-box;word-break: break-all; }} .template__main h1 {{ font-family: "Verdana", sans-serif,sans-serif!important; font-weight: bold; font-size: 22px !important;margin: 30px 0;text-align: center;color: #111; word-break: break-word;}} .template__main h2 {{ font-family: "Verdana", sans-serif,sans-serif!important; margin: 0 0 15px 0; font-size: 18px;line-height: 1.2;text-align: left; word-break: break-word; }} .template__main p {{ word-break: break-word; font-family: "Verdana", sans-serif,sans-serif!important; margin: 0;padding: 0 10px 10px;color: #111;text-align: left;line-height: 24px;font-size: 14px;}} .template__main .product_dec {{margin: 0;padding: 0 0 20px 0;color: #111;text-align: left;}} .template__main .product__intro {{line-height: 24px;font-size: 14px;padding: 0 30px 20px;}} .template__main ul {{ margin: 0 0 20px 0; padding-left: 20px; }} .template__main li {{ font-family: "Verdana", sans-serif,sans-serif!important; font-size: 14px; line-height: 24px; margin-bottom: 5px; }} .aside__item:not(:last-of-type) {{ padding-bottom: 20px; }} .template__main section {{padding-bottom: 20px;}} .template__main h2 {{ background-color: #FFF100; color: #111;padding: 10px 10px; font-weight: bold;}}</style>
@@ -290,14 +289,7 @@ def build_html_description(title, ai_output, condition, genre_key="default"):
 {about_items}
 </ul>
 
-<p><strong>Appearance</strong></p>
-<ul>{app_html}</ul>
-
-<p><strong>Condition</strong></p>
-<ul><li>{condition}</li></ul>
-
-<p><strong>Included Items</strong></p>
-<ul>{bundle_html}</ul>
+{flat_sections_html}
 </div>
 </div>
 </section>

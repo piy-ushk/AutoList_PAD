@@ -7,31 +7,68 @@ from modules.chatgpt import build_html_description
 def generate_sample():
     ai_output = {
         "description": "This is a dummy description string that is no longer used directly.",
-        "background_bullets": [
-            "Bandai developed this Anpanman Theater to provide an immersive storytelling experience for young children and their parents.",
-            "It builds upon the massive popularity of the Anpanman franchise, which has been a staple in Japanese households since the 1970s.",
-            "Designed to be user-friendly, the projector allows for easy operation even in low-light environments."
+        "nested_sections": [
+            {
+                "header": "Product Development Background",
+                "bullets": [
+                    "Bandai developed this Anpanman Theater to provide an immersive storytelling experience for young children and their parents.",
+                    "It builds upon the massive popularity of the Anpanman franchise, which has been a staple in Japanese households since the 1970s.",
+                    "Designed to be user-friendly, the projector allows for easy operation even in low-light environments."
+                ]
+            },
+            {
+                "header": "Rarity",
+                "bullets": [
+                    "While Anpanman toys are widely produced, this specific theater model is highly sought after by parents.",
+                    "Complete working units in good condition have become increasingly difficult to find on the secondary market."
+                ]
+            },
+            {
+                "header": "Description",
+                "bullets": [
+                    "This interactive projector brings the beloved characters of Anpanman to life on your ceiling or wall.",
+                    "It features multiple interchangeable discs that tell different classic stories.",
+                    "The device includes built-in speakers that play soothing lullabies and narration."
+                ]
+            },
+            {
+                "header": "Features",
+                "bullets": [
+                    "Comes with 3 distinct story discs for varied entertainment.",
+                    "Features a sleep timer that automatically turns off the projector after 30 minutes.",
+                    "Adjustable focus lens ensures crisp images on surfaces at various distances.",
+                    "Battery operated for safe, cord-free use in children's bedrooms."
+                ]
+            }
         ],
-        "rarity_bullets": [
-            "While Anpanman toys are widely produced, this specific theater model is highly sought after by parents.",
-            "Complete working units in good condition have become increasingly difficult to find on the secondary market."
-        ],
-        "description_bullets": [
-            "This interactive projector brings the beloved characters of Anpanman to life on your ceiling or wall.",
-            "It features multiple interchangeable discs that tell different classic stories.",
-            "The device includes built-in speakers that play soothing lullabies and narration."
-        ],
-        "features_bullets": [
-            "Comes with 3 distinct story discs for varied entertainment.",
-            "Features a sleep timer that automatically turns off the projector after 30 minutes.",
-            "Adjustable focus lens ensures crisp images on surfaces at various distances.",
-            "Battery operated for safe, cord-free use in children's bedrooms."
-        ],
-        "appearance_bullets": [
-            "Please see the attached photo."
-        ],
-        "bundled_items_bullets": [
-            "Please see the attached photo."
+        "flat_sections": [
+            {
+                "header": "Items Required to Run (Not included)",
+                "bullets": [
+                    "4x C batteries",
+                    "A blank wall or ceiling for projection"
+                ]
+            },
+            {
+                "header": "Appearance",
+                "bullets": [
+                    "Please see the attached photo."
+                ]
+            },
+            {
+                "header": "Condition",
+                "bullets": [
+                    "Used (Good Condition)"
+                ]
+            },
+            {
+                "header": "Included Items",
+                "bullets": [
+                    "Projector Unit",
+                    "3 Story Discs",
+                    "Instruction Manual (Japanese)"
+                ]
+            }
         ]
     }
     html = build_html_description(
