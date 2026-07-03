@@ -67,33 +67,6 @@ def insert_all_genres_demo_data():
             "Category": "Animation Merch",
             "想定仕入額_JPY": "5000",
             "備考": "Works perfectly. Slight scratches on the body but does not affect projection."
-        },
-        {
-            "商品名_JP": "ポケモンカード ピカチュウ プロモ",
-            "Brand": "Nintendo",
-            "Model_Number": "Pikachu Promo",
-            "Condition": "Used",
-            "Category": "Pokemon Cards",
-            "想定仕入額_JPY": "12000",
-            "備考": "Near mint condition. Stored in a protective sleeve."
-        },
-        {
-            "商品名_JP": "Canon EOS 5D Mark IV DSLR Camera Body Only",
-            "Brand": "Canon",
-            "Model_Number": "EOS 5D Mark IV",
-            "Condition": "Used",
-            "Category": "Digital Cameras",
-            "想定仕入額_JPY": "120000",
-            "備考": "Excellent condition. Minimal signs of use. Shutter count around 20,000. Includes battery, charger, and strap."
-        },
-        {
-            "商品名_JP": "初音ミク フィギュア 1/7スケール",
-            "Brand": "Good Smile Company",
-            "Model_Number": "1/7 Scale",
-            "Condition": "New",
-            "Category": "Figures",
-            "想定仕入額_JPY": "15000",
-            "備考": "Brand new in sealed box."
         }
     ]
 

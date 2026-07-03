@@ -322,7 +322,7 @@ def build_html_description(title, ai_output, condition, genre_key="default"):
 <li>We always send the item with a tracking number. So please place an order without any concern on delivery. You can always track the delivery status.</li>
 <li>Shipping is only available to the address registered in eBay. If you want us to send another address, please change your address on eBay and then place an order.</li>
 <li>Shipping is available from Monday to Friday. Weekends are not available because freight (shipping) companies are closed.</li>
-<li>We do not mark merchandise values below value or mark items as "gifts" – Japan, US and International government regulations prohibit such behavior.</li>
+<li>We do not mark merchandise values below value or mark items as "gifts" - Japan, US and International government regulations prohibit such behavior.</li>
 </ul>
 </div>
 </div>
