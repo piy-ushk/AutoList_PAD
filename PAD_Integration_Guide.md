@@ -45,6 +45,107 @@ Once the Listing Editor page has loaded, use the **Populate text field on web pa
 - **Price:** Clear the existing price and write `%CurrentItem.price_usd%` (Selector: `#item-price`).
 - **Quantity:** Clear the existing quantity and write `%CurrentItem.quantity%` (Selector: `input[name='quantity']`).
 - **Description:** Select the description text box or description iframe (`#description-iframe`) and overwrite it with `%CurrentItem.description%`.
+- **Item Specifics (CRITICAL):** Monodas will have cloned the Item Specifics from the dummy eBay reference ID (e.g. Brand: AMT Ertl). To easily overwrite these with the AI-generated Item Specifics without dealing with complex UI selectors, add a **Run JavaScript function on web page** action here. Set the browser instance to `%EditorBrowser%` and paste the following code:
+  ```javascript
+  function ExecuteScript() {
+      let specificsStr = "%CurrentItem.item_specifics%"; 
+      if (!specificsStr) return;
+      
+      // 1. Explicitly clear ALL dummy optional Item Specifics first to prevent errors like "Year Printed is invalid"
+      let optNames = Array.from(document.querySelectorAll("input.specificname"));
+      let optVals = Array.from(document.querySelectorAll("input.specificval"));
+      for (let i = 0; i < optNames.length; i++) {
+          optNames[i].value = "";
+          optNames[i].dispatchEvent(new Event('input', { bubbles: true }));
+          optNames[i].dispatchEvent(new Event('change', { bubbles: true }));
+          if (optVals[i]) {
+              optVals[i].value = "";
+              optVals[i].dispatchEvent(new Event('input', { bubbles: true }));
+              optVals[i].dispatchEvent(new Event('change', { bubbles: true }));
+          }
+      }
+
+      let pairs = specificsStr.split(" | ");
+      pairs.forEach(pair => {
+          let parts = pair.split(": ");
+          if (parts.length === 2) {
+              let key = parts[0].trim();
+              let val = parts[1].trim();
+              
+              // Handle UPC specifically if it's a dedicated field on Monodas
+              if (key.toUpperCase() === "UPC") {
+                  let upcInput = document.querySelector("input[name='upc'], input[name='UPC'], #upc");
+                  if (upcInput) {
+                      upcInput.value = val;
+                      upcInput.dispatchEvent(new Event('input', { bubbles: true }));
+                      upcInput.dispatchEvent(new Event('change', { bubbles: true }));
+                      return; // Skip adding to item specifics if injected to dedicated field
+                  }
+              }
+              
+              // Check Required Specifics (Select2 dropdowns)
+              let reqNames = Array.from(document.querySelectorAll("input[name='specificnamereq']"));
+              let reqMatch = reqNames.find(n => n.value.trim() === key);
+              if (reqMatch) {
+                  let container = reqMatch.closest('.col-4').nextElementSibling;
+                  if (container) {
+                      let select = container.querySelector("select[name='specificvalreq']");
+                      if (select) {
+                          let option = Array.from(select.options).find(o => o.value === val);
+                          if (!option && val !== "") {
+                              option = new Option(val, val, true, true);
+                              select.add(option);
+                          }
+                          select.value = val;
+                          select.dispatchEvent(new Event('change', { bubbles: true }));
+                          
+                          let span = container.querySelector(".select2-selection__rendered");
+                          if (span) {
+                              span.textContent = val;
+                              span.title = val;
+                          }
+                      }
+                  }
+                  return; // Done with this required specific
+              }
+              
+              // Fill Optional Specifics (Standard inputs)
+              // Find the first empty name input
+              let emptyNameInput = Array.from(document.querySelectorAll("input.specificname")).find(n => n.value.trim() === "");
+              
+              // If we ran out of empty slots, clone the last row to make a new one!
+              if (!emptyNameInput) {
+                  let rows = document.querySelectorAll(".sprow");
+                  if (rows.length > 0) {
+                      let lastRow = rows[rows.length - 1];
+                      let newRow = lastRow.cloneNode(true);
+                      newRow.querySelector("input.specificname").value = "";
+                      newRow.querySelector("input.specificval").value = "";
+                      lastRow.parentNode.appendChild(newRow);
+                      emptyNameInput = newRow.querySelector("input.specificname");
+                  }
+              }
+              
+              // Inject the data into the empty slot
+              if (emptyNameInput) {
+                  emptyNameInput.value = key;
+                  emptyNameInput.dispatchEvent(new Event('input', { bubbles: true }));
+                  emptyNameInput.dispatchEvent(new Event('change', { bubbles: true }));
+                  
+                  let container = emptyNameInput.closest('.sprow');
+                  if (container) {
+                      let valInput = container.querySelector("input.specificval");
+                      if (valInput) {
+                          valInput.value = val;
+                          valInput.dispatchEvent(new Event('input', { bubbles: true }));
+                          valInput.dispatchEvent(new Event('change', { bubbles: true }));
+                      }
+                  }
+              }
+          }
+      });
+  }
+  ```
 - **Shipping Policy:** Select the shipping policy dropdown (`#shipping-policy-select`) and match the value from `%CurrentItem.shipping_policy%`.
 - **Handling Time:** Select the handling time dropdown (`#handling-time-select`) and match the value from `%CurrentItem.handling_time%`.
 

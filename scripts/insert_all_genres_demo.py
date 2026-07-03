@@ -103,7 +103,7 @@ def insert_all_genres_demo_data():
         "https://jp.mercari.com/item/m38644870547",
         "https://jp.mercari.com/item/m80279095083",
         "https://jp.mercari.com/item/m55203513386",
-        "https://jp.mercari.com/item/m30599064139",
+        "https://jp.mercari.com/item/m42074830308",
         "https://jp.mercari.com/item/m28494770278",
         "https://jp.mercari.com/item/m91481634727",
         "https://jp.mercari.com/item/m78656521379"
@@ -114,7 +114,7 @@ def insert_all_genres_demo_data():
         "https://static.mercdn.net/item/detail/orig/photos/m38644870547_1.jpg",
         "https://static.mercdn.net/item/detail/orig/photos/m80279095083_1.jpg",
         "https://static.mercdn.net/item/detail/orig/photos/m55203513386_1.jpg",
-        "https://static.mercdn.net/item/detail/orig/photos/m30599064139_1.jpg",
+        "https://static.mercdn.net/item/detail/orig/photos/m42074830308_1.jpg",
         "https://static.mercdn.net/item/detail/orig/photos/m28494770278_1.jpg",
         "https://static.mercdn.net/item/detail/orig/photos/m91481634727_1.jpg",
         "https://static.mercdn.net/item/detail/orig/photos/m78656521379_1.jpg"

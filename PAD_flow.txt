@@ -18,6 +18,105 @@ END
         WebAutomation.PopulateTextField.PopulateTextFieldUsePhysicalKeyboard BrowserInstance: EditorBrowser Control: appmask['Web Page \'h ... ateid=5743\'']['Text area \'Pikachu  ...  Japanese 2025 EX\' 2'] Text: CurrentItem.title Mode: WebAutomation.PopulateTextMode.Replace UnfocusAfterPopulate: True WaitForPageToLoadTimeout: 60
         WebAutomation.PopulateTextField.PopulateTextFieldUsePhysicalKeyboard BrowserInstance: EditorBrowser Control: appmask['Web Page \'h ... ateid=5743\'']['Idiomatic text'] Text: CurrentItem.price_usd Mode: WebAutomation.PopulateTextMode.Replace UnfocusAfterPopulate: True WaitForPageToLoadTimeout: 60
         WebAutomation.PopulateTextField.PopulateTextFieldUsePhysicalKeyboard BrowserInstance: EditorBrowser Control: appmask['Web Page \'h ... ateid=5743\' 4']['Input text \'quantity\''] Text: CurrentItem.quantity Mode: WebAutomation.PopulateTextMode.Replace UnfocusAfterPopulate: True WaitForPageToLoadTimeout: 60
+        WebAutomation.ExecuteJavascript BrowserInstance: EditorBrowser Javascript: $'''function ExecuteScript() {
+    let specificsStr = \"%CurrentItem.item_specifics%\"; 
+    if (!specificsStr) return;
+    
+    // 1. Explicitly clear ALL dummy optional Item Specifics first to prevent errors like \"Year Printed is invalid\"
+    let optNames = Array.from(document.querySelectorAll(\"input.specificname\"));
+    let optVals = Array.from(document.querySelectorAll(\"input.specificval\"));
+    for (let i = 0; i < optNames.length; i++) {
+        optNames[i].value = \"\";
+        optNames[i].dispatchEvent(new Event(\'input\', { bubbles: true }));
+        optNames[i].dispatchEvent(new Event(\'change\', { bubbles: true }));
+        if (optVals[i]) {
+            optVals[i].value = \"\";
+            optVals[i].dispatchEvent(new Event(\'input\', { bubbles: true }));
+            optVals[i].dispatchEvent(new Event(\'change\', { bubbles: true }));
+        }
+    }
+
+    let pairs = specificsStr.split(\" | \");
+    pairs.forEach(pair => {
+        let parts = pair.split(\": \");
+        if (parts.length === 2) {
+            let key = parts[0].trim();
+            let val = parts[1].trim();
+            
+            // Handle UPC specifically if it\'s a dedicated field on Monodas
+            if (key.toUpperCase() === \"UPC\") {
+                let upcInput = document.querySelector(\"input[name=\'upc\'], input[name=\'UPC\'], #upc\");
+                if (upcInput) {
+                    upcInput.value = val;
+                    upcInput.dispatchEvent(new Event(\'input\', { bubbles: true }));
+                    upcInput.dispatchEvent(new Event(\'change\', { bubbles: true }));
+                    return; // Skip adding to item specifics if injected to dedicated field
+                }
+            }
+            
+            // Check Required Specifics (Select2 dropdowns)
+            let reqNames = Array.from(document.querySelectorAll(\"input[name=\'specificnamereq\']\"));
+            let reqMatch = reqNames.find(n => n.value.trim() === key);
+            if (reqMatch) {
+                let container = reqMatch.closest(\'.col-4\').nextElementSibling;
+                if (container) {
+                    let select = container.querySelector(\"select[name=\'specificvalreq\']\");
+                    if (select) {
+                        let option = Array.from(select.options).find(o => o.value === val);
+                        if (!option && val !== \"\") {
+                            option = new Option(val, val, true, true);
+                            select.add(option);
+                        }
+                        select.value = val;
+                        select.dispatchEvent(new Event(\'change\', { bubbles: true }));
+                        
+                        let span = container.querySelector(\".select2-selection__rendered\");
+                        if (span) {
+                            span.textContent = val;
+                            span.title = val;
+                        }
+                    }
+                }
+                return; // Done with this required specific
+            }
+            
+            // Fill Optional Specifics (Standard inputs)
+            // Find the first empty name input
+            let emptyNameInput = Array.from(document.querySelectorAll(\"input.specificname\")).find(n => n.value.trim() === \"\");
+            
+            // If we ran out of empty slots, clone the last row to make a new one!
+            if (!emptyNameInput) {
+                let rows = document.querySelectorAll(\".sprow\");
+                if (rows.length > 0) {
+                    let lastRow = rows[rows.length - 1];
+                    let newRow = lastRow.cloneNode(true);
+                    newRow.querySelector(\"input.specificname\").value = \"\";
+                    newRow.querySelector(\"input.specificval\").value = \"\";
+                    lastRow.parentNode.appendChild(newRow);
+                    emptyNameInput = newRow.querySelector(\"input.specificname\");
+                }
+            }
+            
+            // Inject the data into the empty slot
+            if (emptyNameInput) {
+                emptyNameInput.value = key;
+                emptyNameInput.dispatchEvent(new Event(\'input\', { bubbles: true }));
+                emptyNameInput.dispatchEvent(new Event(\'change\', { bubbles: true }));
+                
+                let container = emptyNameInput.closest(\'.sprow\');
+                if (container) {
+                    let valInput = container.querySelector(\"input.specificval\");
+                    if (valInput) {
+                        valInput.value = val;
+                        valInput.dispatchEvent(new Event(\'input\', { bubbles: true }));
+                        valInput.dispatchEvent(new Event(\'change\', { bubbles: true }));
+                    }
+                }
+            }
+        }
+    });
+}
+''' Result=> Result
         WebAutomation.Click.Click BrowserInstance: EditorBrowser Control: appmask['Web Page \'h ... ateid=5743\'']['Button \'カスタム編集\''] ClickType: WebAutomation.ClickType.LeftClick MouseClick: True WaitForPageToLoadTimeout: 60 MousePositionRelativeToElement: WebAutomation.RectangleEdgePoint.MiddleCenter OffsetX: 0 OffsetY: 0
         WAIT 3
         WebAutomation.Click.Click BrowserInstance: EditorBrowser Control: appmask['Web Page \'h ... ateid=5743\'']['Anchor \'HTML\''] ClickType: WebAutomation.ClickType.LeftClick MouseClick: True WaitForPageToLoadTimeout: 60 MousePositionRelativeToElement: WebAutomation.RectangleEdgePoint.MiddleCenter OffsetX: 0 OffsetY: 0
