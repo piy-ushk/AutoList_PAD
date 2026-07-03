@@ -22,7 +22,7 @@ END
     let specificsStr = \"%CurrentItem.item_specifics%\"; 
     if (!specificsStr) return;
     
-    // 1. Explicitly clear ALL dummy optional Item Specifics first to prevent errors like \"Year Printed is invalid\"
+    // 1. Explicitly clear ALL dummy optional Item Specifics first
     let optNames = Array.from(document.querySelectorAll(\"input.specificname\"));
     let optVals = Array.from(document.querySelectorAll(\"input.specificval\"));
     for (let i = 0; i < optNames.length; i++) {
@@ -41,7 +41,8 @@ END
         let parts = pair.split(\": \");
         if (parts.length === 2) {
             let key = parts[0].trim();
-            let val = parts[1].trim();
+            // Replace standard commas with full-width commas to prevent Monodas from stripping them
+            let val = parts[1].trim().replace(/,/g, \"，\");
             
             // Handle UPC specifically if it\'s a dedicated field on Monodas
             if (key.toUpperCase() === \"UPC\") {
@@ -50,17 +51,18 @@ END
                     upcInput.value = val;
                     upcInput.dispatchEvent(new Event(\'input\', { bubbles: true }));
                     upcInput.dispatchEvent(new Event(\'change\', { bubbles: true }));
-                    return; // Skip adding to item specifics if injected to dedicated field
                 }
             }
             
-            // Check Required Specifics (Select2 dropdowns)
+            // Check Required Specifics (Select2 dropdowns and text inputs)
             let reqNames = Array.from(document.querySelectorAll(\"input[name=\'specificnamereq\']\"));
             let reqMatch = reqNames.find(n => n.value.trim() === key);
             if (reqMatch) {
                 let container = reqMatch.closest(\'.col-4\').nextElementSibling;
                 if (container) {
                     let select = container.querySelector(\"select[name=\'specificvalreq\']\");
+                    let textInput = container.querySelector(\"input[name=\'specificvalreq\']\");
+                    
                     if (select) {
                         let option = Array.from(select.options).find(o => o.value === val);
                         if (!option && val !== \"\") {
@@ -75,25 +77,41 @@ END
                             span.textContent = val;
                             span.title = val;
                         }
+                    } else if (textInput) {
+                        // Some required specifics (like UPC) are text inputs, not dropdowns!
+                        textInput.value = val;
+                        textInput.dispatchEvent(new Event(\'input\', { bubbles: true }));
+                        textInput.dispatchEvent(new Event(\'change\', { bubbles: true }));
                     }
                 }
                 return; // Done with this required specific
             }
             
             // Fill Optional Specifics (Standard inputs)
-            // Find the first empty name input
             let emptyNameInput = Array.from(document.querySelectorAll(\"input.specificname\")).find(n => n.value.trim() === \"\");
             
-            // If we ran out of empty slots, clone the last row to make a new one!
+            // If we ran out of empty slots, clone the last row to make a new one
             if (!emptyNameInput) {
                 let rows = document.querySelectorAll(\".sprow\");
                 if (rows.length > 0) {
                     let lastRow = rows[rows.length - 1];
                     let newRow = lastRow.cloneNode(true);
-                    newRow.querySelector(\"input.specificname\").value = \"\";
-                    newRow.querySelector(\"input.specificval\").value = \"\";
+                    
+                    let nInput = newRow.querySelector(\"input.specificname\");
+                    let vInput = newRow.querySelector(\"input.specificval\");
+                    nInput.value = \"\";
+                    vInput.value = \"\";
+                    
+                    // Crucial Fix: Monodas drops rows if their form indices are duplicated.
+                    // We must increment the index numbers in the name/id attributes of the cloned inputs!
+                    let newIdx = rows.length + 10; // offset to ensure uniqueness
+                    if (nInput.name) nInput.name = nInput.name.replace(/\\[\\d+\\]/, \'[\' + newIdx + \']\').replace(/\\d+$/, newIdx);
+                    if (vInput.name) vInput.name = vInput.name.replace(/\\[\\d+\\]/, \'[\' + newIdx + \']\').replace(/\\d+$/, newIdx);
+                    if (nInput.id) nInput.id = nInput.id.replace(/\\d+$/, newIdx);
+                    if (vInput.id) vInput.id = vInput.id.replace(/\\d+$/, newIdx);
+                    
                     lastRow.parentNode.appendChild(newRow);
-                    emptyNameInput = newRow.querySelector(\"input.specificname\");
+                    emptyNameInput = nInput;
                 }
             }
             
