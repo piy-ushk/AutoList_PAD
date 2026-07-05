@@ -1,0 +1,218 @@
+import os
+import sys
+
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+from modules.gsheets import GoogleSheetsClient
+
+def insert_final_demo():
+    client = GoogleSheetsClient()
+    
+    print("Clearing existing sheet data...")
+    client.api.write_range(client.tabs['listings'], 'A2:BC1000', [[''] * 55 for _ in range(999)])
+    
+    headers = client.api.read_range(client.tabs['listings'], 'A1:BC1')[0]
+    
+    demo_items = [
+        # From Phase 4
+        {
+            "SKU": "TEST-DEMO-0",
+            "商品名_JP": "Tamiya 1/12 Scale Tyrrell P34 Six Wheeler Vintage Plastic Model Kit Unassembled",
+            "Brand": "Tamiya",
+            "Model_Number": "1/12 Scale",
+            "Condition": "New",
+            "Category": "Vintage Plastic Model",
+            "仕入れ値_JPY": "12000",
+            "備考": "Box has slight wear due to age.",
+            "商品URL": "https://jp.mercari.com/item/m61126572832",
+            "画像URLs": "https://static.mercdn.net/item/detail/orig/photos/m61126572832_1.jpg"
+        },
+        {
+            "SKU": "TEST-DEMO-1",
+            "商品名_JP": "Vintage Brand Ultra Seven Sofubi Soft Vinyl Figure Vintage 1970s Japan",
+            "Brand": "Vintage Brand",
+            "Model_Number": "Ultra Seven",
+            "Condition": "Used",
+            "Category": "Vintage Toy",
+            "仕入れ値_JPY": "35000",
+            "備考": "Paint fading on the boots and gloves.",
+            "商品URL": "https://jp.mercari.com/item/m97579951845",
+            "画像URLs": "https://static.mercdn.net/item/detail/orig/photos/m97579951845_1.jpg"
+        },
+        {
+            "SKU": "TEST-DEMO-2",
+            "商品名_JP": "Vintage Tin Toy Robot 1960s Japan Wind Up Original Box",
+            "Brand": "Unknown",
+            "Model_Number": "Does not apply",
+            "Condition": "Used",
+            "Category": "Toys & Hobbies > Vintage & Antique Toys > Tin > Robots",
+            "仕入れ値_JPY": "8000",
+            "備考": "Vintage item.",
+            "商品URL": "https://jp.mercari.com/item/m16631865308",
+            "画像URLs": "https://static.mercdn.net/item/detail/orig/photos/m16631865308_1.jpg"
+        },
+        {
+            "SKU": "TEST-DEMO-3",
+            "商品名_JP": "Hatsune Miku 1/7 Scale Figure Miku Symphony 2019 Ver.",
+            "Brand": "Good Smile Company",
+            "Model_Number": "4580416942639",
+            "Condition": "New",
+            "Category": "Toys & Hobbies > Action Figures & Accessories > Action Figures",
+            "仕入れ値_JPY": "12000",
+            "備考": "New item.",
+            "商品URL": "https://jp.mercari.com/item/m46147863763",
+            "画像URLs": "https://static.mercdn.net/item/detail/orig/photos/m46147863763_1.jpg"
+        },
+        # Updated ones from insert_3_demos
+        {
+            "SKU": "TEST-DEMO-4",
+            "商品名_JP": "Pokemon Card Pikachu Promo 001/S-P Full Art Holo Mint",
+            "Brand": "Nintendo",
+            "Model_Number": "Does not apply",
+            "Condition": "Used",
+            "Category": "Toys & Hobbies > Collectible Card Games > CCG Individual Cards",
+            "仕入れ値_JPY": "5000",
+            "備考": "Collector item.",
+            "商品URL": "https://jp.mercari.com/item/m72293528805",
+            "画像URLs": "https://static.mercdn.net/item/detail/orig/photos/m72293528805_1.jpg"
+        },
+        {
+            "SKU": "TEST-DEMO-5",
+            "商品名_JP": "Canon EOS 5D Mark IV DSLR Camera Body Only Tested Japan",
+            "Brand": "Canon",
+            "Model_Number": "1483C002",
+            "Condition": "Used",
+            "Category": "Cameras & Photo > Digital Cameras",
+            "仕入れ値_JPY": "80000",
+            "備考": "Working perfectly.",
+            "商品URL": "https://jp.mercari.com/item/m19720844735",
+            "画像URLs": "https://static.mercdn.net/item/detail/orig/photos/m19720844735_1.jpg"
+        },
+        {
+            "SKU": "TEST-DEMO-6",
+            "商品名_JP": "Canon EF 50mm f/1.4 USM Standard Prime Lens Near Mint",
+            "Brand": "Canon",
+            "Model_Number": "2515A003",
+            "Condition": "Used",
+            "Category": "Cameras & Photo > Lenses & Filters > Lenses",
+            "仕入れ値_JPY": "25000",
+            "備考": "Excellent lens.",
+            "商品URL": "https://jp.mercari.com/item/m10660684954",
+            "画像URLs": "https://static.mercdn.net/item/detail/orig/photos/m10660684954_1.jpg"
+        },
+        # Remaining Phase 4
+        {
+            "SKU": "TEST-DEMO-7",
+            "商品名_JP": "Sony Cyber-shot DSC-RX100 VII Digital Camera Black",
+            "Brand": "Sony",
+            "Model_Number": "DSCRX100M7/B",
+            "Condition": "Used",
+            "Category": "Cameras & Photo > Digital Cameras",
+            "仕入れ値_JPY": "90000",
+            "備考": "Compact camera.",
+            "商品URL": "https://jp.mercari.com/item/m31380758159",
+            "画像URLs": "https://static.mercdn.net/item/detail/orig/photos/m31380758159_1.jpg"
+        },
+        {
+            "SKU": "TEST-DEMO-8",
+            "商品名_JP": "Sony Alpha a7 III Mirrorless Digital Camera Body ILCE-7M3",
+            "Brand": "Sony",
+            "Model_Number": "ILCE-7M3",
+            "Condition": "Used",
+            "Category": "Cameras & Photo > Digital Cameras",
+            "仕入れ値_JPY": "150000",
+            "備考": "Mirrorless body.",
+            "商品URL": "https://jp.mercari.com/item/m53171841093",
+            "画像URLs": "https://static.mercdn.net/item/detail/orig/photos/m53171841093_1.jpg"
+        },
+        {
+            "SKU": "TEST-DEMO-9",
+            "商品名_JP": "Fujifilm QuickSnap Flash 400 Disposable 35mm Camera 27 Exp",
+            "Brand": "Fujifilm",
+            "Model_Number": "1004126",
+            "Condition": "New",
+            "Category": "Cameras & Photo > Film Photography > Film Cameras",
+            "仕入れ値_JPY": "1500",
+            "備考": "Disposable camera.",
+            "商品URL": "https://jp.mercari.com/item/m91309479668",
+            "画像URLs": "https://static.mercdn.net/item/detail/orig/photos/m91309479668_1.jpg"
+        },
+        # From insert_all_genres_demo.py
+        {
+            "SKU": "TEST-DEMO-10",
+            "商品名_JP": "Yokomo YD-2Z RWD Drift Car Chassis Kit 1/10 RC Radio Control",
+            "Brand": "Yokomo",
+            "Model_Number": "YD-2Z",
+            "Condition": "New",
+            "Category": "RC Related",
+            "仕入れ値_JPY": "25000",
+            "備考": "Unassembled kit.",
+            "商品URL": "https://jp.mercari.com/item/m38644870547",
+            "画像URLs": "https://static.mercdn.net/item/detail/orig/photos/m38644870547_1.jpg"
+        },
+        {
+            "SKU": "TEST-DEMO-11",
+            "商品名_JP": "Nintendo Super Famicom Console Boxed CIB Tested Working SFC",
+            "Brand": "Nintendo",
+            "Model_Number": "SHVC-001",
+            "Condition": "Used",
+            "Category": "Game Related",
+            "仕入れ値_JPY": "8000",
+            "備考": "Console is yellowed due to age.",
+            "商品URL": "https://jp.mercari.com/item/m80279095083",
+            "画像URLs": "https://static.mercdn.net/item/detail/orig/photos/m80279095083_1.jpg"
+        },
+        {
+            "SKU": "TEST-DEMO-12",
+            "商品名_JP": "Vintage Alice in Wonderland Japanese 3D Picture Book 1980s",
+            "Brand": "N/A",
+            "Model_Number": "N/A",
+            "Condition": "Used",
+            "Category": "Picture Book",
+            "仕入れ値_JPY": "4500",
+            "備考": "Some pop-up mechanics are slightly bent.",
+            "商品URL": "https://jp.mercari.com/item/m55203513386",
+            "画像URLs": "https://static.mercdn.net/item/detail/orig/photos/m55203513386_1.jpg"
+        },
+        {
+            "SKU": "TEST-DEMO-13",
+            "商品名_JP": "アンパンマン ホームシアター",
+            "Brand": "Bandai",
+            "Model_Number": "Anpanman Theater",
+            "Condition": "Used",
+            "Category": "Animation Merch",
+            "仕入れ値_JPY": "5000",
+            "備考": "Works perfectly.",
+            "商品URL": "https://jp.mercari.com/item/m42074830308",
+            "画像URLs": "https://static.mercdn.net/item/detail/orig/photos/m42074830308_1.jpg"
+        }
+    ]
+
+    rows_to_insert = []
+    for item in demo_items:
+        row = [''] * len(headers)
+        row[headers.index('Listing_Status')] = 'pending_ai'
+        
+        item['商品ID_SKU'] = item['SKU']
+        item['形式'] = 'Buy It Now'
+        item['販売価格_USD'] = '999.00'
+        item['担当者名'] = 'DemoStaff'
+        item['在庫_Quantity'] = '0'
+        item['Shipping_Policy'] = 'DDP(101～200USD)Expedited'
+        item['Return_Policy'] = 'Returns Accepted'
+        item['Item_Condition'] = item['Condition']
+        item['状態詳細'] = item['Condition']
+        item['Handling_Time'] = "10日"
+        item['自動価格調整'] = "NO"
+
+        for key, val in item.items():
+            if key in headers:
+                row[headers.index(key)] = str(val)
+        rows_to_insert.append(row)
+
+    print(f"Inserting {len(rows_to_insert)} items...")
+    range_name = f"A2:BC{1 + len(rows_to_insert)}"
+    client.api.write_range(client.tabs['listings'], range_name, rows_to_insert)
+    print("Done! You can now run main.py to process these 14 demo items.")
+
+if __name__ == "__main__":
+    insert_final_demo()

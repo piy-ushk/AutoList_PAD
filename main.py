@@ -315,6 +315,13 @@ def process_monodas_drafts(sheet_client):
         final_price = "0" if is_test else row.get("出品価格_USD", "")
         final_quantity = 0 if is_test else 1
 
+        import re
+        raw_specs = row.get("ChatGPT_ItemSpecifics", "{}")
+        if is_test:
+            raw_specs = re.sub(r'UPC:\s*[^|]+', 'UPC: Does not apply ', raw_specs)
+            raw_specs = re.sub(r'MPN:\s*[^|]+', 'MPN: Does not apply ', raw_specs)
+            raw_specs = raw_specs.replace(' Does not apply  |', ' Does not apply |')
+
         tasks.append({
             "sheet_row": row["_sheet_row"],
             "sku": sku,
@@ -329,7 +336,7 @@ def process_monodas_drafts(sheet_client):
             "image_urls": row.get("画像URLs", ""),
             "shipping_policy": policy,
             "handling_time": row.get("Handling_Time", "10日"),
-            "item_specifics": row.get("ChatGPT_ItemSpecifics", "{}"),
+            "item_specifics": raw_specs,
             "automation_action": automation_action,
             "scheduled_date": scheduled_date,
             "ebay_ref_id": ebay_ref_id,

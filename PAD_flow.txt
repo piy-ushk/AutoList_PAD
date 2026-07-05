@@ -8,6 +8,7 @@ LOOP FOREACH CurrentItem IN JsonAsCustomObject
 ON BLOCK ERROR
 
 END
+        WAIT 3
         WebAutomation.GoToWebPage.GoToWebPage BrowserInstance: Browser Url: $'''https://monodaz.com''' WaitForPageToLoadTimeout: 60
         WebAutomation.SetDropDownListValue.SetDropDownListValueByName BrowserInstance: Browser Control: appmask['Web Page \'https://monodaz.com/\'']['Select \'Amazon\''] OptionNames: $'''メルカリ''' UseRegularExpression: False WaitForPageToLoadTimeout: 60
         WebAutomation.PopulateTextField.PopulateTextFieldUsePhysicalKeyboard BrowserInstance: Browser Control: appmask['Web Page \'https://monodaz.com/\'']['Input text \'supplierval\''] Text: CurrentItem.source_url Mode: WebAutomation.PopulateTextMode.Replace UnfocusAfterPopulate: True WaitForPageToLoadTimeout: 60

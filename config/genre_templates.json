@@ -14,7 +14,7 @@
         "デュエマ"
       ],
       "specialization": "trading cards, card games, and collectible card singles",
-      "ebay_ref_id": "153121169168",
+      "ebay_ref_id": "384876134058",
       "item_specifics_schema": "{\"Game\": \"string\", \"UPC\": \"string\", \"Card Type\": \"string\", \"Speciality\": \"string\", \"Stage\": \"string\", \"Set\": \"string\", \"Card Name\": \"string\", \"Character\": \"string\", \"Age Level\": \"string\", \"Features\": \"string\", \"Rarity\": \"string\", \"Attribute/MTG:Color\": \"string\", \"Finish\": \"string\", \"Manufacturer\": \"string\", \"Creature/Monster Type\": \"string\", \"Autographed\": \"string\", \"Signed By\": \"string\", \"Autograph Format\": \"string\", \"Card Number\": \"string\", \"Language\": \"string\", \"Year Manufactured\": \"string\", \"Card Size\": \"string\", \"Convention/Event\": \"string\", \"Material\": \"string\", \"Vintage\": \"string\", \"Country/Region of Manufacture\": \"string\", \"Illustrator\": \"string\", \"HP\": \"string\", \"Attack/Power\": \"string\", \"Defense/Toughness\": \"string\", \"California Prop 65 Warning\": \"string\", \"Cost\": \"string\", \"Edition\": \"string\"}",
       "item_specifics_keys": [
         "Game",
@@ -647,7 +647,7 @@
           "Lens Mount"
         ]
       },
-      "ebay_ref_id": "188412969360"
+      "ebay_ref_id": "168511896228"
     },
     "Mirrorless Cameras": {
       "description": "Mirrorless Cameras",
@@ -1038,7 +1038,7 @@
           "Maximum Aperture"
         ]
       },
-      "ebay_ref_id": "178269991775"
+      "ebay_ref_id": "147405837147"
     }
   }
 }
