@@ -14,6 +14,27 @@ def insert_phase4_only():
     
     demo_items = [
         {
+            "SKU": "TEST-DEMO-0",
+            "商品名_JP": "Tamiya 1/12 Scale Tyrrell P34 Six Wheeler Vintage Plastic Model Kit Unassembled",
+            "Brand": "Tamiya",
+            "Model_Number": "1/12 Scale",
+            "Condition": "New",
+            "Category": "Vintage Plastic Model",
+            "想定仕入額_JPY": "12000",
+            "備考": "Box has slight wear due to age."
+        },
+        {
+            "SKU": "TEST-DEMO-1",
+            "商品名_JP": "Vintage Brand Ultra Seven Sofubi Soft Vinyl Figure Vintage 1970s Japan",
+            "Brand": "Vintage Brand",
+            "Model_Number": "Ultra Seven",
+            "Condition": "Used",
+            "Category": "Vintage Toy",
+            "想定仕入額_JPY": "35000",
+            "備考": "Paint fading on the boots and gloves."
+        },
+        {
+            "SKU": "TEST-DEMO-6",
             "商品名_JP": "Vintage Tin Toy Robot 1960s Japan Wind Up Original Box",
             "Brand": "Unknown",
             "Model_Number": "Does not apply",
@@ -23,6 +44,7 @@ def insert_phase4_only():
             "備考": "Vintage item."
         },
         {
+            "SKU": "TEST-DEMO-7",
             "商品名_JP": "Hatsune Miku 1/7 Scale Figure Miku Symphony 2019 Ver.",
             "Brand": "Good Smile Company",
             "Model_Number": "4580416942639",
@@ -32,6 +54,7 @@ def insert_phase4_only():
             "備考": "New item."
         },
         {
+            "SKU": "TEST-DEMO-8",
             "商品名_JP": "Pokemon Card Pikachu Promo 001/S-P Full Art Holo Mint",
             "Brand": "Nintendo",
             "Model_Number": "Does not apply",
@@ -41,6 +64,7 @@ def insert_phase4_only():
             "備考": "Collector item."
         },
         {
+            "SKU": "TEST-DEMO-9",
             "商品名_JP": "Canon EOS 5D Mark IV DSLR Camera Body Only Tested Japan",
             "Brand": "Canon",
             "Model_Number": "1483C002",
@@ -50,6 +74,7 @@ def insert_phase4_only():
             "備考": "Working perfectly."
         },
         {
+            "SKU": "TEST-DEMO-10",
             "商品名_JP": "Canon EF 50mm f/1.4 USM Standard Prime Lens Near Mint",
             "Brand": "Canon",
             "Model_Number": "2515A003",
@@ -59,6 +84,7 @@ def insert_phase4_only():
             "備考": "Excellent lens."
         },
         {
+            "SKU": "TEST-DEMO-11",
             "商品名_JP": "Sony Cyber-shot DSC-RX100 VII Digital Camera Black",
             "Brand": "Sony",
             "Model_Number": "DSCRX100M7/B",
@@ -68,6 +94,7 @@ def insert_phase4_only():
             "備考": "Compact camera."
         },
         {
+            "SKU": "TEST-DEMO-12",
             "商品名_JP": "Sony Alpha a7 III Mirrorless Digital Camera Body ILCE-7M3",
             "Brand": "Sony",
             "Model_Number": "ILCE-7M3",
@@ -77,6 +104,7 @@ def insert_phase4_only():
             "備考": "Mirrorless body."
         },
         {
+            "SKU": "TEST-DEMO-13",
             "商品名_JP": "Fujifilm QuickSnap Flash 400 Disposable 35mm Camera 27 Exp",
             "Brand": "Fujifilm",
             "Model_Number": "1004126",
@@ -103,7 +131,7 @@ def insert_phase4_only():
         row = [''] * len(headers)
         row[headers.index('Listing_Status')] = 'pending_ai'
         
-        item['管理ID_SKU'] = f'TEST-DEMO-{i+6}'
+        item['管理ID_SKU'] = item['SKU']
         item['仕入URL'] = real_urls[i % len(real_urls)]
         item['画像URLs'] = real_images[i % len(real_images)]
         item['販売形式'] = 'Buy It Now'
