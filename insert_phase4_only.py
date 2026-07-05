@@ -118,12 +118,26 @@ def insert_phase4_only():
     real_urls = [
         "https://jp.mercari.com/item/m61126572832",
         "https://jp.mercari.com/item/m97579951845",
-        "https://jp.mercari.com/item/m38644870547"
+        "https://jp.mercari.com/item/m16631865308",
+        "https://jp.mercari.com/item/m46147863763",
+        "https://jp.mercari.com/item/m22102102495",
+        "https://jp.mercari.com/item/m19720844735",
+        "https://jp.mercari.com/item/m10660684954",
+        "https://jp.mercari.com/item/m31380758159",
+        "https://jp.mercari.com/item/m53171841093",
+        "https://jp.mercari.com/item/m80474522380"
     ]
     real_images = [
         "https://static.mercdn.net/item/detail/orig/photos/m61126572832_1.jpg",
         "https://static.mercdn.net/item/detail/orig/photos/m97579951845_1.jpg",
-        "https://static.mercdn.net/item/detail/orig/photos/m38644870547_1.jpg"
+        "https://static.mercdn.net/item/detail/orig/photos/m16631865308_1.jpg",
+        "https://static.mercdn.net/item/detail/orig/photos/m46147863763_1.jpg",
+        "https://static.mercdn.net/item/detail/orig/photos/m22102102495_1.jpg",
+        "https://static.mercdn.net/item/detail/orig/photos/m19720844735_1.jpg",
+        "https://static.mercdn.net/item/detail/orig/photos/m10660684954_1.jpg",
+        "https://static.mercdn.net/item/detail/orig/photos/m31380758159_1.jpg",
+        "https://static.mercdn.net/item/detail/orig/photos/m53171841093_1.jpg",
+        "https://static.mercdn.net/item/detail/orig/photos/m80474522380_1.jpg"
     ]
 
     rows_to_insert = []
@@ -135,7 +149,7 @@ def insert_phase4_only():
         item['仕入URL'] = real_urls[i % len(real_urls)]
         item['画像URLs'] = real_images[i % len(real_images)]
         item['販売形式'] = 'Buy It Now'
-        item['出品価格_USD'] = '150.00'
+        item['出品価格_USD'] = '999.00'
         item['担当者'] = 'DemoStaff'
         item['在庫_Quantity'] = '0'
         item['Shipping_Policy'] = 'DDP(101～200USD)Expedited'

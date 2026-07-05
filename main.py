@@ -179,13 +179,15 @@ def process_validation(sheet_client, error_handler, vero_kw):
             sheet_client.batch_update_cells(sheet_row, updates)
 
         dup = check_duplicate(row, duplicates)
-        if dup["is_duplicate"]:
+        if dup["is_duplicate"] and not is_test:
             sheet_client.update_validation_status(sheet_row, "duplicate_suspected")
             error_handler.log_duplicate_error(sku, dup["reason"])
             blocked += 1
             if staff_name: sheet_client.update_staff_metrics(staff_name, is_success=False, error_type="duplicate")
             log(f"    BLOCKED: Duplicate: {dup['reason']}")
             continue
+        elif dup["is_duplicate"] and is_test:
+            log(f"    WARNING: Duplicate bypassed for Demo")
 
         sheet_client.update_validation_status(sheet_row, "validated")
         sheet_client.append_duplicate_entry(row)
