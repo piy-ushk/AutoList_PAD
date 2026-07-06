@@ -11,7 +11,7 @@ def check_required_fields(listing_data):
 
 
 def check_ai_content(listing_data):
-    ai_fields = ["ChatGPT_Description", "ChatGPT_ItemSpecifics", "ChatGPT_Rarity", "ChatGPT_Features", "ChatGPT_Background"]
+    ai_fields = ["ChatGPT_Description", "ChatGPT_ItemSpecifics"]
     missing = [f for f in ai_fields if not listing_data.get(f, "").strip()]
     title = listing_data.get("eBay_Title", "").strip() or listing_data.get("ChatGPT_Title", "").strip()
     if not title:

@@ -23,7 +23,7 @@ def insert_final_demo():
             "Category": "Vintage Plastic Model",
             "仕入れ値_JPY": "12000",
             "備考": "Box has slight wear due to age.",
-            "商品URL": "https://jp.mercari.com/item/m61126572832",
+            "仕入URL": "https://jp.mercari.com/item/m61126572832",
             "画像URLs": "https://static.mercdn.net/item/detail/orig/photos/m61126572832_1.jpg"
         },
         {
@@ -35,7 +35,7 @@ def insert_final_demo():
             "Category": "Vintage Toy",
             "仕入れ値_JPY": "35000",
             "備考": "Paint fading on the boots and gloves.",
-            "商品URL": "https://jp.mercari.com/item/m97579951845",
+            "仕入URL": "https://jp.mercari.com/item/m97579951845",
             "画像URLs": "https://static.mercdn.net/item/detail/orig/photos/m97579951845_1.jpg"
         },
         {
@@ -47,7 +47,7 @@ def insert_final_demo():
             "Category": "Toys & Hobbies > Vintage & Antique Toys > Tin > Robots",
             "仕入れ値_JPY": "8000",
             "備考": "Vintage item.",
-            "商品URL": "https://jp.mercari.com/item/m16631865308",
+            "仕入URL": "https://jp.mercari.com/item/m16631865308",
             "画像URLs": "https://static.mercdn.net/item/detail/orig/photos/m16631865308_1.jpg"
         },
         {
@@ -59,7 +59,7 @@ def insert_final_demo():
             "Category": "Toys & Hobbies > Action Figures & Accessories > Action Figures",
             "仕入れ値_JPY": "12000",
             "備考": "New item.",
-            "商品URL": "https://jp.mercari.com/item/m32979305678",
+            "仕入URL": "https://jp.mercari.com/item/m32979305678",
             "画像URLs": "https://static.mercdn.net/item/detail/orig/photos/m32979305678_1.jpg"
         },
         # Updated ones from insert_3_demos
@@ -72,7 +72,7 @@ def insert_final_demo():
             "Category": "Toys & Hobbies > Collectible Card Games > CCG Individual Cards",
             "仕入れ値_JPY": "5000",
             "備考": "Collector item.",
-            "商品URL": "https://jp.mercari.com/item/m72293528805",
+            "仕入URL": "https://jp.mercari.com/item/m72293528805",
             "画像URLs": "https://static.mercdn.net/item/detail/orig/photos/m72293528805_1.jpg"
         },
         {
@@ -84,7 +84,7 @@ def insert_final_demo():
             "Category": "Cameras & Photo > Digital Cameras",
             "仕入れ値_JPY": "80000",
             "備考": "Working perfectly.",
-            "商品URL": "https://jp.mercari.com/item/m59123840515",
+            "仕入URL": "https://jp.mercari.com/item/m59123840515",
             "画像URLs": "https://static.mercdn.net/item/detail/orig/photos/m59123840515_1.jpg"
         },
         {
@@ -96,7 +96,7 @@ def insert_final_demo():
             "Category": "Cameras & Photo > Lenses & Filters > Lenses",
             "仕入れ値_JPY": "25000",
             "備考": "Excellent lens.",
-            "商品URL": "https://jp.mercari.com/item/m93472250105",
+            "仕入URL": "https://jp.mercari.com/item/m93472250105",
             "画像URLs": "https://static.mercdn.net/item/detail/orig/photos/m93472250105_1.jpg"
         },
         # Remaining Phase 4
@@ -109,7 +109,7 @@ def insert_final_demo():
             "Category": "Cameras & Photo > Digital Cameras",
             "仕入れ値_JPY": "90000",
             "備考": "Compact camera.",
-            "商品URL": "https://jp.mercari.com/item/m91052090495",
+            "仕入URL": "https://jp.mercari.com/item/m91052090495",
             "画像URLs": "https://static.mercdn.net/item/detail/orig/photos/m91052090495_1.jpg"
         },
         {
@@ -121,7 +121,7 @@ def insert_final_demo():
             "Category": "Cameras & Photo > Digital Cameras",
             "仕入れ値_JPY": "150000",
             "備考": "Mirrorless body.",
-            "商品URL": "https://jp.mercari.com/item/m16035508401",
+            "仕入URL": "https://jp.mercari.com/item/m16035508401",
             "画像URLs": "https://static.mercdn.net/item/detail/orig/photos/m16035508401_1.jpg"
         },
         {
@@ -133,7 +133,7 @@ def insert_final_demo():
             "Category": "Cameras & Photo > Film Photography > Film Cameras",
             "仕入れ値_JPY": "1500",
             "備考": "Disposable camera.",
-            "商品URL": "https://jp.mercari.com/item/m31235321067",
+            "仕入URL": "https://jp.mercari.com/item/m31235321067",
             "画像URLs": "https://static.mercdn.net/item/detail/orig/photos/m31235321067_1.jpg"
         },
         # From insert_all_genres_demo.py
@@ -146,7 +146,7 @@ def insert_final_demo():
             "Category": "RC Related",
             "仕入れ値_JPY": "25000",
             "備考": "Unassembled kit.",
-            "商品URL": "https://jp.mercari.com/item/m38644870547",
+            "仕入URL": "https://jp.mercari.com/item/m38644870547",
             "画像URLs": "https://static.mercdn.net/item/detail/orig/photos/m38644870547_1.jpg"
         },
         {
@@ -158,7 +158,7 @@ def insert_final_demo():
             "Category": "Game Related",
             "仕入れ値_JPY": "8000",
             "備考": "Console is yellowed due to age.",
-            "商品URL": "https://jp.mercari.com/item/m80279095083",
+            "仕入URL": "https://jp.mercari.com/item/m80279095083",
             "画像URLs": "https://static.mercdn.net/item/detail/orig/photos/m80279095083_1.jpg"
         },
         {
@@ -170,7 +170,7 @@ def insert_final_demo():
             "Category": "Picture Book",
             "仕入れ値_JPY": "4500",
             "備考": "Some pop-up mechanics are slightly bent.",
-            "商品URL": "https://jp.mercari.com/item/m55203513386",
+            "仕入URL": "https://jp.mercari.com/item/m55203513386",
             "画像URLs": "https://static.mercdn.net/item/detail/orig/photos/m55203513386_1.jpg"
         },
         {
@@ -182,7 +182,7 @@ def insert_final_demo():
             "Category": "Animation Merch",
             "仕入れ値_JPY": "5000",
             "備考": "Works perfectly.",
-            "商品URL": "https://jp.mercari.com/item/m42074830308",
+            "仕入URL": "https://jp.mercari.com/item/m42074830308",
             "画像URLs": "https://static.mercdn.net/item/detail/orig/photos/m42074830308_1.jpg"
         }
     ]
@@ -192,10 +192,10 @@ def insert_final_demo():
         row = [''] * len(headers)
         row[headers.index('Listing_Status')] = 'pending_ai'
         
-        item['商品ID_SKU'] = item['SKU']
-        item['形式'] = 'Buy It Now'
-        item['販売価格_USD'] = '999.00'
-        item['担当者名'] = 'DemoStaff'
+        item['管理ID_SKU'] = item['SKU']
+        item['販売形式'] = 'Buy It Now'
+        item['出品価格_USD'] = '999.00'
+        item['担当者'] = 'DemoStaff'
         item['在庫_Quantity'] = '0'
         item['Shipping_Policy'] = 'DDP(101～200USD)Expedited'
         item['Return_Policy'] = 'Returns Accepted'
