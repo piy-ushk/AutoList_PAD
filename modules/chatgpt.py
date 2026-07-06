@@ -119,12 +119,14 @@ class ChatGPTCaller:
             '    {"header": "string", "bullets": ["string", "string"]}\n'
             '  ]\n'
             "}\n\n"
-            "INSTRUCTIONS FOR CONTENT (ALL TEXT MUST BE IN ENGLISH ONLY - NO JAPANESE TEXT ALLOWED):\n"
+            "INSTRUCTIONS FOR CONTENT:\n"
             "- 'itemSpecifics': You MUST perform deep internet research on the product to fill out AS MANY FIELDS AS POSSIBLE. CRITICAL FOR ITEM SPECIFICS: You MUST meticulously extract ALL details like Scale, Brand, Model, Year, etc. from the Title/Product Name. Ensure the Scale (e.g., 1:12, 1/10) perfectly matches the Title. Do not leave fields empty if the information is publicly available. Exhaustively populate this schema!\n"
-            "- 'nested_sections': These sections will be rendered as nested bullets inside the 'About This Items' list. You MUST include sections for 'Product Development Background', 'Rarity', 'Description', and 'Features'. Write 4-6 highly detailed, comprehensive sentences/bullet points for each of these sections.\n"
-            "- 'flat_sections': These sections will be rendered below the main description as bold headers followed by bullet points. You MUST intelligently decide what sections make sense for the product! For example, for RC Cars or Models, include sections like 'Items Required to Run (Not included)' or 'Optional Tune-Up Parts (Not included)'. Always include 'Appearance', 'Condition', and 'Included Items' sections if applicable to the condition. Use 2-3 detailed sentences/bullets for each.\n"
+            "- 'nested_sections': These sections will be rendered as nested bullets inside the 'About This Items' list. You MUST include sections for 'Product Development Background', 'Rarity', 'Description', and 'Features'. Write 4-6 highly detailed, comprehensive sentences/bullet points for each of these sections. CRITICAL: For each bullet point list in these nested sections, you MUST provide the English bullet points first, followed immediately by a Japanese translation (和訳) of those points below them.\n"
+            "- 'flat_sections': These sections will be rendered below the main description as bold headers followed by bullet points. You MUST intelligently decide what sections make sense for the product! For Cameras and Lenses, you MUST include flat sections specifically named 'Appearance', 'Optics', 'Functional', and 'Bundled Items'. For other items, include 'Appearance', 'Condition', and 'Included Items' sections if applicable. Use 2-3 detailed sentences/bullets for each.\n"
+            "- Dimension Formatting: For 'Item Height', 'Item Length', and 'Item Width' in itemSpecifics, you MUST research the actual dimensions and format the values as 'X cm (Y inches)'.\n"
+            "- Missing Items: If an item is missing or not included (e.g., battery, charger), append '(Not included)' to its header in the description.\n"
+            "- Capitalization: For all section headers, capitalize ONLY the first letter of the header (e.g., 'Product development background', 'Included items'). Do not use all-caps.\n"
             "- Ensure the tone is 'collector to collector'.\n"
-            "- AGAIN: DO NOT INCLUDE ANY JAPANESE TEXT IN THE OUTPUT.\n"
         )
         if vero_kw:
             vero_kw_strs = [k.get("keyword", str(k)) if isinstance(k, dict) else str(k) for k in vero_kw]
