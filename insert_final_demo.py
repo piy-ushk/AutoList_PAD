@@ -102,24 +102,24 @@ def insert_final_demo():
         # Remaining Phase 4
         {
             "SKU": "TEST-DEMO-7",
-            "商品名_JP": "Ricoh GR III Digital Compact Camera Tested",
-            "Brand": "Ricoh",
-            "Model_Number": "GR III",
+            "商品名_JP": "Nikon Coolpix S210 Digital Compact Camera Black Tested",
+            "Brand": "Nikon",
+            "Model_Number": "Coolpix S210",
             "Condition": "Used",
             "Category": "Cameras & Photo > Digital Cameras",
-            "仕入れ値_JPY": "90000",
+            "仕入れ値_JPY": "5000",
             "備考": "Compact camera.",
             "仕入URL": "https://jp.mercari.com/item/m91052090495",
             "画像URLs": "https://static.mercdn.net/item/detail/orig/photos/m91052090495_1.jpg"
         },
         {
             "SKU": "TEST-DEMO-8",
-            "商品名_JP": "Nikon Z50 Mirrorless Camera Body Black",
+            "商品名_JP": "Nikon 1 J1 Mirrorless Digital Camera Body Black Tested",
             "Brand": "Nikon",
-            "Model_Number": "Z50",
+            "Model_Number": "J1",
             "Condition": "Used",
             "Category": "Cameras & Photo > Digital Cameras",
-            "仕入れ値_JPY": "150000",
+            "仕入れ値_JPY": "10000",
             "備考": "Mirrorless body.",
             "仕入URL": "https://jp.mercari.com/item/m16035508401",
             "画像URLs": "https://static.mercdn.net/item/detail/orig/photos/m16035508401_1.jpg"

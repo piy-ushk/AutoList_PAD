@@ -127,6 +127,7 @@ class ChatGPTCaller:
             "- Missing Items: If an item is missing or not included (e.g., battery, charger), append '(Not included)' to its header in the description.\n"
             "- Capitalization: For all section headers, capitalize ONLY the first letter of the header (e.g., 'Product development background', 'Included items'). Do not use all-caps.\n"
             "- Ensure the tone is 'collector to collector'.\n"
+            "- VERO PROTECTION: DO NOT EVER USE the words 'Bluetooth' or 'Wi-Fi' anywhere in the description or features.\n"
             "- AGAIN: DO NOT INCLUDE ANY JAPANESE TEXT IN THE OUTPUT.\n"
         )
         if vero_kw:
