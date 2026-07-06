@@ -151,8 +151,7 @@ def process_validation(sheet_client, error_handler, vero_kw):
         is_test = sku.startswith("TEST-")
         vero_blocked = not vero["passed"]
         vero_reason = f"VeRO: {', '.join(vero.get('flagged_keywords', []))}"
-        
-        if vero_blocked and not is_test:
+        if vero_blocked:
             flagged = vero.get("flagged_keywords", [])
             sheet_client.update_validation_status(sheet_row, "vero_flagged", flagged)
             error_handler.log_vero_error(sku, flagged)
@@ -160,8 +159,6 @@ def process_validation(sheet_client, error_handler, vero_kw):
             if staff_name: sheet_client.update_staff_metrics(staff_name, is_success=False, error_type="vero_flagged")
             log(f"    BLOCKED: {vero_reason}")
             continue
-        elif vero_blocked and is_test:
-            log(f"    WARNING: {vero_reason} (Bypassed for Demo)")
 
         # If VeRO check passed, save any auto-replacements made to the sheet so both titles are updated together
         updates = []
