@@ -59,8 +59,8 @@ def insert_final_demo():
             "Category": "Toys & Hobbies > Action Figures & Accessories > Action Figures",
             "仕入れ値_JPY": "12000",
             "備考": "New item.",
-            "商品URL": "https://jp.mercari.com/item/m46147863763",
-            "画像URLs": "https://static.mercdn.net/item/detail/orig/photos/m46147863763_1.jpg"
+            "商品URL": "https://jp.mercari.com/item/m32979305678",
+            "画像URLs": "https://static.mercdn.net/item/detail/orig/photos/m32979305678_1.jpg"
         },
         # Updated ones from insert_3_demos
         {
@@ -84,8 +84,8 @@ def insert_final_demo():
             "Category": "Cameras & Photo > Digital Cameras",
             "仕入れ値_JPY": "80000",
             "備考": "Working perfectly.",
-            "商品URL": "https://jp.mercari.com/item/m19720844735",
-            "画像URLs": "https://static.mercdn.net/item/detail/orig/photos/m19720844735_1.jpg"
+            "商品URL": "https://jp.mercari.com/item/m59123840515",
+            "画像URLs": "https://static.mercdn.net/item/detail/orig/photos/m59123840515_1.jpg"
         },
         {
             "SKU": "TEST-DEMO-6",
@@ -96,8 +96,8 @@ def insert_final_demo():
             "Category": "Cameras & Photo > Lenses & Filters > Lenses",
             "仕入れ値_JPY": "25000",
             "備考": "Excellent lens.",
-            "商品URL": "https://jp.mercari.com/item/m10660684954",
-            "画像URLs": "https://static.mercdn.net/item/detail/orig/photos/m10660684954_1.jpg"
+            "商品URL": "https://jp.mercari.com/item/m93472250105",
+            "画像URLs": "https://static.mercdn.net/item/detail/orig/photos/m93472250105_1.jpg"
         },
         # Remaining Phase 4
         {
@@ -109,8 +109,8 @@ def insert_final_demo():
             "Category": "Cameras & Photo > Digital Cameras",
             "仕入れ値_JPY": "90000",
             "備考": "Compact camera.",
-            "商品URL": "https://jp.mercari.com/item/m31380758159",
-            "画像URLs": "https://static.mercdn.net/item/detail/orig/photos/m31380758159_1.jpg"
+            "商品URL": "https://jp.mercari.com/item/m91052090495",
+            "画像URLs": "https://static.mercdn.net/item/detail/orig/photos/m91052090495_1.jpg"
         },
         {
             "SKU": "TEST-DEMO-8",
@@ -121,8 +121,8 @@ def insert_final_demo():
             "Category": "Cameras & Photo > Digital Cameras",
             "仕入れ値_JPY": "150000",
             "備考": "Mirrorless body.",
-            "商品URL": "https://jp.mercari.com/item/m53171841093",
-            "画像URLs": "https://static.mercdn.net/item/detail/orig/photos/m53171841093_1.jpg"
+            "商品URL": "https://jp.mercari.com/item/m16035508401",
+            "画像URLs": "https://static.mercdn.net/item/detail/orig/photos/m16035508401_1.jpg"
         },
         {
             "SKU": "TEST-DEMO-9",
@@ -133,8 +133,8 @@ def insert_final_demo():
             "Category": "Cameras & Photo > Film Photography > Film Cameras",
             "仕入れ値_JPY": "1500",
             "備考": "Disposable camera.",
-            "商品URL": "https://jp.mercari.com/item/m91309479668",
-            "画像URLs": "https://static.mercdn.net/item/detail/orig/photos/m91309479668_1.jpg"
+            "商品URL": "https://jp.mercari.com/item/m31235321067",
+            "画像URLs": "https://static.mercdn.net/item/detail/orig/photos/m31235321067_1.jpg"
         },
         # From insert_all_genres_demo.py
         {
