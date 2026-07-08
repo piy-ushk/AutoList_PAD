@@ -33,7 +33,10 @@
         "Condition",
         "UPC"
       ],
-      "item_specifics_schema": "{\"Brand\": \"string\", \"Model\": \"string\", \"Type\": \"string\", \"Format\": \"string\", \"Color\": \"string\", \"Series\": \"string\", \"Features\": \"string\", \"Focus Type\": \"string\", \"Flash\": \"string\", \"Film Format\": \"string\", \"Number of Exposures\": \"string\", \"Expiration Date\": \"string\", \"MPN\": \"string\", \"Country/Region of Manufacture\": \"string\", \"Custom Bundle\": \"string\", \"Bundle Description\": \"string\", \"Item Height\": \"string\", \"Item Length\": \"string\", \"Item Width\": \"string\", \"Item Weight\": \"string\", \"Year Manufactured\": \"string\", \"Manufacturer Warranty\": \"string\", \"Condition\": \"string\", \"UPC\": \"string\"}"
+      "item_specifics_schema": "{\"Brand\": \"string\", \"Model\": \"string\", \"Type\": \"string\", \"Format\": \"string\", \"Color\": \"string\", \"Series\": \"string\", \"Features\": \"string\", \"Focus Type\": \"string\", \"Flash\": \"string\", \"Film Format\": \"string\", \"Number of Exposures\": \"string\", \"Expiration Date\": \"string\", \"MPN\": \"string\", \"Country/Region of Manufacture\": \"string\", \"Custom Bundle\": \"string\", \"Bundle Description\": \"string\", \"Item Height\": \"string\", \"Item Length\": \"string\", \"Item Width\": \"string\", \"Item Weight\": \"string\", \"Year Manufactured\": \"string\", \"Manufacturer Warranty\": \"string\", \"Condition\": \"string\", \"UPC\": \"string\"}",
+      "keywords": [
+        "disposable_camera"
+      ]
     },
     "pokemon_card": {
       "display_name": "Pokemon Cards",
@@ -399,7 +402,9 @@
     },
     "default": {
       "display_name": "General Collectibles",
-      "keywords": [],
+      "keywords": [
+        "default"
+      ],
       "specialization": "Japanese vintage collectibles, hobby products, and retro goods",
       "ebay_ref_id": "168209526733",
       "item_specifics_schema": "{\"Brand\":\"string\",\"Manufacturer\":\"string\",\"Condition\":\"string\",\"Year\":\"string\",\"Country/Region of Manufacture\":\"string\"}",
@@ -682,7 +687,10 @@
           "Lens Mount"
         ]
       },
-      "ebay_ref_id": "168511896228"
+      "ebay_ref_id": "168511896228",
+      "keywords": [
+        "digital slr cameras"
+      ]
     },
     "Mirrorless Cameras": {
       "description": "Mirrorless Cameras",
@@ -829,7 +837,10 @@
           "Lens Mount"
         ]
       },
-      "ebay_ref_id": "147408060838"
+      "ebay_ref_id": "147408060838",
+      "keywords": [
+        "mirrorless cameras"
+      ]
     },
     "Compact Cameras": {
       "description": "Compact Digital Cameras",
@@ -970,7 +981,10 @@
           "Optical Zoom"
         ]
       },
-      "ebay_ref_id": "298462687090"
+      "ebay_ref_id": "298462687090",
+      "keywords": [
+        "compact cameras"
+      ]
     },
     "Camera Lenses": {
       "description": "Camera Lenses",
@@ -1075,7 +1089,10 @@
           "Maximum Aperture"
         ]
       },
-      "ebay_ref_id": "147405837147"
+      "ebay_ref_id": "147405837147",
+      "keywords": [
+        "camera lenses"
+      ]
     }
   }
 }

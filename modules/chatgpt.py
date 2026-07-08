@@ -103,7 +103,8 @@ class ChatGPTCaller:
         genre_data = genres_section.get(genre_key, genres_section.get("default", {}))
 
         sys_specialization = genre_data.get("specialization", "Japanese vintage collectibles and hobby products")
-        item_specifics_schema = genre_data.get("item_specifics_schema", "{}")
+        schema_raw = genre_data.get("item_specifics_schema", "{}")
+        item_specifics_schema = json.dumps(schema_raw) if isinstance(schema_raw, dict) else schema_raw
         
         system_prompt = (
             f"You are a professional eBay listing copywriter specializing in {sys_specialization}. "
