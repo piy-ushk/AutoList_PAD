@@ -241,7 +241,12 @@ class ChatGPTCaller:
         # Guarantee no 'hallmark' VeRO violations slip through
         for key in ["title", "description", "ChatGPT_ItemSpecifics"]:
             if key in parsed and isinstance(parsed[key], str):
-                parsed[key] = parsed[key].replace("hallmark", "signature").replace("Hallmark", "Signature")
+                s = parsed[key]
+                s = s.replace("hallmark", "signature").replace("Hallmark", "Signature")
+                s = re.sub(r'(?i)\bhdmi\b', 'Video Out', s)
+                s = re.sub(r'(?i)\bwi-fi\b', 'Wireless', s)
+                s = re.sub(r'(?i)\bbluetooth\b', 'Wireless', s)
+                parsed[key] = s
                 
         return parsed
 

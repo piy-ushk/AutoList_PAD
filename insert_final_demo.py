@@ -35,8 +35,8 @@ def insert_final_demo():
             "Category": "Vintage Toy",
             "仕入れ値_JPY": "35000",
             "備考": "Paint fading on the boots and gloves.",
-            "仕入URL": "https://jp.mercari.com/item/m97579951845",
-            "画像URLs": "https://static.mercdn.net/item/detail/orig/photos/m97579951845_1.jpg"
+            "仕入URL": "https://jp.mercari.com/item/m91233202436",
+            "画像URLs": "https://static.mercdn.net/item/detail/orig/photos/m91233202436_1.jpg"
         },
         {
             "SKU": "TEST-DEMO-2",
@@ -47,8 +47,8 @@ def insert_final_demo():
             "Category": "Toys & Hobbies > Vintage & Antique Toys > Tin > Cars",
             "仕入れ値_JPY": "8000",
             "備考": "Vintage item.",
-            "仕入URL": "https://jp.mercari.com/item/m16631865309",
-            "画像URLs": "https://static.mercdn.net/item/detail/orig/photos/m16631865309_1.jpg"
+            "仕入URL": "https://jp.mercari.com/item/m81961726448",
+            "画像URLs": "https://static.mercdn.net/item/detail/orig/photos/m81961726448_1.jpg"
         },
         {
             "SKU": "TEST-DEMO-3",
@@ -59,8 +59,8 @@ def insert_final_demo():
             "Category": "Toys & Hobbies > Action Figures & Accessories > Action Figures",
             "仕入れ値_JPY": "12000",
             "備考": "New item.",
-            "仕入URL": "https://jp.mercari.com/item/m32979305679",
-            "画像URLs": "https://static.mercdn.net/item/detail/orig/photos/m32979305679_1.jpg"
+            "仕入URL": "https://jp.mercari.com/item/m77992081636",
+            "画像URLs": "https://static.mercdn.net/item/detail/orig/photos/m77992081636_1.jpg"
         },
         # Updated ones from insert_3_demos
         {
@@ -72,8 +72,8 @@ def insert_final_demo():
             "Category": "Toys & Hobbies > Collectible Card Games > CCG Individual Cards",
             "仕入れ値_JPY": "5000",
             "備考": "Collector item.",
-            "仕入URL": "https://jp.mercari.com/item/m72293528806",
-            "画像URLs": "https://static.mercdn.net/item/detail/orig/photos/m72293528806_1.jpg"
+            "仕入URL": "https://jp.mercari.com/item/m10796625160",
+            "画像URLs": "https://static.mercdn.net/item/detail/orig/photos/m10796625160_1.jpg"
         },
         {
             "SKU": "TEST-DEMO-5",
@@ -96,8 +96,8 @@ def insert_final_demo():
             "Category": "Cameras & Photo > Lenses & Filters > Lenses",
             "仕入れ値_JPY": "25000",
             "備考": "Excellent lens.",
-            "仕入URL": "https://jp.mercari.com/item/m93472250106",
-            "画像URLs": "https://static.mercdn.net/item/detail/orig/photos/m93472250106_1.jpg"
+            "仕入URL": "https://jp.mercari.com/item/m73794653293",
+            "画像URLs": "https://static.mercdn.net/item/detail/orig/photos/m73794653293_1.jpg"
         },
         # Remaining Phase 4
         {
@@ -133,8 +133,8 @@ def insert_final_demo():
             "Category": "Cameras & Photo > Film Photography > Film Cameras",
             "仕入れ値_JPY": "1500",
             "備考": "Disposable camera.",
-            "仕入URL": "https://jp.mercari.com/item/m31235321068",
-            "画像URLs": "https://static.mercdn.net/item/detail/orig/photos/m31235321068_1.jpg"
+            "仕入URL": "https://jp.mercari.com/item/m24806593561",
+            "画像URLs": "https://static.mercdn.net/item/detail/orig/photos/m24806593561_1.jpg"
         },
         # From insert_all_genres_demo.py
         {
@@ -158,8 +158,8 @@ def insert_final_demo():
             "Category": "Game Related",
             "仕入れ値_JPY": "8000",
             "備考": "Console is yellowed due to age.",
-            "仕入URL": "https://jp.mercari.com/item/m80279095083",
-            "画像URLs": "https://static.mercdn.net/item/detail/orig/photos/m80279095083_1.jpg"
+            "仕入URL": "https://jp.mercari.com/item/m80279095099",
+            "画像URLs": "https://static.mercdn.net/item/detail/orig/photos/m80279095099_1.jpg"
         },
         {
             "SKU": "TEST-DEMO-12",
@@ -170,8 +170,8 @@ def insert_final_demo():
             "Category": "Picture Book",
             "仕入れ値_JPY": "4500",
             "備考": "Some pop-up mechanics are slightly bent.",
-            "仕入URL": "https://jp.mercari.com/item/m55203513386",
-            "画像URLs": "https://static.mercdn.net/item/detail/orig/photos/m55203513386_1.jpg"
+            "仕入URL": "https://jp.mercari.com/item/m55203513399",
+            "画像URLs": "https://static.mercdn.net/item/detail/orig/photos/m55203513399_1.jpg"
         },
         {
             "SKU": "TEST-DEMO-13",
