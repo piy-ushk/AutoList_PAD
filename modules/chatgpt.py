@@ -210,6 +210,23 @@ class ChatGPTCaller:
         
         # We store itemSpecifics as JSON string in the sheet so we can use it later
         item_specs_dict = parsed.get("itemSpecifics", {})
+        
+        # Post-process Item Specifics to prevent Monodas/eBay errors
+        for k, v in list(item_specs_dict.items()):
+            val_str = str(v).strip()
+            # Clean N/A values
+            if val_str.upper() in ("N/A", "NA", "NONE", "-", "UNKNOWN", "NOT SPECIFIED", "NOT APPLICABLE", "UNSPECIFIED", ""):
+                item_specs_dict[k] = "Does not apply"
+            
+            # Clean Year fields (eBay requires strict YYYY format)
+            if "year" in k.lower():
+                # Extract first 4 consecutive digits
+                match = re.search(r'(18|19|20)\d{2}', val_str)
+                if match:
+                    item_specs_dict[k] = match.group(0)
+                else:
+                    item_specs_dict[k] = "Does not apply"
+                    
         parsed["ChatGPT_ItemSpecifics"] = " | ".join(f"{k}: {v}" for k, v in item_specs_dict.items())
         
         return parsed
