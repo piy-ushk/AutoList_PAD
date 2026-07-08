@@ -307,8 +307,8 @@ def process_monodas_drafts(sheet_client):
         sku = row.get("管理ID_SKU", "")
         is_test = sku.startswith("TEST-")
         
-        final_price = "0" if is_test else row.get("出品価格_USD", "")
-        final_quantity = 0 if is_test else 1
+        final_price = row.get("出品価格_USD", "999.00")
+        final_quantity = 1
 
         import re
         raw_specs = row.get("ChatGPT_ItemSpecifics", "{}")
