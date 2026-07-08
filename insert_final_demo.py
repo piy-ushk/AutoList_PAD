@@ -40,40 +40,40 @@ def insert_final_demo():
         },
         {
             "SKU": "TEST-DEMO-2",
-            "商品名_JP": "Vintage Tin Toy Robot 1960s Japan Wind Up Original Box",
+            "商品名_JP": "Vintage Tin Toy Car 1960s Japan Wind Up Original Box",
             "Brand": "Unknown",
             "Model_Number": "Does not apply",
             "Condition": "Used",
-            "Category": "Toys & Hobbies > Vintage & Antique Toys > Tin > Robots",
+            "Category": "Toys & Hobbies > Vintage & Antique Toys > Tin > Cars",
             "仕入れ値_JPY": "8000",
             "備考": "Vintage item.",
-            "仕入URL": "https://jp.mercari.com/item/m16631865308",
-            "画像URLs": "https://static.mercdn.net/item/detail/orig/photos/m16631865308_1.jpg"
+            "仕入URL": "https://jp.mercari.com/item/m16631865309",
+            "画像URLs": "https://static.mercdn.net/item/detail/orig/photos/m16631865309_1.jpg"
         },
         {
             "SKU": "TEST-DEMO-3",
-            "商品名_JP": "Re Zero Starting Life in Another World Rem Coreful Figure Taito Japan New",
-            "Brand": "Taito",
+            "商品名_JP": "Jujutsu Kaisen Gojo Satoru 1/8 Scale Figure Kotobukiya Japan",
+            "Brand": "Kotobukiya",
             "Model_Number": "Does not apply",
             "Condition": "New",
             "Category": "Toys & Hobbies > Action Figures & Accessories > Action Figures",
             "仕入れ値_JPY": "12000",
             "備考": "New item.",
-            "仕入URL": "https://jp.mercari.com/item/m32979305678",
-            "画像URLs": "https://static.mercdn.net/item/detail/orig/photos/m32979305678_1.jpg"
+            "仕入URL": "https://jp.mercari.com/item/m32979305679",
+            "画像URLs": "https://static.mercdn.net/item/detail/orig/photos/m32979305679_1.jpg"
         },
         # Updated ones from insert_3_demos
         {
             "SKU": "TEST-DEMO-4",
-            "商品名_JP": "Pokemon Card Pikachu Promo 001/S-P Full Art Holo Mint",
+            "商品名_JP": "Pokemon Card Charizard VMAX SSR 308/190 Shiny Star V Japanese Mint",
             "Brand": "Nintendo",
             "Model_Number": "Does not apply",
             "Condition": "Used",
             "Category": "Toys & Hobbies > Collectible Card Games > CCG Individual Cards",
             "仕入れ値_JPY": "5000",
             "備考": "Collector item.",
-            "仕入URL": "https://jp.mercari.com/item/m72293528805",
-            "画像URLs": "https://static.mercdn.net/item/detail/orig/photos/m72293528805_1.jpg"
+            "仕入URL": "https://jp.mercari.com/item/m72293528806",
+            "画像URLs": "https://static.mercdn.net/item/detail/orig/photos/m72293528806_1.jpg"
         },
         {
             "SKU": "TEST-DEMO-5",
@@ -89,15 +89,15 @@ def insert_final_demo():
         },
         {
             "SKU": "TEST-DEMO-6",
-            "商品名_JP": "Sigma 18-35mm f/1.8 DC HSM Art Lens for Nikon Mount",
-            "Brand": "Sigma",
+            "商品名_JP": "Minolta MD 50mm f/1.4 Prime Lens for MD Mount Near Mint",
+            "Brand": "Minolta",
             "Model_Number": "Does not apply",
             "Condition": "Used",
             "Category": "Cameras & Photo > Lenses & Filters > Lenses",
             "仕入れ値_JPY": "25000",
             "備考": "Excellent lens.",
-            "仕入URL": "https://jp.mercari.com/item/m93472250105",
-            "画像URLs": "https://static.mercdn.net/item/detail/orig/photos/m93472250105_1.jpg"
+            "仕入URL": "https://jp.mercari.com/item/m93472250106",
+            "画像URLs": "https://static.mercdn.net/item/detail/orig/photos/m93472250106_1.jpg"
         },
         # Remaining Phase 4
         {
@@ -109,32 +109,32 @@ def insert_final_demo():
             "Category": "Cameras & Photo > Digital Cameras",
             "仕入れ値_JPY": "5000",
             "備考": "Compact camera.",
-            "仕入URL": "https://jp.mercari.com/item/m91052090495",
-            "画像URLs": "https://static.mercdn.net/item/detail/orig/photos/m91052090495_1.jpg"
+            "仕入URL": "https://jp.mercari.com/item/m70665623374",
+            "画像URLs": "https://static.mercdn.net/item/detail/orig/photos/m70665623374_1.jpg"
         },
         {
             "SKU": "TEST-DEMO-8",
-            "商品名_JP": "Nikon 1 J1 Mirrorless Digital Camera Body Black Tested",
+            "商品名_JP": "Nikon 1 J1 Mirrorless Digital Camera Body White Tested",
             "Brand": "Nikon",
             "Model_Number": "J1",
             "Condition": "Used",
             "Category": "Cameras & Photo > Digital Cameras",
             "仕入れ値_JPY": "10000",
             "備考": "Mirrorless body.",
-            "仕入URL": "https://jp.mercari.com/item/m16035508401",
-            "画像URLs": "https://static.mercdn.net/item/detail/orig/photos/m16035508401_1.jpg"
+            "仕入URL": "https://jp.mercari.com/item/m47275046421",
+            "画像URLs": "https://static.mercdn.net/item/detail/orig/photos/m47275046421_1.jpg"
         },
         {
             "SKU": "TEST-DEMO-9",
-            "商品名_JP": "Kodak FunSaver 35mm Single Use Camera 27 Exp",
-            "Brand": "Kodak",
+            "商品名_JP": "Ilford Sprite 35-II Reusable 35mm Film Camera Black",
+            "Brand": "Ilford",
             "Model_Number": "Does not apply",
             "Condition": "New",
             "Category": "Cameras & Photo > Film Photography > Film Cameras",
             "仕入れ値_JPY": "1500",
             "備考": "Disposable camera.",
-            "仕入URL": "https://jp.mercari.com/item/m31235321067",
-            "画像URLs": "https://static.mercdn.net/item/detail/orig/photos/m31235321067_1.jpg"
+            "仕入URL": "https://jp.mercari.com/item/m31235321068",
+            "画像URLs": "https://static.mercdn.net/item/detail/orig/photos/m31235321068_1.jpg"
         },
         # From insert_all_genres_demo.py
         {
