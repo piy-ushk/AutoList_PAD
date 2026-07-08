@@ -158,8 +158,8 @@ def insert_final_demo():
             "Category": "Game Related",
             "仕入れ値_JPY": "8000",
             "備考": "Console is yellowed due to age.",
-            "仕入URL": "https://jp.mercari.com/item/m80279095099",
-            "画像URLs": "https://static.mercdn.net/item/detail/orig/photos/m80279095099_1.jpg"
+            "仕入URL": "https://jp.mercari.com/item/m44906231946",
+            "画像URLs": "https://static.mercdn.net/item/detail/orig/photos/m44906231946_1.jpg"
         },
         {
             "SKU": "TEST-DEMO-12",
@@ -170,8 +170,8 @@ def insert_final_demo():
             "Category": "Picture Book",
             "仕入れ値_JPY": "4500",
             "備考": "Some pop-up mechanics are slightly bent.",
-            "仕入URL": "https://jp.mercari.com/item/m55203513399",
-            "画像URLs": "https://static.mercdn.net/item/detail/orig/photos/m55203513399_1.jpg"
+            "仕入URL": "https://jp.mercari.com/item/m45040687729",
+            "画像URLs": "https://static.mercdn.net/item/detail/orig/photos/m45040687729_1.jpg"
         },
         {
             "SKU": "TEST-DEMO-13",

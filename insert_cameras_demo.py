@@ -18,8 +18,8 @@ def insert_camera_demo():
             "Category": "disposable_camera",
             "仕入れ値_JPY": "4500",
             "備考": "Good working condition.",
-            "仕入URL": "https://jp.mercari.com/item/m12345678901",
-            "画像URLs": "https://static.mercdn.net/item/detail/orig/photos/m12345678901_1.jpg"
+            "仕入URL": "https://jp.mercari.com/item/m24806593561",
+            "画像URLs": "https://static.mercdn.net/item/detail/orig/photos/m24806593561_1.jpg"
         },
         {
             "SKU": "TEST-DEMO-CAM-2",
@@ -30,8 +30,8 @@ def insert_camera_demo():
             "Category": "Digital SLR Cameras",
             "仕入れ値_JPY": "35000",
             "備考": "Tested and working.",
-            "仕入URL": "https://jp.mercari.com/item/m12345678902",
-            "画像URLs": "https://static.mercdn.net/item/detail/orig/photos/m12345678902_1.jpg"
+            "仕入URL": "https://jp.mercari.com/item/m59123840515",
+            "画像URLs": "https://static.mercdn.net/item/detail/orig/photos/m59123840515_1.jpg"
         }
     ]
 

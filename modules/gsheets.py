@@ -187,7 +187,7 @@ class GoogleSheetsClient:
         updates = [
             ("eBay_Title", ai_data.get("title", "")),
             ("ChatGPT_Title", ai_data.get("title", "")),
-            ("ChatGPT_ItemSpecifics", " | ".join(f"{k}: {v}" for k, v in ai_data.get("itemSpecifics", {}).items())),
+            ("ChatGPT_ItemSpecifics", ai_data.get("ChatGPT_ItemSpecifics", "")),
             ("ChatGPT_Description", ai_data.get("description", "")),
             ("ChatGPT_Rarity", ai_data.get("rarity", "")),
             ("ChatGPT_Features", ai_data.get("features", "")),
