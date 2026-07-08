@@ -68,7 +68,7 @@ def check_duplicate(new_listing, existing_listings):
     if not new_phash and new_listing.get("画像URLs"):
         new_phash = compute_phash(new_listing.get("画像URLs", ""))
 
-    IGNORE_VALUES = {"n/a", "na", "none", "nan", "", "-"}
+    IGNORE_VALUES = {"n/a", "na", "none", "nan", "", "-", "does not apply"}
 
     for existing in existing_listings:
         existing_sku = existing.get("SKU", "")
