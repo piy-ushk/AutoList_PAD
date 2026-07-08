@@ -366,7 +366,7 @@
         "メガドライブ"
       ],
       "specialization": "vintage retro video games, consoles, controllers, and gaming accessories",
-      "ebay_ref_id": "267652293740",
+      "ebay_ref_id": "168209526733",
       "item_specifics_schema": "{\"Brand\": \"string\", \"Model\": \"string\", \"UPC\": \"string\", \"Platform\": \"string\", \"Region Code\": \"string\", \"Color\": \"string\", \"Type\": \"string\", \"Storage Capacity\": \"string\", \"Connectivity\": \"string\", \"MPN\": \"string\", \"Year Manufactured\": \"string\", \"Charger Included\": \"string\", \"Device Charging Range\": \"string\", \"Features\": \"string\", \"Resolution\": \"string\", \"California Prop 65 Warning\": \"string\", \"Country of Origin\": \"string\", \"Item Depth\": \"string\", \"Item Height\": \"string\", \"Item Length\": \"string\", \"Item Weight\": \"string\", \"Manufacturer Warranty\": \"string\", \"Unit Quantity\": \"string\", \"Unit Type\": \"string\", \"Materials sourced from\": \"string\"}",
       "item_specifics_keys": [
         "Brand",
