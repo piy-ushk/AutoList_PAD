@@ -6,10 +6,6 @@ from modules.gsheets import GoogleSheetsClient
 
 def insert_camera_demo():
     client = GoogleSheetsClient()
-    
-    print("Clearing existing sheet data...")
-    client.api.write_range(client.tabs['listings'], 'A2:BC1000', [[''] * 55 for _ in range(999)])
-    
     headers = client.api.read_range(client.tabs['listings'], 'A1:BC1')[0]
     
     demo_items = [
