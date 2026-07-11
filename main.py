@@ -15,7 +15,7 @@ from modules.validator import run_all_validations
 # ==============================================================================
 # Set to True to only process the 5 TEST cards (SKUs starting with "TEST-").
 # Set to False to process all cards normally.
-ONLY_PROCESS_TEST_CARDS = False
+ONLY_PROCESS_TEST_CARDS = True
 
 # PHASE 2 SAFETY OVERRIDE:
 # Set to True to force ALL items to be saved as Drafts regardless of automation rules.

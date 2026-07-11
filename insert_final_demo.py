@@ -72,8 +72,8 @@ def insert_final_demo():
             "Category": "Toys & Hobbies > Collectible Card Games > CCG Individual Cards",
             "仕入れ値_JPY": "5000",
             "備考": "Collector item.",
-            "仕入URL": "https://jp.mercari.com/item/m10796625160",
-            "画像URLs": "https://static.mercdn.net/item/detail/orig/photos/m10796625160_1.jpg"
+            "仕入URL": "https://jp.mercari.com/item/m77535112834",
+            "画像URLs": "https://static.mercdn.net/item/detail/orig/photos/m77535112834_1.jpg"
         },
         {
             "SKU": "TEST-DEMO-5",

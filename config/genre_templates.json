@@ -527,7 +527,8 @@
       "match_keywords": [
         "dslr",
         "デジタル一眼レフ",
-        "一眼レフ"
+        "一眼レフ",
+        "digital slr camera"
       ],
       "item_specifics_keys": [
         "Brand",
@@ -981,7 +982,7 @@
           "Optical Zoom"
         ]
       },
-      "ebay_ref_id": "298462687090",
+      "ebay_ref_id": "127776245005",
       "keywords": [
         "compact cameras"
       ]
@@ -1093,6 +1094,179 @@
       "keywords": [
         "camera lenses"
       ]
+    },
+    "Film Cameras": {
+      "display_name": "Film Cameras",
+      "keywords": [
+        "film cameras",
+        "film photography"
+      ],
+      "match_keywords": [
+        "film camera",
+        "35mm film camera",
+        "analog camera"
+      ],
+      "specialization": "Vintage and modern film cameras",
+      "ebay_ref_id": "178230942338",
+      "item_specifics_schema": {
+        "type": "object",
+        "properties": {
+          "Brand": {
+            "type": "string"
+          },
+          "Model": {
+            "type": "string"
+          },
+          "Series": {
+            "type": "string"
+          },
+          "Type": {
+            "type": "string"
+          },
+          "Color": {
+            "type": "string"
+          },
+          "Features": {
+            "type": "string"
+          },
+          "Maximum Resolution": {
+            "type": "string"
+          },
+          "Optical Zoom": {
+            "type": "string"
+          },
+          "Digital Zoom": {
+            "type": "string"
+          },
+          "Screen Size": {
+            "type": "string"
+          },
+          "Battery Type": {
+            "type": "string"
+          },
+          "Storage Type": {
+            "type": "string"
+          },
+          "Lens Mount": {
+            "type": "string"
+          },
+          "Compatible Brand": {
+            "type": "string"
+          },
+          "Compatible Series": {
+            "type": "string"
+          },
+          "Focus Type": {
+            "type": "string"
+          },
+          "Auto Focus": {
+            "type": "string"
+          },
+          "Manual Focus": {
+            "type": "string"
+          },
+          "Viewfinder Type": {
+            "type": "string"
+          },
+          "Image Stabilization": {
+            "type": "string"
+          },
+          "Maximum Aperture": {
+            "type": "string"
+          },
+          "Maximum Shutter Speed": {
+            "type": "string"
+          },
+          "Minimum Shutter Speed": {
+            "type": "string"
+          },
+          "Connectivity": {
+            "type": "string"
+          },
+          "Wi-Fi": {
+            "type": "string"
+          },
+          "Bluetooth": {
+            "type": "string"
+          },
+          "USB": {
+            "type": "string"
+          },
+          "HDMI": {
+            "type": "string"
+          },
+          "Video Recording": {
+            "type": "string"
+          },
+          "MPN": {
+            "type": "string"
+          },
+          "Country/Region of Manufacture": {
+            "type": "string"
+          },
+          "Item Height": {
+            "type": "string"
+          },
+          "Item Length": {
+            "type": "string"
+          },
+          "Item Width": {
+            "type": "string"
+          },
+          "Item Weight": {
+            "type": "string"
+          },
+          "UPC": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "Brand",
+          "Model",
+          "Type",
+          "Maximum Resolution",
+          "Lens Mount"
+        ]
+      },
+      "item_specifics_keys": [
+        "Brand",
+        "Model",
+        "Series",
+        "Type",
+        "Color",
+        "Features",
+        "Maximum Resolution",
+        "Optical Zoom",
+        "Digital Zoom",
+        "Screen Size",
+        "Battery Type",
+        "Storage Type",
+        "Lens Mount",
+        "Compatible Brand",
+        "Compatible Series",
+        "Focus Type",
+        "Auto Focus",
+        "Manual Focus",
+        "Viewfinder Type",
+        "Image Stabilization",
+        "Maximum Aperture",
+        "Maximum Shutter Speed",
+        "Minimum Shutter Speed",
+        "Connectivity",
+        "Wi-Fi",
+        "Bluetooth",
+        "USB",
+        "HDMI",
+        "Video Recording",
+        "MPN",
+        "Country/Region of Manufacture",
+        "Item Height",
+        "Item Length",
+        "Item Width",
+        "Item Weight",
+        "UPC"
+      ],
+      "genre_fields": ""
     }
   }
 }

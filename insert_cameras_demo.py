@@ -9,30 +9,18 @@ def insert_camera_demo():
     headers = client.api.read_range(client.tabs['listings'], 'A1:BC1')[0]
     
     demo_items = [
-        {
-            "SKU": "TEST-DEMO-CAM-1",
-            "商品名_JP": "Ilford Sprite 35-II Reusable 35mm Film Camera Black",
-            "Brand": "Ilford",
-            "Model_Number": "Sprite 35-II",
+         {
+            "SKU": "TEST-DEMO-9",
+            "商品名_JP": "Minolta X-700 35mm Film Camera SLR Black",
+            "Brand": "Minolta",
+            "Model_Number": "X-700",
             "Condition": "Used",
-            "Category": "disposable_camera",
-            "仕入れ値_JPY": "4500",
-            "備考": "Good working condition.",
-            "仕入URL": "https://jp.mercari.com/item/m24806593561",
-            "画像URLs": "https://static.mercdn.net/item/detail/orig/photos/m24806593561_1.jpg"
-        },
-        {
-            "SKU": "TEST-DEMO-CAM-2",
-            "商品名_JP": "Pentax K-70 Digital SLR Camera Body Black Tested",
-            "Brand": "Pentax",
-            "Model_Number": "K-70",
-            "Condition": "Used",
-            "Category": "Digital SLR Cameras",
-            "仕入れ値_JPY": "35000",
-            "備考": "Tested and working.",
-            "仕入URL": "https://jp.mercari.com/item/m59123840515",
-            "画像URLs": "https://static.mercdn.net/item/detail/orig/photos/m59123840515_1.jpg"
-        }
+            "Category": "Cameras & Photo > Film Photography > Film Cameras",
+            "仕入れ値_JPY": "1500",
+            "備考": "Disposable camera.",
+            "仕入URL": "https://jp.mercari.com/item/m14420673428",
+            "画像URLs": "https://static.mercdn.net/item/detail/orig/photos/m14420673428_1.jpg"
+         }
     ]
 
     print(f"Inserting {len(demo_items)} camera items...")

@@ -401,7 +401,7 @@
             "notes": "Added from client VERO Excel 1073 list"
         },
         {
-            "keyword": "Harvey’s ATV Parts",
+            "keyword": "Harvey\u2019s ATV Parts",
             "category": "VeRO",
             "match_type": "contains",
             "action": "block",
@@ -913,7 +913,7 @@
             "notes": "Added from client VERO Excel 1073 list"
         },
         {
-            "keyword": "Dolby Laboratories Inc. (“Dolby”)",
+            "keyword": "Dolby Laboratories Inc. (\u201cDolby\u201d)",
             "category": "VeRO",
             "match_type": "contains",
             "action": "block",
@@ -977,7 +977,7 @@
             "notes": "Added from client VERO Excel 1073 list"
         },
         {
-            "keyword": "Aloe of America, Inc. & Forever Living Products Int’l.",
+            "keyword": "Aloe of America, Inc. & Forever Living Products Int\u2019l.",
             "category": "VeRO",
             "match_type": "contains",
             "action": "block",
@@ -1273,7 +1273,7 @@
             "notes": "Added from client VERO Excel 1073 list"
         },
         {
-            "keyword": "Goetze’s Candy",
+            "keyword": "Goetze\u2019s Candy",
             "category": "VeRO",
             "match_type": "contains",
             "action": "block",
@@ -1753,7 +1753,7 @@
             "notes": "Added from client VERO Excel 1073 list"
         },
         {
-            "keyword": "Griot’s Garage Inc.",
+            "keyword": "Griot\u2019s Garage Inc.",
             "category": "VeRO",
             "match_type": "contains",
             "action": "block",
@@ -1929,7 +1929,7 @@
             "notes": "Added from client VERO Excel 1073 list"
         },
         {
-            "keyword": "Doctor’s Associates Inc. dba Subway",
+            "keyword": "Doctor\u2019s Associates Inc. dba Subway",
             "category": "VeRO",
             "match_type": "contains",
             "action": "block",
@@ -2209,7 +2209,7 @@
             "notes": "Added from client VERO Excel 1073 list"
         },
         {
-            "keyword": "Ranger Doug’s Enterprises",
+            "keyword": "Ranger Doug\u2019s Enterprises",
             "category": "VeRO",
             "match_type": "contains",
             "action": "block",
@@ -2601,7 +2601,7 @@
             "notes": "Added from client VERO Excel 1073 list"
         },
         {
-            "keyword": "Bonnie’s Plants",
+            "keyword": "Bonnie\u2019s Plants",
             "category": "VeRO",
             "match_type": "contains",
             "action": "block",
@@ -2705,7 +2705,7 @@
             "notes": "Added from client VERO Excel 1073 list"
         },
         {
-            "keyword": "Multipure Int’l",
+            "keyword": "Multipure Int\u2019l",
             "category": "VeRO",
             "match_type": "contains",
             "action": "block",
@@ -2897,7 +2897,7 @@
             "notes": "Added from client VERO Excel 1073 list"
         },
         {
-            "keyword": "Amybug’s Attic",
+            "keyword": "Amybug\u2019s Attic",
             "category": "VeRO",
             "match_type": "contains",
             "action": "block",
@@ -3881,7 +3881,7 @@
             "notes": "Added from client VERO Excel 1073 list"
         },
         {
-            "keyword": "Laser Design Int’l, LLC",
+            "keyword": "Laser Design Int\u2019l, LLC",
             "category": "VeRO",
             "match_type": "contains",
             "action": "block",
@@ -4025,7 +4025,7 @@
             "notes": "Added from client VERO Excel 1073 list"
         },
         {
-            "keyword": "Crazy Aaron’s Puttyworld (Crazy Aaron’s Thinking Putty)",
+            "keyword": "Crazy Aaron\u2019s Puttyworld (Crazy Aaron\u2019s Thinking Putty)",
             "category": "VeRO",
             "match_type": "contains",
             "action": "block",
@@ -4305,7 +4305,7 @@
             "notes": "Added from client VERO Excel 1073 list"
         },
         {
-            "keyword": "Marianne’s Sol Mate Socks, Inc.",
+            "keyword": "Marianne\u2019s Sol Mate Socks, Inc.",
             "category": "VeRO",
             "match_type": "contains",
             "action": "block",
@@ -4809,7 +4809,7 @@
             "notes": "Added from client VERO Excel 1073 list"
         },
         {
-            "keyword": "Red Steagall’s Cowboy Corner",
+            "keyword": "Red Steagall\u2019s Cowboy Corner",
             "category": "VeRO",
             "match_type": "contains",
             "action": "block",
@@ -5073,7 +5073,7 @@
             "notes": "Added from client VERO Excel 1073 list"
         },
         {
-            "keyword": "Dave’s Discount Motors",
+            "keyword": "Dave\u2019s Discount Motors",
             "category": "VeRO",
             "match_type": "contains",
             "action": "block",
@@ -5169,7 +5169,7 @@
             "notes": "Added from client VERO Excel 1073 list"
         },
         {
-            "keyword": "Dick Harrell Performance Center, Inc. (‘DHPC Inc.’) Licensing Department",
+            "keyword": "Dick Harrell Performance Center, Inc. (\u2018DHPC Inc.\u2019) Licensing Department",
             "category": "VeRO",
             "match_type": "contains",
             "action": "block",
@@ -6673,7 +6673,7 @@
             "notes": "Added from client VERO Excel 1073 list"
         },
         {
-            "keyword": "Nature’s Rx LLC",
+            "keyword": "Nature\u2019s Rx LLC",
             "category": "VeRO",
             "match_type": "contains",
             "action": "block",
@@ -7081,7 +7081,7 @@
             "notes": "Added from client VERO Excel 1073 list"
         },
         {
-            "keyword": "Hannah’s Games LTD",
+            "keyword": "Hannah\u2019s Games LTD",
             "category": "VeRO",
             "match_type": "contains",
             "action": "block",
@@ -7665,7 +7665,7 @@
             "notes": "Added from client VERO Excel 1073 list"
         },
         {
-            "keyword": "Robert Thompson’s Craftsmen Ltd.",
+            "keyword": "Robert Thompson\u2019s Craftsmen Ltd.",
             "category": "VeRO",
             "match_type": "contains",
             "action": "block",
@@ -7913,7 +7913,7 @@
             "notes": "Added from client VERO Excel 1073 list"
         },
         {
-            "keyword": "Carmen’s Vintage Collections",
+            "keyword": "Carmen\u2019s Vintage Collections",
             "category": "VeRO",
             "match_type": "contains",
             "action": "block",
@@ -7929,7 +7929,7 @@
             "notes": "Added from client VERO Excel 1073 list"
         },
         {
-            "keyword": "Don’t Die, LLC",
+            "keyword": "Don\u2019t Die, LLC",
             "category": "VeRO",
             "match_type": "contains",
             "action": "block",
@@ -8337,7 +8337,7 @@
             "notes": "Added from client VERO Excel 1073 list"
         },
         {
-            "keyword": "Fast Eddie’s Vape Shop and Lounge, LLC",
+            "keyword": "Fast Eddie\u2019s Vape Shop and Lounge, LLC",
             "category": "VeRO",
             "match_type": "contains",
             "action": "block",
@@ -8591,6 +8591,14 @@
             "action": "block",
             "replacement": "",
             "notes": "Added from client VERO Excel 1073 list"
+        },
+        {
+            "keyword": "Epoch",
+            "category": "VeRO",
+            "match_type": "exact",
+            "action": "block",
+            "replacement": "",
+            "notes": "Requested by client (Patent Troll)"
         }
     ]
 }
