@@ -306,6 +306,9 @@ def build_html_description(title, ai_output, condition, genre_key="default"):
     about_items += "<li>This product is rarely seen online or in stores in Japan, so if this product is sold out, it will be out of stock.</li>"
     about_items += "<li>We recommend that you purchase this opportunity as this is a wonderful product that is difficult to obtain.</li>"
     
+    if genre_key == "pokemon_card":
+        about_items += "<li>We have used a precision balance scale to check whether it is genuine and to confirm that it is genuine. Also, counterfeit products have missing parts of the letters due to duplication, but the products I am selling are sold after confirming that there are no missing letters. Therefore, you can purchase with confidence. Please check the attached photos carefully before purchasing.</li>"
+
     for sec in ai_output.get("nested_sections", []):
         header = sec.get("header", "")
         bullets = sec.get("bullets", [])
@@ -314,12 +317,26 @@ def build_html_description(title, ai_output, condition, genre_key="default"):
             about_items += f"<li><strong>{header}</strong><ul style='margin-top: 10px; margin-bottom: 10px;'>{bullets_html}</ul></li>"
 
     flat_sections_html = ""
-    for sec in ai_output.get("flat_sections", []):
-        header = sec.get("header", "")
-        bullets = sec.get("bullets", [])
-        if header and bullets:
-            bullets_html = make_li(bullets)
-            flat_sections_html += f"<p><strong>{header}</strong></p>\n<ul>{bullets_html}</ul>\n"
+    if genre_key == "pokemon_card":
+        flat_sections_html = (
+            "<p><strong>Appearance</strong></p>\n"
+            "<ul><li>Please see attached photos for card condition.</li></ul>\n"
+            "<p><strong>Condition</strong></p>\n"
+            "<ul><li>Condition:A (The definition of the condition is explain in item description.)</li></ul>\n"
+            "<p style='margin-left: 20px; line-height: 24px; font-size: 14px;'>"
+            "A:Near Mint<br>\n"
+            "B:Excellent&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;compared to Condition A, this card has scratches and damage<br>\n"
+            "C:Moderately Played&nbsp;&nbsp;&nbsp;&nbsp;this card has a lot of scratches and damage<br>\n"
+            "D:Heavily Played&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;compared to condition C, this card has more scratches and Damage"
+            "</p>\n"
+        )
+    else:
+        for sec in ai_output.get("flat_sections", []):
+            header = sec.get("header", "")
+            bullets = sec.get("bullets", [])
+            if header and bullets:
+                bullets_html = make_li(bullets)
+                flat_sections_html += f"<p><strong>{header}</strong></p>\n<ul>{bullets_html}</ul>\n"
     
     html = f'''<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"> <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
 <style>.template__main.main6 h2, .template__main.main1 h2{{color: #000;}}  .template__main {{word-break: break-word; width: 100%;background: #fff;border: 1px solid #000;padding: 0 20px 30px 20px !important;-webkit-box-sizing: border-box;box-sizing: border-box;}} .template__main h1 {{ font-family: "Verdana", sans-serif,sans-serif!important; font-weight: bold; font-size: 22px !important;margin: 30px 0;text-align: center;color: #111; word-break: break-word;}} .template__main h2 {{ font-family: "Verdana", sans-serif,sans-serif!important; margin: 0 0 15px 0; font-size: 18px;line-height: 1.2;text-align: left; word-break: break-word; }} .template__main p {{ word-break: break-word; font-family: "Verdana", sans-serif,sans-serif!important; margin: 0;padding: 0 10px 10px;color: #111;text-align: left;line-height: 24px;font-size: 14px;}} .template__main .product_dec {{margin: 0;padding: 0 0 20px 0;color: #111;text-align: left;}} .template__main .product__intro {{line-height: 24px;font-size: 14px;padding: 0 30px 20px;}} .template__main ul {{ margin: 0 0 20px 0; padding-left: 20px; }} .template__main li {{ font-family: "Verdana", sans-serif,sans-serif!important; font-size: 14px; line-height: 24px; margin-bottom: 5px; }} .aside__item:not(:last-of-type) {{ padding-bottom: 20px; }} .template__main section {{padding-bottom: 20px;}} .template__main h2 {{ background-color: #FFF100; color: #111;padding: 10px 10px; font-weight: bold;}}</style>

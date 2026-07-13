@@ -9,18 +9,18 @@ def insert_camera_demo():
     headers = client.api.read_range(client.tabs['listings'], 'A1:BC1')[0]
     
     demo_items = [
-         {
-            "SKU": "TEST-DEMO-9",
-            "商品名_JP": "Minolta X-700 35mm Film Camera SLR Black",
-            "Brand": "Minolta",
-            "Model_Number": "X-700",
+        {
+            "SKU": "TEST-DEMO-4",
+            "商品名_JP": "Pokemon Card Charizard VMAX SSR 308/190 Shiny Star V Japanese Mint",
+            "Brand": "Nintendo",
+            "Model_Number": "Does not apply",
             "Condition": "Used",
-            "Category": "Cameras & Photo > Film Photography > Film Cameras",
-            "仕入れ値_JPY": "1500",
-            "備考": "Disposable camera.",
-            "仕入URL": "https://jp.mercari.com/item/m14420673428",
-            "画像URLs": "https://static.mercdn.net/item/detail/orig/photos/m14420673428_1.jpg"
-         }
+            "Category": "Toys & Hobbies > Collectible Card Games > CCG Individual Cards",
+            "仕入れ値_JPY": "5000",
+            "備考": "Collector item.",
+            "仕入URL": "https://jp.mercari.com/item/m77535112834",
+            "画像URLs": "https://static.mercdn.net/item/detail/orig/photos/m77535112834_1.jpg"
+        }
     ]
 
     print(f"Inserting {len(demo_items)} camera items...")
