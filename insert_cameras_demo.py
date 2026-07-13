@@ -18,8 +18,8 @@ def insert_camera_demo():
             "Category": "Toys & Hobbies > Collectible Card Games > CCG Individual Cards",
             "仕入れ値_JPY": "5000",
             "備考": "Collector item.",
-            "仕入URL": "https://jp.mercari.com/item/m77535112834",
-            "画像URLs": "https://static.mercdn.net/item/detail/orig/photos/m77535112834_1.jpg"
+            "仕入URL": "https://jp.mercari.com/item/m54780246867",
+            "画像URLs": "https://static.mercdn.net/item/detail/orig/photos/m54780246867_1.jpg"
         }
     ]
 

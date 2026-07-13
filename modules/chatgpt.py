@@ -309,28 +309,36 @@ def build_html_description(title, ai_output, condition, genre_key="default"):
     if genre_key == "pokemon_card":
         about_items += "<li>We have used a precision balance scale to check whether it is genuine and to confirm that it is genuine. Also, counterfeit products have missing parts of the letters due to duplication, but the products I am selling are sold after confirming that there are no missing letters. Therefore, you can purchase with confidence. Please check the attached photos carefully before purchasing.</li>"
 
+    # For pokemon cards, inject Appearance and Condition at the top
+    custom_condition_html = ""
+    if genre_key == "pokemon_card":
+        custom_condition_html = (
+            "<p><strong>Appearance</strong></p>\n"
+            "<ul><li>Please see attached photos for card condition.</li></ul>\n"
+            "<p><strong>Condition</strong></p>\n"
+            "<ul><li>Condition:A (The definition of the condition is explain in item description.)</li></ul>\n"
+            "<table style='margin-left: 20px; line-height: 24px; font-size: 14px; border: none; margin-bottom: 20px;'>\n"
+            "<tr><td style='min-width: 160px; padding: 0;'>A:Near Mint</td><td style='padding: 0;'></td></tr>\n"
+            "<tr><td style='padding: 0;'>B:Excellent</td><td style='padding: 0;'>compared to Condition A, this card has scratches and damage</td></tr>\n"
+            "<tr><td style='padding: 0;'>C:Moderately Played</td><td style='padding: 0;'>this card has a lot of scratches and damage</td></tr>\n"
+            "<tr><td style='padding: 0;'>D:Heavily Played</td><td style='padding: 0;'>compared to condition C, this card has more scratches and Damage</td></tr>\n"
+            "</table>\n"
+        )
+
+    # For pokemon_card, we don't nest the AI sections under "About This Items". We format them as separate sections.
+    nested_items_html = ""
     for sec in ai_output.get("nested_sections", []):
         header = sec.get("header", "")
         bullets = sec.get("bullets", [])
         if header and bullets:
             bullets_html = make_li(bullets)
-            about_items += f"<li><strong>{header}</strong><ul style='margin-top: 10px; margin-bottom: 10px;'>{bullets_html}</ul></li>"
+            if genre_key == "pokemon_card":
+                nested_items_html += f"<p><strong>{header}</strong></p>\n<ul>{bullets_html}</ul>\n"
+            else:
+                about_items += f"<li><strong>{header}</strong><ul style='margin-top: 10px; margin-bottom: 10px;'>{bullets_html}</ul></li>"
 
     flat_sections_html = ""
-    if genre_key == "pokemon_card":
-        flat_sections_html = (
-            "<p><strong>Appearance</strong></p>\n"
-            "<ul><li>Please see attached photos for card condition.</li></ul>\n"
-            "<p><strong>Condition</strong></p>\n"
-            "<ul><li>Condition:A (The definition of the condition is explain in item description.)</li></ul>\n"
-            "<p style='margin-left: 20px; line-height: 24px; font-size: 14px;'>"
-            "A:Near Mint<br>\n"
-            "B:Excellent&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;compared to Condition A, this card has scratches and damage<br>\n"
-            "C:Moderately Played&nbsp;&nbsp;&nbsp;&nbsp;this card has a lot of scratches and damage<br>\n"
-            "D:Heavily Played&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;compared to condition C, this card has more scratches and Damage"
-            "</p>\n"
-        )
-    else:
+    if genre_key != "pokemon_card":
         for sec in ai_output.get("flat_sections", []):
             header = sec.get("header", "")
             bullets = sec.get("bullets", [])
@@ -350,6 +358,10 @@ def build_html_description(title, ai_output, condition, genre_key="default"):
 <ul>
 {about_items}
 </ul>
+
+{custom_condition_html}
+
+{nested_items_html}
 
 {flat_sections_html}
 </div>
