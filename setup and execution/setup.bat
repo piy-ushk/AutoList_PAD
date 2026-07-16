@@ -8,7 +8,7 @@ echo ==========================================
 echo.
 echo Installing required Python libraries...
 python -m pip install --upgrade pip
-pip install -r docs\delivery_package\requirements.txt
+pip install -r requirements.txt
 echo.
 echo ==========================================
 echo Running Google Authentication...
