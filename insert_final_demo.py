@@ -59,8 +59,8 @@ def insert_final_demo():
             "Category": "Toys & Hobbies > Action Figures & Accessories > Action Figures",
             "仕入れ値_JPY": "12000",
             "備考": "New item.",
-            "仕入URL": "https://jp.mercari.com/item/m77992081636",
-            "画像URLs": "https://static.mercdn.net/item/detail/orig/photos/m77992081636_1.jpg"
+            "仕入URL": "https://jp.mercari.com/item/m29778287505",
+            "画像URLs": "https://static.mercdn.net/item/detail/orig/photos/m29778287505_1.jpg"
         },
         # Updated ones from insert_3_demos
         {
@@ -72,8 +72,8 @@ def insert_final_demo():
             "Category": "Toys & Hobbies > Collectible Card Games > CCG Individual Cards",
             "仕入れ値_JPY": "5000",
             "備考": "Collector item.",
-            "仕入URL": "https://jp.mercari.com/item/m77535112834",
-            "画像URLs": "https://static.mercdn.net/item/detail/orig/photos/m77535112834_1.jpg"
+            "仕入URL": "https://jp.mercari.com/item/m50386019910",
+            "画像URLs": "https://static.mercdn.net/item/detail/orig/photos/m50386019910_1.jpg"
         },
         {
             "SKU": "TEST-DEMO-5",
