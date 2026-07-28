@@ -16,15 +16,15 @@ def insert_final_demo():
         # From Phase 4
         {
             "SKU": "TEST-DEMO-0",
-            "商品名_JP": "Tamiya 1/12 Scale Tyrrell P34 Six Wheeler Vintage Plastic Model Kit Unassembled",
-            "Brand": "Tamiya",
-            "Model_Number": "1/12 Scale",
-            "Condition": "New",
-            "Category": "Vintage Plastic Model",
-            "仕入れ値_JPY": "12000",
-            "備考": "Box has slight wear due to age.",
-            "仕入URL": "https://jp.mercari.com/item/m61126572832",
-            "画像URLs": "https://static.mercdn.net/item/detail/orig/photos/m61126572832_1.jpg"
+            "商品名_JP": "Sony PlayStation 2 PS2 Console System Black Tested Japan",
+            "Brand": "Sony",
+            "Model_Number": "SCPH-30000",
+            "Condition": "Used",
+            "Category": "Video Game Consoles",
+            "仕入れ値_JPY": "4500",
+            "備考": "Tested and working. Includes controller.",
+            "仕入URL": "https://jp.mercari.com/item/m79079994917",
+            "画像URLs": "https://static.mercdn.net/item/detail/orig/photos/m79079994917_1.jpg"
         },
         {
             "SKU": "TEST-DEMO-1",
