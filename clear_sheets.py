@@ -32,6 +32,15 @@ def clear_test_data():
             print("Successfully cleared all test cells from the Google Sheets tabs.")
     except Exception as e:
         print(f"Error clearing sheets: {e}")
+        
+    # Also delete any leftover monodas_results.json file so it doesn't corrupt the next run
+    results_path = os.path.join(os.path.dirname(os.path.abspath(__file__)), "logs", "monodas_results.json")
+    if os.path.exists(results_path):
+        try:
+            os.remove(results_path)
+            print(f"Deleted leftover results file: {results_path}")
+        except Exception as e:
+            print(f"Warning: Could not delete leftover results file: {e}")
 
 if __name__ == "__main__":
     clear_test_data()
