@@ -225,6 +225,11 @@ To make the system fully automated, PAD writes the generated eBay Item IDs to a 
    * **Text to write:** `%FinalJSON%`
    * **If file exists:** `Overwrite`
 
+### Step 5: Run Results Syncing Script
+After the PAD flow finishes execution and writes the `monodas_results.json` file, you must synchronize the results back to Google Sheets.
+- Run `2_run_sync_results.bat` (or execute `python sync_results.py`).
+- This script reads the JSON file, updates the Google Sheet with the eBay Item IDs, and automatically deletes `monodas_results.json` to prevent interference with future runs.
+
 ---
 
 ## 3. Error Handling

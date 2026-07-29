@@ -174,6 +174,7 @@ When processing completes:
 ⑤ → Checks for duplicate listings (stops if a duplicate is found)
 ⑥ → Outputs to logs/monodas_task_batch.json if all checks pass
 ⑦ Power Automate Desktop reads this JSON and saves drafts in Monodas
-⑧ Administrator checks and approves the drafts in eBay Seller Hub
-⑨ After publishing, Monodas automatically monitors stock, prices, and handles auto-termination
+⑧ Run `python sync_results.py` (or `2_run_sync_results.bat`) to update the spreadsheet with eBay IDs and clear logs
+⑨ Administrator checks and approves the drafts in eBay Seller Hub
+⑩ After publishing, Monodas automatically monitors stock, prices, and handles auto-termination
 ```
