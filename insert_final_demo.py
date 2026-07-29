@@ -16,15 +16,15 @@ def insert_final_demo():
         # From Phase 4
         {
             "SKU": "TEST-DEMO-0",
-            "商品名_JP": "Sony PlayStation 2 PS2 Console System Black Tested Japan",
-            "Brand": "Sony",
-            "Model_Number": "SCPH-30000",
-            "Condition": "Used",
-            "Category": "Video Game Consoles",
-            "仕入れ値_JPY": "4500",
-            "備考": "Tested and working. Includes controller.",
-            "仕入URL": "https://jp.mercari.com/item/m79079994917",
-            "画像URLs": "https://static.mercdn.net/item/detail/orig/photos/m79079994917_1.jpg"
+            "商品名_JP": "Traditional Japanese Tea Cup Yunomi Set of 2 Ceramic Craft",
+            "Brand": "Generic",
+            "Model_Number": "Does not apply",
+            "Condition": "New",
+            "Category": "Home & Garden > Kitchen, Dining & Bar > Dinnerware & Serveware > Cups & Saucers",
+            "仕入れ値_JPY": "3500",
+            "備考": "Beautiful traditional design.",
+            "仕入URL": "https://jp.mercari.com/item/m32969530049",
+            "画像URLs": "https://static.mercdn.net/item/detail/orig/photos/m32969530049_1.jpg"
         },
         {
             "SKU": "TEST-DEMO-1",
