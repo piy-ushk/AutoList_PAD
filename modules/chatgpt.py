@@ -134,8 +134,11 @@ class ChatGPTCaller:
         if vero_kw:
             vero_kw_strs = [k.get("keyword", str(k)) if isinstance(k, dict) else str(k) for k in vero_kw]
             system_prompt += (
-                f"\n\nCRITICAL RULE: You MUST NOT use ANY of the following blacklisted VeRO keywords in your generated text (title, description, or bullets). "
-                f"Using these words will cause the listing to be banned! Blacklisted words:\n{', '.join(vero_kw_strs)}\n"
+                f"\n\n🚨 ABSOLUTE STRICT CRITICAL RULE 🚨\n"
+                f"You are strictly FORBIDDEN from using ANY of the following blacklisted VeRO keywords anywhere in your output (title, description, specifics, bullets, etc.).\n"
+                f"Even if the word is a common English adjective (e.g., 'specialized', 'velcro', 'onesie'), DO NOT USE IT. Find a synonym.\n"
+                f"If you use even ONE of these words, the user's eBay account will be permanently banned. DOUBLE-CHECK your final output before returning.\n"
+                f"BLACKLISTED WORDS:\n{', '.join(vero_kw_strs)}\n"
             )
 
         genre_fields_txt = genre_data.get("genre_fields", "")
