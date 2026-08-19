@@ -138,10 +138,13 @@ def process_validation(sheet_client, error_handler, vero_kw):
 
         vr = run_all_validations(row)
         if not vr["passed"]:
+            error_msg = "; ".join(vr["errors"])
             sheet_client.update_validation_status(sheet_row, "format_error")
-            error_handler.log_error(sku=sku, error_code=ErrorCode.E014, error_message="; ".join(vr["errors"]), pad_step="Validate_Row")
+            sheet_client.update_cell(sheet_row, "Rejection_Reason", error_msg)
+            error_handler.log_error(sku=sku, error_code=ErrorCode.E014, error_message=error_msg, pad_step="Validate_Row")
             blocked += 1
             if staff_name: sheet_client.update_staff_metrics(staff_name, is_success=False, error_type="format_error")
+            log(f"    BLOCKED: Format Error: {error_msg}")
             continue
 
         title = row.get("eBay_Title", "").strip() or row.get("ChatGPT_Title", "").strip()
