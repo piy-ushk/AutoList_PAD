@@ -132,7 +132,7 @@ class GoogleSheetsClient:
 
     def get_pending_ai_rows(self):
         rows = self.get_all_rows()
-        return [r for r in rows if r.get("Listing_Status", "").strip() == "pending_ai"]
+        return [r for r in rows if r.get("Listing_Status", "").strip() == "pending_ai" or r.get("AI_Status", "").strip() == "pending_ai"]
 
     def get_ai_complete_rows(self):
         rows = self.get_all_rows()
