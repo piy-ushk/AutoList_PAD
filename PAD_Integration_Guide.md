@@ -85,7 +85,11 @@ Once the Listing Editor page has loaded, use the **Populate text field on web pa
               
               // Check Required Specifics (Select2 dropdowns and text inputs)
               let reqNames = Array.from(document.querySelectorAll("input[name='specificnamereq']"));
-              let reqMatch = reqNames.find(n => n.value.trim() === key);
+              let kVal = key.toLowerCase().replace(/[^a-z0-9]/g, '');
+              let reqMatch = reqNames.find(n => {
+                  let nVal = n.value.trim().toLowerCase().replace(/[^a-z0-9]/g, '');
+                  return nVal === kVal || (nVal === 'brandname' && kVal === 'brand') || (nVal === 'countryregionofmanufacture' && kVal === 'countryofmanufacture');
+              });
               if (reqMatch) {
                   let container = reqMatch.closest('.col-4').nextElementSibling;
                   if (container) {
@@ -93,18 +97,20 @@ Once the Listing Editor page has loaded, use the **Populate text field on web pa
                       let textInput = container.querySelector("input[name='specificvalreq']");
                       
                       if (select) {
-                          let option = Array.from(select.options).find(o => o.value === val);
+                          let cleanVal = val.toLowerCase().trim();
+                          let option = Array.from(select.options).find(o => o.value.toLowerCase().trim() === cleanVal);
                           if (!option && val !== "") {
                               option = new Option(val, val, true, true);
                               select.add(option);
                           }
-                          select.value = val;
+                          let finalVal = option ? option.value : val;
+                          select.value = finalVal;
                           select.dispatchEvent(new Event('change', { bubbles: true }));
                           
                           let span = container.querySelector(".select2-selection__rendered");
                           if (span) {
-                              span.textContent = val;
-                              span.title = val;
+                              span.textContent = finalVal;
+                              span.title = finalVal;
                           }
                       } else if (textInput) {
                           // Some required specifics (like UPC) are text inputs, not dropdowns!

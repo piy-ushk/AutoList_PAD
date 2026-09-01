@@ -159,7 +159,7 @@ class ChatGPTCaller:
             f"Notes: {product_data.get('備考', '')}\n"
             f"{genre_fields_txt}\n"
             "Rules:\n"
-            "1. Title MUST be highly SEO optimized and as close to 80 characters as possible without exceeding it (e.g. 75-80 chars). Use strong keywords (Brand, Model, Vintage, Rare) and include 'From Japan'.\n"
+            "1. Title MUST be highly SEO optimized and exactly between 75 and 80 characters long. Do not leave the title short (e.g., 60-65 characters is unacceptable). Intelligently add relevant search keywords (such as Brand, Era/Year, Product Type, Material, 'Vintage', 'Japan') to maximize the 80-character limit without exceeding it.\n"
             "2. Do NOT use trademarked names unless they are the actual product brand.\n"
             "3. Do NOT include: replica, copy, fake, inspired, unauthorized, counterfeit.\n"
             "4. For itemSpecifics, provide values for: " + item_specifics_keys_str + ". If height/length/width are known, convert to cm and inches.\n"
