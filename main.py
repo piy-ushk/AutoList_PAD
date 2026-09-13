@@ -15,7 +15,7 @@ from modules.validator import run_all_validations
 # ==============================================================================
 # Set to True to only process the 5 TEST cards (SKUs starting with "TEST-").
 # Set to False to process all cards normally.
-ONLY_PROCESS_TEST_CARDS = True
+ONLY_PROCESS_TEST_CARDS = False
 
 # PHASE 2 SAFETY OVERRIDE:
 # Set to True to force ALL items to be saved as Drafts regardless of automation rules.
@@ -232,12 +232,12 @@ def format_schedule_date(date_str):
 
 def determine_supplier(url):
     url = url.lower()
-    if "yahoo" in url or "paypayfleamarket" in url:
-        return "ヤフーフリマ"
-    elif "rakuma.rakuten" in url:
-        return "ラクマ"
-    elif "auctions.yahoo" in url:
+    if "auctions.yahoo" in url or "page.auctions" in url:
         return "ヤフオク"
+    elif "paypayfleamarket" in url or "paypay" in url or "yahoo.co.jp/item" in url:
+        return "PayPayフリマ"
+    elif "rakuma" in url or "fril.jp" in url:
+        return "ラクマ"
     else:
         return "メルカリ" # Default to Mercari
 
