@@ -850,7 +850,9 @@
         "コンパクトデジタルカメラ",
         "コンデジ",
         "cyber-shot",
-        "compact digital camera"
+        "compact digital camera",
+        "デジタルカメラ",
+        "digital camera"
       ],
       "item_specifics_keys": [
         "Brand",
@@ -1104,7 +1106,8 @@
       "match_keywords": [
         "film camera",
         "35mm film camera",
-        "analog camera"
+        "analog camera",
+        "フィルムカメラ"
       ],
       "specialization": "Vintage and modern film cameras",
       "ebay_ref_id": "178230942338",
