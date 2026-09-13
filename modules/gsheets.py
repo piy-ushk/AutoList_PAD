@@ -132,11 +132,13 @@ class GoogleSheetsClient:
 
     def get_pending_ai_rows(self):
         rows = self.get_all_rows()
-        return [r for r in rows if r.get("Listing_Status", "").strip() == "pending_ai" or r.get("AI_Status", "").strip() == "pending_ai"]
+        # Only process rows that haven't completed AI generation yet
+        return [r for r in rows if (r.get("Listing_Status", "").strip() == "pending_ai" or r.get("AI_Status", "").strip() == "pending_ai") and r.get("AI_Status", "").strip() != "ai_complete"]
 
     def get_ai_complete_rows(self):
         rows = self.get_all_rows()
-        return [r for r in rows if r.get("AI_Status", "").strip() == "ai_complete"]
+        # Only validate rows that haven't been validated yet
+        return [r for r in rows if r.get("AI_Status", "").strip() == "ai_complete" and not r.get("Validation_Status", "").strip()]
 
     def get_validated_rows(self):
         rows = self.get_all_rows()
