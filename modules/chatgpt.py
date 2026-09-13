@@ -159,12 +159,12 @@ class ChatGPTCaller:
             f"Notes: {product_data.get('備考', '')}\n"
             f"{genre_fields_txt}\n"
             "Rules:\n"
-            "1. Title MUST be highly SEO optimized and exactly between 75 and 80 characters long. Do not leave the title short (e.g., 60-65 characters is unacceptable). Intelligently add relevant search keywords (such as Brand, Era/Year, Product Type, Material, 'Vintage', 'Japan') to maximize the 80-character limit without exceeding it.\n"
+            "1. Title MUST be highly SEO optimized and exactly between 77 and 80 characters long. It is absolutely unacceptable if the title is under 77 characters. If the natural title is too short, you MUST aggressively append strong SEO keywords like 'Japan', 'Vintage', 'Rare', 'Authentic', 'Mint', or the Franchise name to pad the length until it reaches 77-80 characters.\n"
             "2. Do NOT use trademarked names unless they are the actual product brand.\n"
             "3. Do NOT include: replica, copy, fake, inspired, unauthorized, counterfeit.\n"
             "4. For itemSpecifics, provide values for: " + item_specifics_keys_str + ". If height/length/width are known, convert to cm and inches.\n"
             "5. Output JSON only, no preamble.\n"
-            "6. For itemSpecifics, do NOT guess. If information is completely unknown, output 'Does not apply' or 'N/A'."
+            "6. For itemSpecifics, you must make intelligent, highly probable educated guesses based on the item type (e.g., Material: PVC/ABS for figures, Country of Manufacture: Japan, Vintage: Yes/No). Attempt to fill EVERY field logically. Only use 'Does not apply' for fields that are strictly irrelevant (e.g., Autographed, Graded) or completely impossible to deduce."
         )
 
         return system_prompt, user_prompt
