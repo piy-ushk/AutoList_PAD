@@ -284,7 +284,7 @@ class ChatGPTCaller:
                 item_specs_dict[k] = "Does not apply"
                     
         parsed["ChatGPT_ItemSpecifics"] = " | ".join(f"{k}: {v}" for k, v in item_specs_dict.items())
-        # Guarantee no 'hallmark' VeRO violations slip through
+        # Guarantee no 'hallmark' VeRO violations slip through, and SANITIZE strings to prevent PAD JS SyntaxErrors!
         for key in ["title", "description", "ChatGPT_ItemSpecifics"]:
             if key in parsed and isinstance(parsed[key], str):
                 s = parsed[key]
@@ -292,6 +292,11 @@ class ChatGPTCaller:
                 s = re.sub(r'(?i)\bhdmi\b', 'Video Out', s)
                 s = re.sub(r'(?i)\bwi-fi\b', 'Wireless', s)
                 s = re.sub(r'(?i)\bbluetooth\b', 'Wireless', s)
+                
+                # CRITICAL FIX FOR PAD: Remove quotes and newlines from strings injected directly into JS strings
+                if key in ["title", "ChatGPT_ItemSpecifics"]:
+                    s = s.replace('"', ' inch').replace("'", "").replace('\\', ' ').replace('\n', ' ').replace('\r', '')
+                
                 parsed[key] = s
                 
         return parsed
